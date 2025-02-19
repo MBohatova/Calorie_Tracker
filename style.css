@@ -1,0 +1,411 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  /* Hide scrollbar for IE, Edge and Firefox */
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+body {
+  background-color: rgb(255, 255, 255);
+}
+body .main {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  height: 800px;
+  margin: 40px auto;
+}
+body .main__appleButton {
+  height: 200px;
+  width: 200px;
+  background: url(./image/appleFirstPic.png);
+  border: none;
+}
+body .main__onboarding {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: none;
+}
+body .main__onboarding .main__onboardingContent .onboardingWrapper {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body .main__onboarding .main__onboardingContent .onboardingWrapper .main__onboardingTextBox {
+  width: 248px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+body .main__onboarding .main__onboardingContent .onboardingWrapper .main__onboardingTextBox .main__onboardingH {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+}
+body .main__onboarding .main__onboardingContent .onboardingWrapper .main__onboardingTextBox .main__onboardingP {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+}
+body .main__onboarding .main__onboardingContent .onboardingWrapper .main__onboardingNavBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+body .main__onboarding .main__onboardingContent .onboardingWrapper .main__onboardingNavBox .main__onboardingNavItem {
+  height: 8px;
+  width: 8px;
+  border-radius: 100%;
+  background-color: rgb(217, 217, 217);
+  margin-top: 20px;
+}
+body .main__onboarding .main__onboardingContent .onboardingWrapper .main__onboardingNavBox .activeState {
+  width: 24px;
+  border-radius: 20px;
+  background-color: rgb(53, 204, 140);
+}
+body .main__onboarding .main__onboardingContent .onboardingBox1 {
+  display: flex;
+}
+body .main__onboarding .main__onboardingContent .onboardingBox2 {
+  display: none;
+}
+body .main__onboarding .main__onboardingContent .onboardingBox3 {
+  display: none;
+}
+body .main__onboarding .main__onboardingContent .onboardingBox4 {
+  display: none;
+}
+body .main__onboarding .main__onboardingButtons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+body .main__onboarding .main__onboardingButtons .main__onboardingSkipButton, body .main__onboarding .main__onboardingButtons .main__onboardingBackButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  width: 33px;
+  background: none;
+  border: none;
+  color: rgb(110, 113, 121);
+  padding: 20px 30px;
+}
+body .main__onboarding .main__onboardingButtons .main__onboardingBackButton {
+  display: none;
+}
+body .main__onboarding .main__onboardingButtons .main__onboardingNextButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: none;
+  background: rgb(53, 204, 140) url(./image/nextArrow.svg) no-repeat center;
+}
+body .main__onboarding .main__startButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: none;
+}
+body .main__onboarding .main__startButtons .main__startButton {
+  height: 52px;
+  width: 312px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgb(53, 204, 140);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+body .main__onboarding .main__startButtons .main__startParagraph {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  text-align: center;
+  text-underline-position: from-font;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+  color: rgb(13, 18, 32);
+}
+body .main__onboarding .main__startButtons .main__startParagraph .main__startLink {
+  color: rgb(53, 204, 140);
+  text-decoration: none;
+}
+body .main__requestingData {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  display: none;
+}
+body .main__requestingData .main__requestingDataContainer {
+  height: 422px;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox {
+  height: 422px;
+  width: 312px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextBox .requestingHeadline {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextBox .requestingParagraph {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  width: 290px;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingButtonsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingButtonsBox .requestingDataButton {
+  height: 60px;
+  width: 312px;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper .requestingChoose {
+  width: 70px;
+  height: 150px;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper .requestingChoose .picker {
+  overflow-y: scroll;
+  padding: 0px 10px;
+  scroll-snap-type: y mandatory;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper .requestingChoose .picker .pickerNums {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  scroll-snap-align: center;
+  color: rgb(110, 113, 121);
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper .requestingChoose .picker .pickerNumsActive {
+  font-weight: bold;
+  color: rgb(13, 18, 32);
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper .requestingChoose .highlight {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-top: 2px solid rgb(53, 204, 140);
+  border-bottom: 2px solid rgb(53, 204, 140);
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .unit {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  color: rgb(53, 204, 140);
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextWeight {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextWeight .inputWeight {
+  height: 30px;
+  width: 100px;
+  border: none;
+  border-bottom: 1px solid rgb(53, 204, 140);
+  padding-left: 10px;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextWeight .weightParagraph {
+  color: rgb(53, 204, 140);
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextAge {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextAge .inputAge {
+  height: 30px;
+  width: 100px;
+  border: none;
+  border-bottom: 1px solid rgb(53, 204, 140);
+  padding-left: 10px;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextAge .ageParagraph {
+  color: rgb(53, 204, 140);
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextName .inputName {
+  height: 30px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgb(53, 204, 140);
+  padding-left: 10px;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingInfoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+body .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingInfoBox .normCalorieParagraph {
+  height: 60px;
+  width: 312px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  color: rgb(255, 255, 255);
+  background-color: rgb(53, 204, 140);
+  border-radius: 10px;
+}
+body .main__requestingData .main__requestingDataContainer .requestingGoal {
+  display: flex;
+}
+body .main__requestingData .main__requestingDataContainer .requestingGender {
+  display: none;
+}
+body .main__requestingData .main__requestingDataContainer .requestingActivity {
+  display: none;
+}
+body .main__requestingData .main__requestingDataContainer .requestingTall {
+  display: none;
+}
+body .main__requestingData .main__requestingDataContainer .requestingWeight {
+  display: none;
+}
+body .main__requestingData .main__requestingDataContainer .requestingAge {
+  display: none;
+}
+body .main__requestingData .main__requestingDataContainer .requestingName {
+  display: none;
+}
+body .main__requestingData .main__requestingDataContainer .requestingRecommendations {
+  display: none;
+}
+body .main__requestingData .main__requestingDataButtons {
+  width: 312px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+body .main__requestingData .main__requestingDataButtons .requestingButtonBack {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  background: none;
+  border: none;
+  display: none;
+}
+body .main__requestingData .main__requestingDataButtons .requestingButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: none;
+  background: rgb(53, 204, 140) url(./image/nextArrow.svg) no-repeat center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}/*# sourceMappingURL=style.css.map */

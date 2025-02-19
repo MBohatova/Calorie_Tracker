@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <main class="main">
+    <button type="button" class="main__appleButton"></button>
+
+    <div class="main__onboarding">
+      <div class="main__onboardingContent">
+        <div class="onboardingWrapper onboardingBox1">
+
+          <img 
+          src="./image/onboardingPic1.png" 
+          alt="boy_and_flower"
+          height="230px"
+          width="200px"
+          class="main__onboardingPic"
+        >
+  
+        <div class="main__onboardingTextBox">
+          <h2 class="main__onboardingH">
+            Welcome!
+          </h2>
+  
+          <p class="main__onboardingP">
+            Congratulations on taking the first step toward a healthier you!
+          </p>
+        </div>
+  
+        <div class="main__onboardingNavBox">
+          <div class="main__onboardingNavItem activeState"></div>
+          <div class="main__onboardingNavItem"></div>
+          <div class="main__onboardingNavItem"></div>
+        </div>
+        </div>
+
+        <div class="onboardingWrapper onboardingBox2">
+          <img 
+          src="./image/onboardingPic2.png" 
+          alt="boy_and_flower"
+          height="230px"
+          width="230px"
+          class="main__onboardingPic"
+        >
+  
+        <div class="main__onboardingTextBox">
+          <h2 class="main__onboardingH">
+            Effortless Tracking
+          </h2>
+  
+          <p class="main__onboardingP">
+            Easily log your meals, snacks and water intake
+          </p>
+        </div>
+  
+        <div class="main__onboardingNavBox">
+          <div class="main__onboardingNavItem"></div>
+          <div class="main__onboardingNavItem activeState"></div>
+          <div class="main__onboardingNavItem"></div>
+        </div>
+        </div>
+
+        <div class="onboardingWrapper onboardingBox3">
+          <img 
+          src="./image/onboardingPic3.png" 
+          alt="boy_and_flower"
+          height="230px"
+          width="230px"
+          class="main__onboardingPic"
+        >
+  
+        <div class="main__onboardingTextBox">
+          <h2 class="main__onboardingH">
+            Goal Setting
+          </h2>
+  
+          <p class="main__onboardingP">
+            Set realistic goals and watch your progress unfold
+          </p>
+        </div>
+  
+        <div class="main__onboardingNavBox">
+          <div class="main__onboardingNavItem"></div>
+          <div class="main__onboardingNavItem"></div>
+          <div class="main__onboardingNavItem activeState"></div>
+        </div>
+        </div>
+         
+        <div class="onboardingWrapper onboardingBox4">
+          <img 
+            src="./image/appleFirstPic.png" 
+            alt="boy_and_flower"
+            height="100px"
+            width="100px"
+            class="main__onboardingPic"
+          >
+  
+        <div class="main__onboardingTextBox">
+          <h2 class="main__onboardingH">
+            Welcome!
+          </h2>
+  
+          <p class="main__onboardingP">
+            Start or sign in to your account
+          </p>
+         </div>
+        </div>
+  
+        <div class="main__onboardingButtons">
+        <button type="button" class="main__onboardingSkipButton">Skip</button>
+        <button type="button" class="main__onboardingBackButton">Back</button>
+        <button type="button" class="main__onboardingNextButton"></button>
+        </div>
+
+        <div class="main__startButtons">
+        <button class="main__startButton" type="button">Start</button>
+        <p class="main__startParagraph">Already have an account? <a class="main__startLink" href="#">Sing In</a></p> 
+        </div>
+      </div>
+    </div>
+
+    <div class="main__requestingData">
+      <div class="main__requestingDataContainer">
+
+        <div class="main__requestingBox requestingGoal">
+          <div class="requestingTextBox">
+            <h2 class="requestingHeadline">
+              What’s you goal?
+            </h2>
+
+            <p class="requestingParagraph">
+              We will calculate daily calories according to your goal
+            </p>
+          </div>
+
+          <div id="goals" class="requestingButtonsBox">
+            <button data-goals="lose_weight" class="requestingDataButton">Lose weight</button>
+            <button data-goals="keep_weight" class="requestingDataButton">Keep weight</button>
+            <button data-goals="gain_weight" class="requestingDataButton">Gain weight</button>
+          </div>
+        </div>
+
+        <div class="main__requestingBox requestingGender">
+          <div class="requestingTextBox">
+            <h2 class="requestingHeadline">
+              What’s your gender?
+            </h2>
+
+            <p class="requestingParagraph">
+              Male bodies need more calories
+            </p>
+          </div>
+
+          <div id="gender" class="requestingButtonsBox">
+            <button data-gender="male" class="requestingDataButton">Male</button>
+            <button data-gender="female" class="requestingDataButton">Female</button>
+          </div>
+        </div>
+
+        <div class="main__requestingBox requestingActivity">
+
+          <div class="requestingTextBox">
+            <h2 class="requestingHeadline">
+              How active are you?
+            </h2>
+
+            <p class="requestingParagraph">
+              A sedentary person burns fewer calories than an active person
+            </p>
+          </div>
+
+          <div id="activity" class="requestingButtonsBox">
+            <button data-activity="sedentary" class="requestingDataButton">Sedentary</button>
+            <button data-activity="low_active" class="requestingDataButton">Low Active</button>
+            <button data-activity="active" class="requestingDataButton">Active</button>
+            <button data-activity="very_active" class="requestingDataButton">Very Active</button>
+          </div>
+
+        </div>
+
+        <div class="main__requestingBox requestingTall">
+
+          <div class="requestingTextBox">
+            <h2 class="requestingHeadline">
+              How tall are you?
+            </h2>
+
+            <p class="requestingParagraph">
+              The taller you are, the more calories your body needs
+            </p>
+          </div>
+
+          <div class="requestingChooseToolBox">
+
+            <div class="requestingChooseToolWrapper">
+              <div class="requestingChoose meter">
+                <div class="picker" id="meterPicker">
+                  <p class="pickerNums"></p>
+                </div>
+                <div class="highlight"></div>
+              </div>
+              <span class="unit">m</span>
+            </div>
+
+            <div class="requestingChooseToolWrapper">
+              <div class="requestingChoose centimeter">
+                <div class="picker" id="cmPicker">
+                  <p class="pickerNums"></p>
+                </div>
+                <div class="highlight"></div>
+              </div>
+              <span class="unit">cm</span>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="main__requestingBox requestingWeight">
+
+          <div class="requestingTextBox">
+            <h2 class="requestingHeadline">
+              What’s your weight?
+            </h2>
+
+            <p class="requestingParagraph">
+              TThe more you weigh, the more calories your body burns
+            </p>
+          </div>
+
+          <div class="requestingTextWeight">
+            <input 
+              type="number" 
+              name="weight" 
+              class="inputWeight"
+              placeholder="55"
+              id="weight"
+            >
+
+            <p class="weightParagraph">
+              kg
+            </p>
+          </div>
+
+        </div>
+
+        <div class="main__requestingBox requestingAge">
+
+          <div class="requestingTextBox">
+            <h2 class="requestingHeadline">
+              What’s your age?
+            </h2>
+
+            <p class="requestingParagraph">
+              Required number of calories varies with age
+            </p>
+          </div>
+
+          <div class="requestingTextAge">
+            <input 
+              type="number" 
+              name="age" 
+              class="inputAge"
+              placeholder="30"
+              id="age"
+            >
+
+            <p class="ageParagraph">
+              years
+            </p>
+          </div>
+
+        </div>
+
+        <div class="main__requestingBox requestingName">
+          <div class="requestingTextBox">
+            <h2 class="requestingHeadline">
+              What’s your name?
+            </h2>
+
+            <p class="requestingParagraph">
+              Write your name to finish registration
+            </p>
+          </div>
+
+          <div class="requestingTextName">
+            <input 
+              type="text" 
+              name="name" 
+              class="inputName"
+              placeholder="Alex"
+              id="name"
+            >
+          </div>
+        </div>
+
+        <div class="main__requestingBox requestingRecommendations">
+          <div class="requestingTextBox">
+            <h2 class="requestingHeadline">
+              Recommended PFC
+            </h2>
+
+            <p class="requestingParagraph">
+              You can always change PFC in the profile
+            </p>
+          </div>
+
+          <div class="requestingInfoBox">
+            <p id="proteins" class="normCalorieParagraph"></p>
+            <p id="fats" class="normCalorieParagraph">fats</p>
+            <p id="carbs" class="normCalorieParagraph">carbs</p>
+            <p id="calories" class="normCalorieParagraph">calories</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="main__requestingDataButtons">
+        <button class="requestingButtonBack">Back</button>
+        <button class="requestingButton"></button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
