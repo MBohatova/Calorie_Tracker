@@ -1,4 +1,4 @@
-
+// localStorage.clear()
 // Buttons
 let appleButton = document.querySelector('.main__appleButton');
 let onboardingSkipButton = document.querySelector('.main__onboardingSkipButton');
@@ -42,6 +42,7 @@ let inputName = document.getElementById('name');
 // Arrays
 let userDataArray = [];
 let userData = {};
+let userTall = {};
 let onboardingContent = [onboardingBox1, onboardingBox2, onboardingBox3, onboardingBox4];
 let requestingContent = [requestingGoal, requestingGender, requestingActivity, requestingTall, requestingWeight, requestingAge, requestingName, requestingRecommendations];
 let requestingInputs = [inputWeight, inputAge, inputName];
@@ -51,6 +52,8 @@ let onboardingCurrentIndex = 0;
 let requestingCurrentIndex = 0;
 
 // Elements 
+let meterPicker = document.getElementById('meterPicker');
+let cmPicker = document.getElementById('cmPicker');
 let proteins = document.getElementById('proteins');
 let fats = document.getElementById('fats');
 let carbs = document.getElementById('carbs');
@@ -98,11 +101,6 @@ onboardingBackButton.addEventListener('click', function() {
   }
 })
 
-let meterPicker = document.getElementById('meterPicker');
-let cmPicker = document.getElementById('cmPicker');
-let highlight = document.querySelector('.highlight');
-let scrollsBox = document.querySelector('.requestingChooseToolBox');
-
 function createPicker(min, max, scrollContainer, parameters) {
   for(let i = min; i < max; i++) {
     scrollContainer.insertAdjacentHTML(
@@ -123,6 +121,7 @@ function createPicker(min, max, scrollContainer, parameters) {
       items[i].classList.remove('pickerNumsActive');
     }
     items[index].classList.add('pickerNumsActive');
+    collectUserDataFromScroll(items[index], parameters);
   });
 }
 
@@ -147,7 +146,7 @@ function changeContentInRequestForm() {
   if(requestingCurrentIndex === (requestingContent.length - 1)) {
     requestingButtonBack.style.display = 'none';
     saveUserDataToLocalStorage(userData, userDataArray);
-    calcPFC(userData)
+    calcPFC(userData);
   }
 }
 
@@ -172,6 +171,16 @@ requestingButtonsBox.forEach((button) => {
 
 function collectUserData(e, key) {
   userData[key] = e.target.dataset[key];
+}
+
+function collectUserDataFromScroll(elem, key) {
+  userTall[key] = elem.textContent;
+  calcTall(userTall);
+}
+
+function calcTall(tallObj) {
+  let tallInCm = (Number(tallObj.m)* 100) + Number(tallObj.cm);
+  userData.tall = tallInCm.toString();
 }
 
 function collectUserDataFromInputs(e, key) {
@@ -202,11 +211,80 @@ function saveUserDataToLocalStorage(userData, userDataArray) {
   }
 }
 
-// функція для розрахунку калорій
+function calcPFC(userData) {
+  calcBasalMetabolicRate(userData);
+}
 
-// function calcPFC(userData) {
-//   if(userData.goals === 'gain_weight') {
-//     proteins.textContent = '+++';
-//   }
+function calcBasalMetabolicRate(userData) {
+  let basalMetabolicRate = 0;
+
+  if(userData.gender.toLowerCase() === 'male') {
+    basalMetabolicRate = Math.round((10 * Number(userData.weight)) + (6.25 * Number(userData.tall)) - (5 * Number(userData.age)) + 5);
+  } else if(userData.gender.toLowerCase() === 'female') {
+    basalMetabolicRate = Math.round((10 * Number(userData.weight)) + (6.25 * Number(userData.tall)) - (5 * Number(userData.age)) - 161);
+  }
+  calcTotalDailyEnergyExpenditure(basalMetabolicRate);
+}
+
+function calcTotalDailyEnergyExpenditure(basalMetabolicRate) {
+  let totalDailyEnergyExpenditure = 0;
+
+  switch(userData.activity.toLowerCase()) {
+    case 'sedentary': 
+      totalDailyEnergyExpenditure = Math.round(basalMetabolicRate * 1.2);
+      break;
+    case 'low_active':
+      totalDailyEnergyExpenditure = Math.round(basalMetabolicRate * 1.375);
+      break;
+    case 'active':
+      totalDailyEnergyExpenditure = Math.round(basalMetabolicRate * 1.55);
+      break;
+    case 'very_active':
+      totalDailyEnergyExpenditure = Math.round(basalMetabolicRate * 1.725);
+      break;
+  }
+  adjustmentCalcsDependOnGoals(totalDailyEnergyExpenditure);
+}
+
+function adjustmentCalcsDependOnGoals(totalDailyEnergyExpenditure) {
+  let normDependOnGoal = 0;
+
+  switch(userData.goals.toLowerCase()) {
+    case 'keep_weight':
+      normDependOnGoal = totalDailyEnergyExpenditure;
+      break;
+    case 'lose_weight':
+      normDependOnGoal = Math.round(totalDailyEnergyExpenditure * 0.8);
+      break;
+    case 'gain_weight':
+      normDependOnGoal = Math.round(totalDailyEnergyExpenditure * 1.1);
+      break;
+  }
+
+  let proteinsCalcs = Math.round(Number(userData.weight) * (userData.goals === 'gain_weight' ? 2.2 : 1.6));
+  let fatsCalcs = Math.round(Number(userData.weight) * (userData.goals === 'gain_weight' ? 1.2 : 1.0));
+
+  let proteinCalories = proteinsCalcs * 4;
+  let fatCalories = fatsCalcs * 9;
+  let carbsCalcs = Math.round((normDependOnGoal - (proteinCalories + fatCalories)) / 4);
+
+  toWriteResults(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs);
+  toSaveResultsInLocalStorage(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs)
+}
+
+function toWriteResults(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs) {
+  calories.textContent = 'Calories: ' + normDependOnGoal;
+  proteins.textContent = 'Proteins: ' + proteinsCalcs + 'g';
+  fats.textContent = 'Fats: ' + fatsCalcs + 'g';
+  carbs.textContent = 'Carbs: ' + carbsCalcs + 'g';
+}
+
+// написати функцію для зберігання результатів розрахунків PFC
+
+// function toSaveResultsInLocalStorage(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs) {
+//   userData.proteins = proteinsCalcs + 'g';
+//   userData.fats = fatsCalcs + 'g';
+//   userData.carbs = carbsCalcs + 'g';
+//   userData.calories = normDependOnGoal;
 // }
 
