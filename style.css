@@ -408,4 +408,170 @@ body .main__requestingData .main__requestingDataButtons .requestingButton {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+body .main__homePage {
+  position: absolute;
+  background-color: white;
+  width: 360px;
+  display: none;
+}
+body .main__homePage .main__homePageBox {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+body .main__homePage .main__homePageBox .main__homePageHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+body .main__homePage .main__homePageBox .main__homePageHeader .personBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+}
+body .main__homePage .main__homePageBox .main__homePageHeader .calenderButton {
+  height: 20px;
+  width: 18px;
+  background: url(./image/calendar.svg);
+  border: none;
+}
+body .main__homePage .main__homePageBox .homePageHeadline {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock {
+  width: 328px;
+  height: 144px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  background-color: rgb(247, 247, 247);
+  border-radius: 10px;
+  margin: auto;
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox {
+  display: flex;
+  gap: 24px;
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock {
+  height: 44px;
+  width: 85.33px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .pfcText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .pfcIndicator {
+  height: 4px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: rgb(53, 204, 140);
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock {
+  height: 132px;
+  width: 328px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(247, 247, 247);
+  border-radius: 10px;
+  margin: auto;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 100px;
+  width: 296px;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeText {
+  width: 69px;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeTextTime {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(128, 128, 128);
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock {
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .plusMinusButton {
+  height: 24px;
+  width: 24px;
+  border-radius: 30px;
+  border: none;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .plus {
+  background: url(./image/plus.svg) rgb(204, 204, 204) center no-repeat;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .minus {
+  background: url(./image/minus.svg) rgb(204, 204, 204) center no-repeat;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .waterIntackeIndicator {
+  height: 100px;
+  width: 40px;
+  background-color: rgb(53, 204, 140);
+  border-radius: 30px;
+}
+body .main__homePage .main__homePageBox .homePageHeadlineBlock {
+  display: flex;
+  justify-content: space-between;
+}
+body .main__homePage .main__homePageBox .homePageHeadlineBlock .plusButton {
+  height: 24px;
+  width: 24px;
+  border-radius: 30px;
+  border: none;
+  background: url(./image/plus.svg) center no-repeat;
+}
+body .main__homePage .main__homePageBox .controlPanel {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  bottom: 50px;
+  height: 74px;
+  width: 360px;
+  background-color: rgb(219, 251, 237);
+  border-radius: 10px;
+}
+body .main__homePage .main__homePageBox .controlPanel .controlPanelElem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+body .main__homePage .main__homePageBox .controlPanel .controlPanelElem .controlPanelParagraph {
+  color: rgb(53, 204, 140);
 }/*# sourceMappingURL=style.css.map */

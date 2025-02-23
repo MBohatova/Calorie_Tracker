@@ -18,6 +18,7 @@ let onboardingBox3 = document.querySelector('.onboardingBox3');
 let onboardingBox4 = document.querySelector('.onboardingBox4');
 let onboardingButtonsContainer = document.querySelector('.main__onboardingButtons');
 let onboardingStartButtonsContainer = document.querySelector('.main__startButtons');
+let homePage = document.querySelector('.main__homePage');
 
 let requestingContentContainer = document.querySelector('.main__requestingData');;
 let requestingButtons = document.querySelector('.main__requestingDataButtons');
@@ -44,7 +45,7 @@ let userDataArray = [];
 let userData = {};
 let userTall = {};
 let onboardingContent = [onboardingBox1, onboardingBox2, onboardingBox3, onboardingBox4];
-let requestingContent = [requestingGoal, requestingGender, requestingActivity, requestingTall, requestingWeight, requestingAge, requestingName, requestingRecommendations];
+let requestingContent = [requestingGoal, requestingGender, requestingActivity, requestingTall, requestingWeight, requestingAge, requestingName, requestingRecommendations, homePage];
 let requestingInputs = [inputWeight, inputAge, inputName];
 
 // Index
@@ -58,6 +59,10 @@ let proteins = document.getElementById('proteins');
 let fats = document.getElementById('fats');
 let carbs = document.getElementById('carbs');
 let calories = document.getElementById('calories');
+let normDependOnGoal = 0;
+let proteinsCalcs;
+let fatsCalcs;
+let carbsCalcs;
 
 
 appleButton.addEventListener('click', openApp);
@@ -143,10 +148,13 @@ function changeContentInRequestForm() {
   requestingCurrentIndex = (requestingCurrentIndex + 1);
   requestingContent[requestingCurrentIndex].style.display = 'flex';
 
-  if(requestingCurrentIndex === (requestingContent.length - 1)) {
-    requestingButtonBack.style.display = 'none';
-    saveUserDataToLocalStorage(userData, userDataArray);
+  if(requestingCurrentIndex === (requestingContent.length - 2)) {
     calcPFC(userData);
+  }
+
+  if(requestingCurrentIndex === (requestingContent.length - 1)) {
+    toSaveResultsInLocalStorage(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs);
+    saveUserDataToLocalStorage(userData, userDataArray);
   }
 }
 
@@ -247,8 +255,6 @@ function calcTotalDailyEnergyExpenditure(basalMetabolicRate) {
 }
 
 function adjustmentCalcsDependOnGoals(totalDailyEnergyExpenditure) {
-  let normDependOnGoal = 0;
-
   switch(userData.goals.toLowerCase()) {
     case 'keep_weight':
       normDependOnGoal = totalDailyEnergyExpenditure;
@@ -261,12 +267,12 @@ function adjustmentCalcsDependOnGoals(totalDailyEnergyExpenditure) {
       break;
   }
 
-  let proteinsCalcs = Math.round(Number(userData.weight) * (userData.goals === 'gain_weight' ? 2.2 : 1.6));
-  let fatsCalcs = Math.round(Number(userData.weight) * (userData.goals === 'gain_weight' ? 1.2 : 1.0));
+  proteinsCalcs = Math.round(Number(userData.weight) * (userData.goals === 'gain_weight' ? 2.2 : 1.6));
+  fatsCalcs = Math.round(Number(userData.weight) * (userData.goals === 'gain_weight' ? 1.2 : 1.0));
 
   let proteinCalories = proteinsCalcs * 4;
   let fatCalories = fatsCalcs * 9;
-  let carbsCalcs = Math.round((normDependOnGoal - (proteinCalories + fatCalories)) / 4);
+  carbsCalcs = Math.round((normDependOnGoal - (proteinCalories + fatCalories)) / 4);
 
   toWriteResults(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs);
   toSaveResultsInLocalStorage(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs)
@@ -279,12 +285,10 @@ function toWriteResults(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs) 
   carbs.textContent = 'Carbs: ' + carbsCalcs + 'g';
 }
 
-// написати функцію для зберігання результатів розрахунків PFC
-
-// function toSaveResultsInLocalStorage(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs) {
-//   userData.proteins = proteinsCalcs + 'g';
-//   userData.fats = fatsCalcs + 'g';
-//   userData.carbs = carbsCalcs + 'g';
-//   userData.calories = normDependOnGoal;
-// }
+function toSaveResultsInLocalStorage(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs) {
+  userData.proteins = proteinsCalcs + 'g';
+  userData.fats = fatsCalcs + 'g';
+  userData.carbs = carbsCalcs + 'g';
+  userData.calories = normDependOnGoal;
+}
 

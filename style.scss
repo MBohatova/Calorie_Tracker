@@ -3,6 +3,10 @@ $LightHeadline: rgba(13, 18, 32, 1);
 $lightParagraph: rgba(110, 113, 121, 1);
 $navItems: rgba(217, 217, 217, 1);
 $buttonGreen: rgba(53, 204, 140, 1);
+$backgroundBlocksLight: rgba(247, 247, 247, 1);
+$lightGreyForTime: rgba(128, 128, 128, 1);
+$greyForPlusMinusButtons: rgba(204, 204, 204, 1);
+$lightGreenBg: rgba(219, 251, 237, 1);
 
 * {
   margin: 0;
@@ -491,6 +495,200 @@ body {
           position: absolute;
           right: 0;
           bottom: 0;
+        }
+      }
+    }
+
+    &__homePage {
+      position: absolute;
+      background-color: white;
+      width: 360px;
+      display: none;
+
+      .main__homePageBox {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+
+        .main__homePageHeader {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+
+          .personBlock {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+          }
+
+          .calenderButton {
+            height: 20px;
+            width: 18px;
+            background: url(./image/calendar.svg);
+            border: none;
+          }
+        }
+
+        .homePageHeadline {
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 14.5px;
+          letter-spacing: 0%;
+          text-align: left;
+        }
+
+        .nutrientsIndicatorBlock {
+          width: 328px;
+          height: 144px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 24px;
+          background-color: $backgroundBlocksLight;
+          border-radius: 10px;
+          margin: auto;
+
+          .pfcBox {
+            display: flex;
+            gap: 24px;
+
+            .pfcBlock {
+              height: 44px;
+              width: 85.33px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              align-items: center;
+
+              .pfcText {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: 0%;
+                text-align: center;
+              }
+
+              .pfcIndicator {
+                height: 4px;
+                width: 100%;
+                border-radius: 5px;
+                background-color: $buttonGreen;
+              }
+            }
+          }
+        }
+
+        .waterIntakeBlock {
+          height: 132px;
+          width: 328px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: $backgroundBlocksLight;
+          border-radius: 10px;
+          margin: auto;
+
+          .waterIntakeWrapper {
+            display: flex;
+            justify-content: space-between;
+            height: 100px;
+            width: 296px;
+
+            .waterIntakeTextBlock {
+              height: 100px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+
+              .waterIntakeText {
+                width: 69px;
+              }
+
+              .waterIntakeTextTime {
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14.5px;
+                letter-spacing: 0%;
+                text-align: center;
+                color: $lightGreyForTime;
+              }
+            }
+
+            .waterIntackeButtonAndIndicatorBlock{
+              display: flex;
+              align-items: center;
+              gap: 16px;
+
+              .plusMinusButtonsBlock {
+                height: 72px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .plusMinusButton {
+                  height: 24px;
+                  width: 24px;
+                  border-radius: 30px;
+                  border: none;
+                }
+
+                .plus {
+                  background: url(./image/plus.svg) $greyForPlusMinusButtons center no-repeat;
+                }
+
+                .minus {
+                  background: url(./image/minus.svg) $greyForPlusMinusButtons center no-repeat;
+                }
+              }
+
+              .waterIntackeIndicator {
+                height: 100px;
+                width: 40px;
+                background-color: $buttonGreen;
+                border-radius: 30px;
+              }
+            }
+          }
+        }
+
+        .homePageHeadlineBlock {
+          display: flex;
+          justify-content: space-between;
+
+          .plusButton {
+            height: 24px;
+            width: 24px;
+            border-radius: 30px;
+            border: none;
+            background: url(./image/plus.svg) center no-repeat;
+          }
+        }
+
+
+        .controlPanel {
+          position: fixed;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          bottom: 50px;
+          height: 74px;
+          width: 360px;
+          background-color: $lightGreenBg;
+          border-radius: 10px;
+
+          .controlPanelElem {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+
+            .controlPanelParagraph {
+              color: $buttonGreen;
+            }
+          }
         }
       }
     }
