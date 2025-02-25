@@ -21,12 +21,13 @@ body .main {
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 360px;
   height: 800px;
   margin: 40px auto;
 }
 body .main__appleButton {
+  position: absolute;
+  top: 35%;
   height: 200px;
   width: 200px;
   background: url(./image/appleFirstPic.png);
@@ -410,8 +411,8 @@ body .main__requestingData .main__requestingDataButtons .requestingButton {
   bottom: 0;
 }
 body .main__homePage {
-  position: absolute;
-  background-color: white;
+  display: flex;
+  justify-content: center;
   width: 360px;
   display: none;
 }
@@ -431,7 +432,7 @@ body .main__homePage .main__homePageBox .main__homePageHeader .personBlock {
   align-items: center;
   gap: 9px;
 }
-body .main__homePage .main__homePageBox .main__homePageHeader .calenderButton {
+body .main__homePage .main__homePageBox .main__homePageHeader .calendarButton {
   height: 20px;
   width: 18px;
   background: url(./image/calendar.svg);
@@ -454,7 +455,6 @@ body .main__homePage .main__homePageBox .nutrientsIndicatorBlock {
   gap: 24px;
   background-color: rgb(247, 247, 247);
   border-radius: 10px;
-  margin: auto;
 }
 body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox {
   display: flex;
@@ -481,6 +481,24 @@ body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlo
   border-radius: 5px;
   background-color: rgb(53, 204, 140);
 }
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 304px;
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox .caloriesText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox .caloriesIndicator {
+  height: 4px;
+  border-radius: 5px;
+  background-color: rgb(53, 204, 140);
+}
 body .main__homePage .main__homePageBox .waterIntakeBlock {
   height: 132px;
   width: 328px;
@@ -489,7 +507,6 @@ body .main__homePage .main__homePageBox .waterIntakeBlock {
   align-items: center;
   background-color: rgb(247, 247, 247);
   border-radius: 10px;
-  margin: auto;
 }
 body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper {
   display: flex;
@@ -561,7 +578,7 @@ body .main__homePage .main__homePageBox .controlPanel {
   align-items: center;
   bottom: 50px;
   height: 74px;
-  width: 360px;
+  width: 330px;
   background-color: rgb(219, 251, 237);
   border-radius: 10px;
 }
@@ -574,4 +591,138 @@ body .main__homePage .main__homePageBox .controlPanel .controlPanelElem {
 }
 body .main__homePage .main__homePageBox .controlPanel .controlPanelElem .controlPanelParagraph {
   color: rgb(53, 204, 140);
+}
+body .main__homePage .main__homePageBox .calendar {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 541px;
+  width: 328px;
+  background-color: rgb(247, 247, 247);
+  border-radius: 10px;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .calendarHead {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid lightgray;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .calendarHead .calendarP {
+  height: 16px;
+  width: 292px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgb(13, 18, 32);
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .calendarHead .calendarH {
+  height: 40px;
+  width: 292px;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 39px;
+  color: rgb(13, 18, 32);
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  width: 304px;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .monthAndYear {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 10px;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .monthAndYear .calendarP {
+  position: relative;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+  border: none;
+  background-color: inherit;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .navigation {
+  display: flex;
+  align-items: center;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .navigation .backButtonCalendar, body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .navigation .nextButtonCalendar {
+  height: 48px;
+  width: 48px;
+  border: none;
+  background-color: inherit;
+  background: url(./image/arrow.svg) center no-repeat;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .navigation .nextButtonCalendar {
+  background: url(./image/arrow.svg) center no-repeat;
+  transform: rotate(180deg);
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .daysName {
+  height: 48px;
+  width: 304px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .daysName .days {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 43.43px;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .nums {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 12px;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .nums .num {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  width: 43.43px;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .nums .empty {
+  height: 48px;
+  width: 43.43px;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .buttonsCancelAndOkBox {
+  height: 57px;
+  width: 304px;
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+}
+body .main__homePage .main__homePageBox .calendar .calendarItem .buttonsCancelAndOkBox .calendarCancelOkBtn {
+  border: none;
+  background-color: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(53, 204, 140);
+  padding: 12px;
 }/*# sourceMappingURL=style.css.map */

@@ -58,12 +58,13 @@ body {
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 360px;
     height: 800px;
     margin: 40px auto;
 
     &__appleButton {
+      position: absolute;
+      top: 35%;
       height: 200px;
       width: 200px;
       background: url(./image/appleFirstPic.png);
@@ -500,8 +501,8 @@ body {
     }
 
     &__homePage {
-      position: absolute;
-      background-color: white;
+      display: flex;
+      justify-content: center;
       width: 360px;
       display: none;
 
@@ -522,7 +523,7 @@ body {
             gap: 9px;
           }
 
-          .calenderButton {
+          .calendarButton {
             height: 20px;
             width: 18px;
             background: url(./image/calendar.svg);
@@ -548,7 +549,6 @@ body {
           gap: 24px;
           background-color: $backgroundBlocksLight;
           border-radius: 10px;
-          margin: auto;
 
           .pfcBox {
             display: flex;
@@ -578,6 +578,27 @@ body {
               }
             }
           }
+
+          .caloriesBox {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 304px;
+
+            .caloriesText{
+              font-weight: 400;
+              font-size: 14px;
+              line-height: 17px;
+              letter-spacing: 0%;
+              text-align: center;
+            }
+
+            .caloriesIndicator {
+              height: 4px;
+              border-radius: 5px;
+              background-color: $buttonGreen;
+            }
+          }
         }
 
         .waterIntakeBlock {
@@ -588,7 +609,6 @@ body {
           align-items: center;
           background-color: $backgroundBlocksLight;
           border-radius: 10px;
-          margin: auto;
 
           .waterIntakeWrapper {
             display: flex;
@@ -674,7 +694,7 @@ body {
           align-items: center;
           bottom: 50px;
           height: 74px;
-          width: 360px;
+          width: 330px;
           background-color: $lightGreenBg;
           border-radius: 10px;
 
@@ -687,6 +707,159 @@ body {
 
             .controlPanelParagraph {
               color: $buttonGreen;
+            }
+          }
+        }
+
+        .calendar {
+          position: absolute;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: rgba(0, 0, 0, 0.5);
+          display: none;
+
+          .calendarItem {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 541px;
+            width: 328px;
+            background-color: $backgroundBlocksLight;
+            border-radius: 10px;
+
+            .calendarHead {
+              height: 100px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              gap: 16px;
+              border-bottom: 1px solid lightgray;
+
+              .calendarP {
+                height: 16px;
+                width: 292px;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 17px;
+                color: $LightHeadline;
+              }
+
+              .calendarH {
+                height: 40px;
+                width: 292px;
+                font-weight: 400;
+                font-size: 32px;
+                line-height: 39px;
+                color: $LightHeadline;
+              }
+            }
+
+            .calendarNav {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              height: 48px;
+              width: 304px;
+
+              .monthAndYear {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-left: 10px;
+
+                .calendarP {
+                  position: relative;
+                  font-weight: 500;
+                  font-size: 14px;
+                  line-height: 17px;
+                  letter-spacing: 0%;
+                  text-align: center;
+                  border: none;
+                  background-color: inherit;
+                }
+              }
+
+              .navigation {
+                display: flex;
+                align-items: center;
+
+                .backButtonCalendar {
+                  height: 48px;
+                  width: 48px;
+                  border: none;
+                  background-color: inherit;
+                  background: url(./image/arrow.svg) center no-repeat;
+                }
+
+                .nextButtonCalendar {
+                  @extend .backButtonCalendar;
+                  background: url(./image/arrow.svg) center no-repeat;
+                  transform: rotate(180deg);
+                }
+              }
+            }
+
+            .daysName {
+              height: 48px;
+              width: 304px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              .days {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 48px;
+                width: 43.43px;
+              }
+            }
+
+            .nums {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: flex-start;
+              align-items: center;
+              margin-left: 12px;
+
+              .num {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 48px;
+                width: 43.43px;
+              }
+
+              .empty {
+                height: 48px;
+                width: 43.43px;
+              }
+            }
+
+            .buttonsCancelAndOkBox {
+              height: 57px;
+              width: 304px;
+              display: flex;
+              justify-content: end;
+              gap: 8px;
+
+              .calendarCancelOkBtn {
+                border: none;
+                background-color: inherit;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: 0%;
+                text-align: center;
+                color: $buttonGreen;
+                padding: 12px;
+              }
             }
           }
         }

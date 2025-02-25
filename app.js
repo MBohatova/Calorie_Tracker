@@ -1,4 +1,4 @@
-// localStorage.clear()
+localStorage.clear()
 // Buttons
 let appleButton = document.querySelector('.main__appleButton');
 let onboardingSkipButton = document.querySelector('.main__onboardingSkipButton');
@@ -34,6 +34,7 @@ let requestingButtonsBox = document.querySelectorAll('.requestingButtonsBox');
 let requestingButtonsGoal = document.getElementById('requestingButtonsGoal');
 let requestingButtonsGender = document.getElementById('requestingButtonsGender');
 let requestingButtonsActivity = document.getElementById('requestingButtonsActivity');
+let nums = document.querySelector('.nums');
 
 // Inputs
 let inputWeight = document.getElementById('weight');
@@ -47,6 +48,7 @@ let userTall = {};
 let onboardingContent = [onboardingBox1, onboardingBox2, onboardingBox3, onboardingBox4];
 let requestingContent = [requestingGoal, requestingGender, requestingActivity, requestingTall, requestingWeight, requestingAge, requestingName, requestingRecommendations, homePage];
 let requestingInputs = [inputWeight, inputAge, inputName];
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 // Index
 let onboardingCurrentIndex = 0;
@@ -63,7 +65,16 @@ let normDependOnGoal = 0;
 let proteinsCalcs;
 let fatsCalcs;
 let carbsCalcs;
+let todaysDate = document.getElementById('todaysDate');
 
+let proteinsTextElem = document.getElementById('proteinsTextElem');
+let fatsTextElem = document.getElementById('fatsTextElem');
+let carbsTextElem = document.getElementById('carbsTextElem');
+let caloriesTextElem = document.getElementById('caloriesTextElem');
+
+let calendarButton = document.querySelector('.calendarButton');
+let calendar = document.querySelector('.calendar');
+let monthYearSelectContainer = document.getElementById('monthYearSelectContainer');
 
 appleButton.addEventListener('click', openApp);
 
@@ -153,8 +164,10 @@ function changeContentInRequestForm() {
   }
 
   if(requestingCurrentIndex === (requestingContent.length - 1)) {
+    requestingButtons.style.display = 'none';
     toSaveResultsInLocalStorage(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs);
     saveUserDataToLocalStorage(userData, userDataArray);
+    toWriteDataInDomElems(userData);
   }
 }
 
@@ -292,3 +305,70 @@ function toSaveResultsInLocalStorage(normDependOnGoal, proteinsCalcs, fatsCalcs,
   userData.calories = normDependOnGoal;
 }
 
+function toWriteDataInDomElems(userData) {
+  proteinsTextElem.textContent = userData.proteins;
+  fatsTextElem.textContent = userData.fats;
+  carbsTextElem.textContent = userData.carbs;
+  caloriesTextElem.textContent = userData.calories;
+};
+
+calendarButton.addEventListener('click', onCalendarButtonHandler);
+
+function onCalendarButtonHandler() {
+  calendar.style.display = 'flex';
+  toWriteTodaysDate();
+  createCalendar();
+}
+
+function createCalendar() {
+  generateMonthYearDaysElems();
+}
+
+function generateMonthYearDaysElems() {
+  let thisYear = new Date().getFullYear();
+
+  months.forEach((month) => {
+    monthYearSelectContainer.insertAdjacentHTML('beforeend',
+      `<option class="optionMonth">${month} ${thisYear}</option>`)
+  })
+
+  monthYearSelectContainer.addEventListener('change', function() {
+    let dateArr = this.value.split(' ');
+    let monthIndex = months.indexOf(dateArr[0]);
+    let year = Number(dateArr[1]);
+    let daysInMonth;
+    let firstDayOfWeek;
+
+    if (monthIndex !== -1) {
+      daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+      firstDayOfWeek = new Date(year, monthIndex, 1).getDay();
+    }
+
+    nums.innerHTML = '';
+    for(let i = 1; i < (firstDayOfWeek === 0 ? 6 : firstDayOfWeek); i++) {
+      nums.insertAdjacentHTML('beforeend', 
+        `<div class="num empty"></div>`
+      )
+    }
+
+    for(let i = 1; i <= daysInMonth; i++) {
+      nums.insertAdjacentHTML('beforeend', 
+        `<div class="num">${i}</div>`
+      );
+    }
+  })
+}
+
+function toWriteTodaysDate() {
+  const today = new Date();
+  const daysShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const monthsShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  
+  const day = daysShort[today.getDay()];
+  const month = monthsShort[today.getMonth()];
+  const date = today.getDate();
+  
+  const formattedDate = `${day}, ${month} ${date}`;
+
+  todaysDate.textContent = formattedDate;
+}

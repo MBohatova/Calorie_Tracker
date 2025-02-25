@@ -344,7 +344,7 @@
             <p class="name">Alex</p>
           </div>
   
-          <button type="button" class="calenderButton"></button>
+          <button type="button" class="calendarButton"></button>
         </div>
 
         <h3 class="homePageHeadline nutrientsIndicatorHeadline">
@@ -354,26 +354,26 @@
         <div class="nutrientsIndicatorBlock">
           <div class="pfcBox">
             <div class="pfcBlock proteins">
-              <p class="pfcText">000</p>
+              <p id="proteinsTextElem" class="pfcText"></p>
               <div class="pfcIndicator"></div>
               <p class="pfcText">Proteins</p>
             </div>
 
             <div class="pfcBlock fats">
-              <p class="pfcText">000</p>
+              <p id="fatsTextElem" class="pfcText">000</p>
               <div class="pfcIndicator"></div>
               <p class="pfcText">Fats</p>
             </div>
 
             <div class="pfcBlock carbs">
-              <p class="pfcText">000</p>
+              <p id="carbsTextElem" class="pfcText">000</p>
               <div class="pfcIndicator"></div>
               <p class="pfcText">Carbs</p>
             </div>
           </div>
 
           <div class="caloriesBox">
-            <p class="caloriesText"></p>
+            <p id="caloriesTextElem" class="caloriesText">000</p>
             <div class="caloriesIndicator"></div>
             <p class="caloriesText">Calories</p>
           </div>
@@ -415,6 +415,44 @@
           <div class="controlPanelElem">
             <img src="./image/diary.svg" alt="diaryIcon" height="24px" width="24px">
             <p class="controlPanelParagraph">Diary</p>
+          </div>
+        </div>
+
+        <div class="calendar">
+          <div class="calendarItem">
+            <div class="calendarHead">
+              <p class="calendarP">Select date</p>
+              <h3 id="todaysDate" class="calendarH"></h3>
+            </div>
+
+            <div class="calendarNav">
+              <div class="monthAndYear">
+                <select id="monthYearSelectContainer" class="calendarP"></select>
+                <button class="calendarButtonToBottom" type="button"></button>
+              </div>
+
+              <div class="navigation">
+                <button type="button" class="backButtonCalendar"></button>
+                <button type="button" class="nextButtonCalendar"></button>
+              </div>
+            </div>
+
+            <div class="daysName">
+              <p class="days">M</p>
+              <p class="days">T</p>
+              <p class="days">W</p>
+              <p class="days">T</p>
+              <p class="days">F</p>
+              <p class="days">S</p>
+              <p class="days">S</p>
+            </div>
+
+            <div class="nums"></div>
+
+            <div class="buttonsCancelAndOkBox">
+                <button class="calendarCancelOkBtn" type="button">Cancel</button>
+                <button class="calendarCancelOkBtn" type="button">OK</button>
+            </div>
           </div>
         </div>
       </div>
