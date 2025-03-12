@@ -7,11 +7,16 @@ $backgroundBlocksLight: rgba(247, 247, 247, 1);
 $lightGreyForTime: rgba(128, 128, 128, 1);
 $greyForPlusMinusButtons: rgba(204, 204, 204, 1);
 $lightGreenBg: rgba(219, 251, 237, 1);
+$greyForSmallParagraph: rgba(101, 101, 101, 1);
 
 * {
   margin: 0;
   padding: 0;
   font-family: "Inter", sans-serif;
+
+  input {
+    outline: none;
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -43,6 +48,20 @@ $lightGreenBg: rgba(219, 251, 237, 1);
   color: $lightParagraph;
 }
 
+@mixin smallHeadline {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+}
+
+@mixin smallParagraph {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+}
+
 @mixin roundButton {
   height: 50px;
   width: 50px;
@@ -52,6 +71,8 @@ $lightGreenBg: rgba(219, 251, 237, 1);
 }
 
 body {
+  position: relative;
+  margin: 0;
   background-color: $lightThemeBg;
 
   .main {
@@ -60,7 +81,7 @@ body {
     justify-content: center;
     width: 360px;
     height: 800px;
-    margin: 40px auto;
+    margin: 0 auto;
 
     &__appleButton {
       position: absolute;
@@ -504,6 +525,7 @@ body {
       display: flex;
       justify-content: center;
       width: 360px;
+      height: 800px;
       display: none;
 
       .main__homePageBox {
@@ -515,6 +537,7 @@ body {
           display: flex;
           justify-content: space-between;
           margin-bottom: 10px;
+          padding-top: 20px;
 
           .personBlock {
             display: flex;
@@ -553,8 +576,10 @@ body {
           .pfcBox {
             display: flex;
             gap: 24px;
+            margin-top: 16px;
 
             .pfcBlock {
+              position: relative;
               height: 44px;
               width: 85.33px;
               display: flex;
@@ -574,16 +599,39 @@ body {
                 height: 4px;
                 width: 100%;
                 border-radius: 5px;
+                background-color: $greyForPlusMinusButtons;
+              }
+
+              .colorIndicator {
+                position: absolute;
+                top: 20px;
+                left: 0;
+                height: 4px;
+                border-radius: 5px;
                 background-color: $buttonGreen;
+              }
+
+              .proteins {
+                background-color: rgba(229, 101, 113, 1);
+              }
+
+              .fats {
+                background-color: rgba(255, 160, 114, 1);
+              }
+
+              .carbs {
+                background-color: rgba(89, 255, 196, 1);
               }
             }
           }
 
           .caloriesBox {
+            position: relative;
             display: flex;
             flex-direction: column;
             gap: 6px;
             width: 304px;
+            margin-bottom: 16px;
 
             .caloriesText{
               font-weight: 400;
@@ -594,6 +642,15 @@ body {
             }
 
             .caloriesIndicator {
+              height: 4px;
+              border-radius: 5px;
+              background-color: $greyForPlusMinusButtons;
+            }
+
+            .colorIndicator {
+              position: absolute;
+              top: 23px;
+              left: 0;
               height: 4px;
               border-radius: 5px;
               background-color: $buttonGreen;
@@ -615,6 +672,7 @@ body {
             justify-content: space-between;
             height: 100px;
             width: 296px;
+            margin: 16px 0;
 
             .waterIntakeTextBlock {
               height: 100px;
@@ -622,8 +680,12 @@ body {
               flex-direction: column;
               justify-content: space-between;
 
-              .waterIntakeText {
-                width: 69px;
+              .waterIntakeTextBox {
+                height: 20px;
+
+                .waterIntakeText {
+                  width: 69px;
+                }
               }
 
               .waterIntakeTextTime {
@@ -676,6 +738,7 @@ body {
         .homePageHeadlineBlock {
           display: flex;
           justify-content: space-between;
+          align-items: center;
 
           .plusButton {
             height: 24px;
@@ -686,6 +749,58 @@ body {
           }
         }
 
+        .mealsBlock {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+
+          .mealbox {
+            height: 89px;
+            width: 328px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $backgroundBlocksLight;
+            border-radius: 10px;
+
+            .meal {
+              height: 57px;
+              width: 296px;
+              display: flex;
+              flex-direction: column;
+              gap: 21px;
+
+              .mealHead {
+                display: flex;
+                justify-content: space-between;
+
+                .mealName {
+                  font-weight: 400;
+                  font-size: 14px;
+                  line-height: 17px;
+                  letter-spacing: 0%;
+                  text-align: center;
+                }
+
+                .calories {
+                  @include paragraphs;
+                  font-weight: 500;
+                  color: $LightHeadline;
+                }
+              }
+
+              .mealTime {
+                display: flex;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14.5px;
+                letter-spacing: 0%;
+                text-align: center;
+                color: $lightGreyForTime;
+              }
+            }
+          }
+        }
 
         .controlPanel {
           position: fixed;
@@ -710,158 +825,477 @@ body {
             }
           }
         }
+      }
+    }
 
-        .calendar {
-          position: absolute;
-          left: 0;
-          height: 100%;
-          width: 100%;
+    &__mealPage {
+      position: absolute;
+      width: 360px;
+      height: 800px;
+      background-color: $lightThemeBg;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      display: none;
+
+      .mealHead {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 312px;
+        margin-top: 40px;
+
+        .mealButtons {
+          height: 24px;
+          width: 24px;
+          border: none;
+          background: none;
+        }
+
+        .closeBtn {
+          background: url(./image/clear.svg) center no-repeat;
+        }
+
+        .createBtn {
+          background: url(./image/plus.svg) center no-repeat;
+        }
+
+        .mealNameP {
+          height: 24px;
+          width: 180px;
+          border: none;
+          @include headlines;
+          font-size: 18px;
+        }
+      }
+
+      .mealCaloriesBlock {
+        width: 328px;
+        display: flex;
+        padding-bottom: 16px;
+        border-bottom: 1px solid $navItems;
+        
+        .mealCaloriesElem {
+          width: 82px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+
+          .mealCaloriesNum {
+            @include headlines;
+            font-size: 16px;
+          }
+
+          .mealCaloriesP {
+            @include smallHeadline;
+            color: $LightHeadline;
+          }
+        }
+      }
+
+      .eatenMealsBlock {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 6px;
+
+        .mealFoodBox {
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: rgba(0, 0, 0, 0.5);
-          display: none;
+          width: 328px;
 
-          .calendarItem {
+          .mealFoodWrapper {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            height: 541px;
-            width: 328px;
-            background-color: $backgroundBlocksLight;
-            border-radius: 10px;
+            align-items: start;
+            width: 304px;
+            margin-left: 12px;
 
-            .calendarHead {
-              height: 100px;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              gap: 16px;
-              border-bottom: 1px solid lightgray;
-
-              .calendarP {
-                height: 16px;
-                width: 292px;
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 17px;
-                color: $LightHeadline;
-              }
-
-              .calendarH {
-                height: 40px;
-                width: 292px;
-                font-weight: 400;
-                font-size: 32px;
-                line-height: 39px;
-                color: $LightHeadline;
-              }
+            .mealFoodH {
+              font-weight: 600;
+              font-size: 12px;
+              line-height: 14.5px;
+              letter-spacing: 0%;
+              text-align: center;
+              color: $LightHeadline;
             }
-
-            .calendarNav {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              height: 48px;
-              width: 304px;
-
-              .monthAndYear {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                margin-left: 10px;
-
-                .calendarP {
-                  position: relative;
-                  font-weight: 500;
-                  font-size: 14px;
-                  line-height: 17px;
-                  letter-spacing: 0%;
-                  text-align: center;
-                  border: none;
-                  background-color: inherit;
-                }
-              }
-
-              .navigation {
-                display: flex;
-                align-items: center;
-
-                .backButtonCalendar {
-                  height: 48px;
-                  width: 48px;
-                  border: none;
-                  background-color: inherit;
-                  background: url(./image/arrow.svg) center no-repeat;
-                }
-
-                .nextButtonCalendar {
-                  @extend .backButtonCalendar;
-                  background: url(./image/arrow.svg) center no-repeat;
-                  transform: rotate(180deg);
-                }
-              }
-            }
-
-            .daysName {
-              height: 48px;
-              width: 304px;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-
-              .days {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 48px;
-                width: 43.43px;
-              }
-            }
-
-            .nums {
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: flex-start;
-              align-items: center;
-              margin-left: 12px;
-
-              .num {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 48px;
-                width: 43.43px;
-              }
-
-              .empty {
-                height: 48px;
-                width: 43.43px;
-              }
-            }
-
-            .buttonsCancelAndOkBox {
-              height: 57px;
-              width: 304px;
-              display: flex;
-              justify-content: end;
-              gap: 8px;
-
-              .calendarCancelOkBtn {
-                border: none;
-                background-color: inherit;
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 17px;
-                letter-spacing: 0%;
-                text-align: center;
-                color: $buttonGreen;
-                padding: 12px;
-              }
+            
+            .mealFoodP {
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 14.5px;
+              letter-spacing: 0%;
+              text-align: center;
+              color: $lightParagraph;
             }
           }
+
+          .deleteArea {
+            height: 24px;
+            width: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 3px;
+
+            .deleteItem {
+              height: 3px;
+              width: 3px;
+              background-color: black;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+
+      .saveMealButton {
+        position: fixed;
+        bottom: 40px;
+        height: 52px;
+        width: 328px;
+        background-color: $buttonGreen;
+        color: $lightThemeBg;
+        border-radius: 10px;
+        border: none;
+      }
+    }
+
+    &__searchFood {
+      position: absolute;
+      width: 360px;
+      height: 800px;
+      background-color: $lightThemeBg;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      display: none;
+
+      .searchBarBox {
+        width: 312px;
+        height: 64px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .backSearchButton {
+          height: 64px;
+          width: 24px;
+          background: url(./image/bigArrow.svg) center no-repeat;
+          padding: 0 20px;
+          border: none;
+        }
+
+        .searchInput {
+          height: 34px;
+          width: 224px;
+          border: none;
+          outline: none;
+        }
+
+        .clearSearchButton {
+          height: 64px;
+          width: 24px;
+          background: url(./image/clear.svg) center no-repeat;
+          padding: 0 20px;
+          border: none;
+        }
+      }
+
+      .foodContainer {
+        height: 500px;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+
+        .foodBox {
+          height: 52px;
+          width: 360px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+
+          .foodH {
+            width: 328px;
+            @include smallHeadline;
+            color: $LightHeadline;
+          }
+
+          .foodP {
+            width: 328px;
+            @include smallParagraph;
+            color: $greyForSmallParagraph;
+          }
+        }
+      }
+    }
+  }
+
+  .calendar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+
+    .calendarItem {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 541px;
+      width: 328px;
+      background-color: $backgroundBlocksLight;
+      border-radius: 10px;
+
+      .calendarHead {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        border-bottom: 1px solid lightgray;
+
+        .calendarP {
+          height: 16px;
+          width: 292px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 17px;
+          color: $LightHeadline;
+        }
+
+        .calendarH {
+          height: 40px;
+          width: 292px;
+          font-weight: 400;
+          font-size: 32px;
+          line-height: 39px;
+          color: $LightHeadline;
+        }
+      }
+
+      .calendarNav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 48px;
+        width: 304px;
+
+        .monthAndYear {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-left: 10px;
+
+          .calendarP {
+            position: relative;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: 0%;
+            text-align: center;
+            border: none;
+            background-color: inherit;
+          }
+        }
+
+        .navigation {
+          display: flex;
+          align-items: center;
+
+          .backButtonCalendar {
+            height: 48px;
+            width: 48px;
+            border: none;
+            background-color: inherit;
+            background: url(./image/arrow.svg) center no-repeat;
+          }
+
+          .nextButtonCalendar {
+            @extend .backButtonCalendar;
+            background: url(./image/arrow.svg) center no-repeat;
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .daysName {
+        height: 48px;
+        width: 304px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .days {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 48px;
+          width: 43.43px;
+        }
+      }
+
+      .nums {
+        display: flex;
+        gap: 1px;
+        flex-wrap: wrap;
+        justify-content: start;
+        align-items: center;
+        margin-left: 12px;
+
+        .num {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 48px;
+          width: 43.43px;
+        }
+
+        .empty {
+          height: 48px;
+          width: 43.43px;
+        }
+
+        .currentDate {
+          border: 1px solid $buttonGreen;
+          border-radius: 50%;
+          color: $buttonGreen;
+        }
+
+        .activeDate {
+          background-color: $buttonGreen;
+          border-radius: 50%;
+          color: white;
+        }
+      }
+
+      .buttonsCancelAndOkBox {
+        height: 57px;
+        width: 304px;
+        display: flex;
+        justify-content: end;
+        gap: 8px;
+
+        .calendarCancelOkBtn {
+          border: none;
+          background-color: inherit;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 17px;
+          letter-spacing: 0%;
+          text-align: center;
+          color: $buttonGreen;
+          padding: 12px;
+        }
+      }
+    }
+  }
+
+  .eatenAmountForm {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+
+    .eatenAmountFormBox {
+      height: 238px;
+      width: 328px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: $backgroundBlocksLight;
+      border-radius: 10px;
+
+      .eatenAmountFormWrapper {
+        .eatenAmountH {
+          @include headlines;
+          font-size: 18px;
+          margin-top: 16px;
+        }
+  
+        .caloriesBlock {
+          display: flex;
+          width: 308px;
+          height: 41px;
+          margin: 18px 0 12px 0;
+  
+          .caloriesElem {
+            height: 41px;
+            width: 77px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+  
+            .caloriesNum {
+              @include paragraphs;
+              font-weight: 500;
+              color: $LightHeadline;
+            }
+  
+            .caloriesP {
+              @include paragraphs;
+              font-size: 14px;
+              color: $LightHeadline;
+            }
+          }
+        }
+      }
+
+      .caloriesValueBlock {
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        gap: 12px;
+        width: 184px;
+        height: 52px;
+        margin-bottom: 36px;
+
+        .eatenAmountGrams {
+          height: 32px;
+          width: 100px;
+          background: none;
+          border: none;
+          border-bottom: 2px solid $buttonGreen;
+          padding-left: 16px;
+        }
+
+        .eatenAmountGramsP {
+          @include paragraphs;
+          color: $buttonGreen;
+        }
+      }
+
+      .caloriesButtonsBlock {
+        height: 17px;
+        width: 284px;
+        display: flex;
+        justify-content: end;
+        gap: 32px;
+
+        .caloriesCancelOkBtn {
+          background: none;
+          border: none;
+          @include headlines;
+          font-size: 14px;
+          color: $buttonGreen;
         }
       }
     }

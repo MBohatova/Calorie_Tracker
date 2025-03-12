@@ -4,6 +4,9 @@
   font-family: "Inter", sans-serif;
   /* Hide scrollbar for IE, Edge and Firefox */
 }
+* input {
+  outline: none;
+}
 *::-webkit-scrollbar {
   display: none;
 }
@@ -15,6 +18,8 @@
 }
 
 body {
+  position: relative;
+  margin: 0;
   background-color: rgb(255, 255, 255);
 }
 body .main {
@@ -23,7 +28,7 @@ body .main {
   justify-content: center;
   width: 360px;
   height: 800px;
-  margin: 40px auto;
+  margin: 0 auto;
 }
 body .main__appleButton {
   position: absolute;
@@ -414,6 +419,7 @@ body .main__homePage {
   display: flex;
   justify-content: center;
   width: 360px;
+  height: 800px;
   display: none;
 }
 body .main__homePage .main__homePageBox {
@@ -425,6 +431,7 @@ body .main__homePage .main__homePageBox .main__homePageHeader {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  padding-top: 20px;
 }
 body .main__homePage .main__homePageBox .main__homePageHeader .personBlock {
   display: flex;
@@ -459,8 +466,10 @@ body .main__homePage .main__homePageBox .nutrientsIndicatorBlock {
 body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox {
   display: flex;
   gap: 24px;
+  margin-top: 16px;
 }
 body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock {
+  position: relative;
   height: 44px;
   width: 85.33px;
   display: flex;
@@ -479,13 +488,32 @@ body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlo
   height: 4px;
   width: 100%;
   border-radius: 5px;
+  background-color: rgb(204, 204, 204);
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .colorIndicator {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  height: 4px;
+  border-radius: 5px;
   background-color: rgb(53, 204, 140);
 }
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .proteins {
+  background-color: rgb(229, 101, 113);
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .fats {
+  background-color: rgb(255, 160, 114);
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .carbs {
+  background-color: rgb(89, 255, 196);
+}
 body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 6px;
   width: 304px;
+  margin-bottom: 16px;
 }
 body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox .caloriesText {
   font-weight: 400;
@@ -495,6 +523,14 @@ body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox .c
   text-align: center;
 }
 body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox .caloriesIndicator {
+  height: 4px;
+  border-radius: 5px;
+  background-color: rgb(204, 204, 204);
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox .colorIndicator {
+  position: absolute;
+  top: 23px;
+  left: 0;
   height: 4px;
   border-radius: 5px;
   background-color: rgb(53, 204, 140);
@@ -513,6 +549,7 @@ body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper {
   justify-content: space-between;
   height: 100px;
   width: 296px;
+  margin: 16px 0;
 }
 body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock {
   height: 100px;
@@ -520,7 +557,10 @@ body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .w
   flex-direction: column;
   justify-content: space-between;
 }
-body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeText {
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeTextBox {
+  height: 20px;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeTextBox .waterIntakeText {
   width: 69px;
 }
 body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeTextTime {
@@ -563,6 +603,7 @@ body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .w
 body .main__homePage .main__homePageBox .homePageHeadlineBlock {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 body .main__homePage .main__homePageBox .homePageHeadlineBlock .plusButton {
   height: 24px;
@@ -570,6 +611,57 @@ body .main__homePage .main__homePageBox .homePageHeadlineBlock .plusButton {
   border-radius: 30px;
   border: none;
   background: url(./image/plus.svg) center no-repeat;
+}
+body .main__homePage .main__homePageBox .mealsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+body .main__homePage .main__homePageBox .mealsBlock .mealbox {
+  height: 89px;
+  width: 328px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(247, 247, 247);
+  border-radius: 10px;
+}
+body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal {
+  height: 57px;
+  width: 296px;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealHead {
+  display: flex;
+  justify-content: space-between;
+}
+body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealHead .mealName {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealHead .calories {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  font-weight: 500;
+  color: rgb(13, 18, 32);
+}
+body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealTime {
+  display: flex;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(128, 128, 128);
 }
 body .main__homePage .main__homePageBox .controlPanel {
   position: fixed;
@@ -592,8 +684,206 @@ body .main__homePage .main__homePageBox .controlPanel .controlPanelElem {
 body .main__homePage .main__homePageBox .controlPanel .controlPanelElem .controlPanelParagraph {
   color: rgb(53, 204, 140);
 }
-body .main__homePage .main__homePageBox .calendar {
+body .main__mealPage {
   position: absolute;
+  width: 360px;
+  height: 800px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  display: none;
+}
+body .main__mealPage .mealHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 312px;
+  margin-top: 40px;
+}
+body .main__mealPage .mealHead .mealButtons {
+  height: 24px;
+  width: 24px;
+  border: none;
+  background: none;
+}
+body .main__mealPage .mealHead .closeBtn {
+  background: url(./image/clear.svg) center no-repeat;
+}
+body .main__mealPage .mealHead .createBtn {
+  background: url(./image/plus.svg) center no-repeat;
+}
+body .main__mealPage .mealHead .mealNameP {
+  height: 24px;
+  width: 180px;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
+}
+body .main__mealPage .mealCaloriesBlock {
+  width: 328px;
+  display: flex;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgb(217, 217, 217);
+}
+body .main__mealPage .mealCaloriesBlock .mealCaloriesElem {
+  width: 82px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+body .main__mealPage .mealCaloriesBlock .mealCaloriesElem .mealCaloriesNum {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 16px;
+}
+body .main__mealPage .mealCaloriesBlock .mealCaloriesElem .mealCaloriesP {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  color: rgb(13, 18, 32);
+}
+body .main__mealPage .eatenMealsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 6px;
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 328px;
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .mealFoodWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 304px;
+  margin-left: 12px;
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .mealFoodWrapper .mealFoodH {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(13, 18, 32);
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .mealFoodWrapper .mealFoodP {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(110, 113, 121);
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteArea {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3px;
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteArea .deleteItem {
+  height: 3px;
+  width: 3px;
+  background-color: black;
+  border-radius: 50%;
+}
+body .main__mealPage .saveMealButton {
+  position: fixed;
+  bottom: 40px;
+  height: 52px;
+  width: 328px;
+  background-color: rgb(53, 204, 140);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: none;
+}
+body .main__searchFood {
+  position: absolute;
+  width: 360px;
+  height: 800px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  display: none;
+}
+body .main__searchFood .searchBarBox {
+  width: 312px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body .main__searchFood .searchBarBox .backSearchButton {
+  height: 64px;
+  width: 24px;
+  background: url(./image/bigArrow.svg) center no-repeat;
+  padding: 0 20px;
+  border: none;
+}
+body .main__searchFood .searchBarBox .searchInput {
+  height: 34px;
+  width: 224px;
+  border: none;
+  outline: none;
+}
+body .main__searchFood .searchBarBox .clearSearchButton {
+  height: 64px;
+  width: 24px;
+  background: url(./image/clear.svg) center no-repeat;
+  padding: 0 20px;
+  border: none;
+}
+body .main__searchFood .foodContainer {
+  height: 500px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+body .main__searchFood .foodContainer .foodBox {
+  height: 52px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+body .main__searchFood .foodContainer .foodBox .foodH {
+  width: 328px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  color: rgb(13, 18, 32);
+}
+body .main__searchFood .foodContainer .foodBox .foodP {
+  width: 328px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+  color: rgb(101, 101, 101);
+}
+body .calendar {
+  position: absolute;
+  top: 0;
   left: 0;
   height: 100%;
   width: 100%;
@@ -603,7 +893,7 @@ body .main__homePage .main__homePageBox .calendar {
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem {
+body .calendar .calendarItem {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -613,7 +903,7 @@ body .main__homePage .main__homePageBox .calendar .calendarItem {
   background-color: rgb(247, 247, 247);
   border-radius: 10px;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .calendarHead {
+body .calendar .calendarItem .calendarHead {
   height: 100px;
   display: flex;
   flex-direction: column;
@@ -622,7 +912,7 @@ body .main__homePage .main__homePageBox .calendar .calendarItem .calendarHead {
   gap: 16px;
   border-bottom: 1px solid lightgray;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .calendarHead .calendarP {
+body .calendar .calendarItem .calendarHead .calendarP {
   height: 16px;
   width: 292px;
   font-weight: 500;
@@ -630,7 +920,7 @@ body .main__homePage .main__homePageBox .calendar .calendarItem .calendarHead .c
   line-height: 17px;
   color: rgb(13, 18, 32);
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .calendarHead .calendarH {
+body .calendar .calendarItem .calendarHead .calendarH {
   height: 40px;
   width: 292px;
   font-weight: 400;
@@ -638,20 +928,20 @@ body .main__homePage .main__homePageBox .calendar .calendarItem .calendarHead .c
   line-height: 39px;
   color: rgb(13, 18, 32);
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav {
+body .calendar .calendarItem .calendarNav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 48px;
   width: 304px;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .monthAndYear {
+body .calendar .calendarItem .calendarNav .monthAndYear {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-left: 10px;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .monthAndYear .calendarP {
+body .calendar .calendarItem .calendarNav .monthAndYear .calendarP {
   position: relative;
   font-weight: 500;
   font-size: 14px;
@@ -661,61 +951,72 @@ body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .mo
   border: none;
   background-color: inherit;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .navigation {
+body .calendar .calendarItem .calendarNav .navigation {
   display: flex;
   align-items: center;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .navigation .backButtonCalendar, body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .navigation .nextButtonCalendar {
+body .calendar .calendarItem .calendarNav .navigation .backButtonCalendar, body .calendar .calendarItem .calendarNav .navigation .nextButtonCalendar {
   height: 48px;
   width: 48px;
   border: none;
   background-color: inherit;
   background: url(./image/arrow.svg) center no-repeat;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .calendarNav .navigation .nextButtonCalendar {
+body .calendar .calendarItem .calendarNav .navigation .nextButtonCalendar {
   background: url(./image/arrow.svg) center no-repeat;
   transform: rotate(180deg);
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .daysName {
+body .calendar .calendarItem .daysName {
   height: 48px;
   width: 304px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .daysName .days {
+body .calendar .calendarItem .daysName .days {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 48px;
   width: 43.43px;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .nums {
+body .calendar .calendarItem .nums {
   display: flex;
+  gap: 1px;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: start;
   align-items: center;
   margin-left: 12px;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .nums .num {
+body .calendar .calendarItem .nums .num {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 48px;
   width: 43.43px;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .nums .empty {
+body .calendar .calendarItem .nums .empty {
   height: 48px;
   width: 43.43px;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .buttonsCancelAndOkBox {
+body .calendar .calendarItem .nums .currentDate {
+  border: 1px solid rgb(53, 204, 140);
+  border-radius: 50%;
+  color: rgb(53, 204, 140);
+}
+body .calendar .calendarItem .nums .activeDate {
+  background-color: rgb(53, 204, 140);
+  border-radius: 50%;
+  color: white;
+}
+body .calendar .calendarItem .buttonsCancelAndOkBox {
   height: 57px;
   width: 304px;
   display: flex;
   justify-content: end;
   gap: 8px;
 }
-body .main__homePage .main__homePageBox .calendar .calendarItem .buttonsCancelAndOkBox .calendarCancelOkBtn {
+body .calendar .calendarItem .buttonsCancelAndOkBox .calendarCancelOkBtn {
   border: none;
   background-color: inherit;
   font-weight: 500;
@@ -725,4 +1026,111 @@ body .main__homePage .main__homePageBox .calendar .calendarItem .buttonsCancelAn
   text-align: center;
   color: rgb(53, 204, 140);
   padding: 12px;
+}
+body .eatenAmountForm {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+body .eatenAmountForm .eatenAmountFormBox {
+  height: 238px;
+  width: 328px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(247, 247, 247);
+  border-radius: 10px;
+}
+body .eatenAmountForm .eatenAmountFormBox .eatenAmountFormWrapper .eatenAmountH {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
+  margin-top: 16px;
+}
+body .eatenAmountForm .eatenAmountFormBox .eatenAmountFormWrapper .caloriesBlock {
+  display: flex;
+  width: 308px;
+  height: 41px;
+  margin: 18px 0 12px 0;
+}
+body .eatenAmountForm .eatenAmountFormBox .eatenAmountFormWrapper .caloriesBlock .caloriesElem {
+  height: 41px;
+  width: 77px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+body .eatenAmountForm .eatenAmountFormBox .eatenAmountFormWrapper .caloriesBlock .caloriesElem .caloriesNum {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  font-weight: 500;
+  color: rgb(13, 18, 32);
+}
+body .eatenAmountForm .eatenAmountFormBox .eatenAmountFormWrapper .caloriesBlock .caloriesElem .caloriesP {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  font-size: 14px;
+  color: rgb(13, 18, 32);
+}
+body .eatenAmountForm .eatenAmountFormBox .caloriesValueBlock {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 12px;
+  width: 184px;
+  height: 52px;
+  margin-bottom: 36px;
+}
+body .eatenAmountForm .eatenAmountFormBox .caloriesValueBlock .eatenAmountGrams {
+  height: 32px;
+  width: 100px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid rgb(53, 204, 140);
+  padding-left: 16px;
+}
+body .eatenAmountForm .eatenAmountFormBox .caloriesValueBlock .eatenAmountGramsP {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  color: rgb(53, 204, 140);
+}
+body .eatenAmountForm .eatenAmountFormBox .caloriesButtonsBlock {
+  height: 17px;
+  width: 284px;
+  display: flex;
+  justify-content: end;
+  gap: 32px;
+}
+body .eatenAmountForm .eatenAmountFormBox .caloriesButtonsBlock .caloriesCancelOkBtn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 14px;
+  color: rgb(53, 204, 140);
 }/*# sourceMappingURL=style.css.map */

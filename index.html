@@ -341,7 +341,7 @@
               alt="personImg" 
               class="personImg" 
             >
-            <p class="name">Alex</p>
+            <p id="userName" class="name"></p>
           </div>
   
           <button type="button" class="calendarButton"></button>
@@ -355,26 +355,30 @@
           <div class="pfcBox">
             <div class="pfcBlock proteins">
               <p id="proteinsTextElem" class="pfcText"></p>
-              <div class="pfcIndicator"></div>
+              <div class="pfcIndicator indicators"></div>
+              <div id="proteinsColor" class="proteins colorIndicator"></div>
               <p class="pfcText">Proteins</p>
             </div>
 
             <div class="pfcBlock fats">
               <p id="fatsTextElem" class="pfcText">000</p>
-              <div class="pfcIndicator"></div>
+              <div class="pfcIndicator indicators"></div>
+              <div id="fatsColor" class="fats colorIndicator"></div>
               <p class="pfcText">Fats</p>
             </div>
 
             <div class="pfcBlock carbs">
               <p id="carbsTextElem" class="pfcText">000</p>
-              <div class="pfcIndicator"></div>
+              <div class="pfcIndicator indicators"></div>
+              <div id="carbsColor" class="carbs colorIndicator"></div>
               <p class="pfcText">Carbs</p>
             </div>
           </div>
 
           <div class="caloriesBox">
             <p id="caloriesTextElem" class="caloriesText">000</p>
-            <div class="caloriesIndicator"></div>
+            <div class="caloriesIndicator indicators"></div>
+            <div id="caloriesColor" class="colorIndicator"></div>
             <p class="caloriesText">Calories</p>
           </div>
         </div>
@@ -386,14 +390,17 @@
         <div class="waterIntakeBlock">
           <div class="waterIntakeWrapper">
             <div class="waterIntakeTextBlock">
-              <p class="waterIntakeText">Water 1.9 / 2.5L</p>
+              <div class="waterIntakeTextBox">
+                <p class="waterIntakeText">Water</p>
+                <p id="waterNormIndicator" class="waterIntakeText"></p>
+              </div>
               <p class="waterIntakeTextTime">Last Time 00:00 AM</p>
             </div>
   
             <div class="waterIntackeButtonAndIndicatorBlock">
               <div class="plusMinusButtonsBlock">
-                <button class="plusMinusButton plus" type="button"></button>
-                <button class="plusMinusButton minus" type="button"></button>
+                <button id="plusButton" class="plusMinusButton plus" type="button"></button>
+                <button id="minusButton" class="plusMinusButton minus" type="button"></button>
               </div>
   
               <div class="waterIntackeIndicator"></div>
@@ -406,10 +413,21 @@
             Meals
           </h3>
 
-          <button class="plusButton" type="button"></button>
+          <button id="createMeal" class="plusButton" type="button"></button>
         </div>
 
-        <div class="mealsBlock"></div>
+        <!-- блок для інфи про калорії користувача на день -->
+        <div id="mealsBlock" class="mealsBlock">
+          <!-- <div class="mealbox">
+            <div class="meal">
+              <div class="mealHead">
+                <h3 class="mealName">supper</h3>
+                <p class="calories">531 Cal</p>
+              </div>
+              <p class="mealTime">00</p>
+            </div>
+          </div> -->
+        </div>
 
         <div class="controlPanel">
           <div class="controlPanelElem">
@@ -417,46 +435,87 @@
             <p class="controlPanelParagraph">Diary</p>
           </div>
         </div>
-
-        <div class="calendar">
-          <div class="calendarItem">
-            <div class="calendarHead">
-              <p class="calendarP">Select date</p>
-              <h3 id="todaysDate" class="calendarH"></h3>
-            </div>
-
-            <div class="calendarNav">
-              <div class="monthAndYear">
-                <select id="monthYearSelectContainer" class="calendarP"></select>
-                <button class="calendarButtonToBottom" type="button"></button>
-              </div>
-
-              <div class="navigation">
-                <button type="button" class="backButtonCalendar"></button>
-                <button type="button" class="nextButtonCalendar"></button>
-              </div>
-            </div>
-
-            <div class="daysName">
-              <p class="days">M</p>
-              <p class="days">T</p>
-              <p class="days">W</p>
-              <p class="days">T</p>
-              <p class="days">F</p>
-              <p class="days">S</p>
-              <p class="days">S</p>
-            </div>
-
-            <div class="nums"></div>
-
-            <div class="buttonsCancelAndOkBox">
-                <button class="calendarCancelOkBtn" type="button">Cancel</button>
-                <button class="calendarCancelOkBtn" type="button">OK</button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
+
+    <div id="mealPage" class="main__mealPage">
+      <div class="mealHead">
+        <button id="closeMealPageBtn" class="mealButtons closeBtn"></button>
+        <p id="mealName" class="mealNameP">Meal 1</p>
+        <button id="createEatenMealsListBtn" class="mealButtons createBtn"></button>
+      </div>
+
+      <div id="mealcaloriesBlock" class="mealCaloriesBlock">
+      </div>
+
+      <div id="eatenMealsList" class="eatenMealsBlock"></div>
+
+      <button id="saveMealsButton" class="saveMealButton">Save</button>
+    </div>
+
+    <div id="searchFoodContainer" class="main__searchFood">
+      <div class="searchBarBox">
+        <button id="backSearchButton" class="backSearchButton" type="button"></button>
+        <input id="searchInput" type="text" class="searchInput" placeholder="Search food">
+        <button id="clearSearchButton" type="button" class="clearSearchButton"></button>
+      </div>
+
+      <div id="foodContainer" class="foodContainer"></div>
+    </div>
   </main>
+
+  <div class="calendar">
+    <div class="calendarItem">
+      <div class="calendarHead">
+        <p class="calendarP">Select date</p>
+        <h3 id="todaysDate" class="calendarH"></h3>
+      </div>
+
+      <div class="calendarNav">
+        <div class="monthAndYear">
+          <select id="monthYearSelectContainer" class="calendarP"></select>
+        </div>
+
+        <div class="navigation">
+          <button type="button" class="backButtonCalendar"></button>
+          <button type="button" class="nextButtonCalendar"></button>
+        </div>
+      </div>
+
+      <div class="daysName">
+        <p class="days">M</p>
+        <p class="days">T</p>
+        <p class="days">W</p>
+        <p class="days">T</p>
+        <p class="days">F</p>
+        <p class="days">S</p>
+        <p class="days">S</p>
+      </div>
+
+      <div class="nums"></div>
+
+      <div class="buttonsCancelAndOkBox">
+          <button id="calendarCancelBtn" class="calendarCancelOkBtn" type="button">Cancel</button>
+          <button id="calendarOkBtn" class="calendarCancelOkBtn" type="button">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="eatenInfoForm" class="eatenAmountForm">
+    <div class="eatenAmountFormBox">
+      <div id="eatenInfoCalories" class="eatenAmountFormWrapper">
+      </div>
+
+      <div class="caloriesValueBlock">
+        <input id="eatenAmountInput" type="text" class="eatenAmountGrams" placeholder="100">
+        <p class="eatenAmountGramsP">grams</p>
+      </div>
+
+      <div class="caloriesButtonsBlock">
+        <button id="cancelEatenAmountBtn" class="caloriesCancelOkBtn" type="button">Cancel</button>
+        <button id="okEatenAmountBtn" class="caloriesCancelOkBtn caloriesOkBtn" type="button">OK</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
