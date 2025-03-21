@@ -43,6 +43,7 @@ body .main__onboarding {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 20px 0 20px 0;
   display: none;
 }
 body .main__onboarding .main__onboardingContent .onboardingWrapper {
@@ -112,6 +113,7 @@ body .main__onboarding .main__onboardingButtons {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  padding-bottom: 20px;
 }
 body .main__onboarding .main__onboardingButtons .main__onboardingSkipButton, body .main__onboarding .main__onboardingButtons .main__onboardingBackButton {
   display: flex;
@@ -144,6 +146,7 @@ body .main__onboarding .main__startButtons {
   left: 0;
   bottom: 0;
   width: 100%;
+  padding-bottom: 20px;
   display: none;
 }
 body .main__onboarding .main__startButtons .main__startButton {
@@ -178,6 +181,7 @@ body .main__requestingData {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 20px 0 20px 0;
   display: none;
 }
 body .main__requestingData .main__requestingDataContainer {
@@ -430,6 +434,7 @@ body .main__homePage .main__homePageBox {
 body .main__homePage .main__homePageBox .main__homePageHeader {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
   padding-top: 20px;
 }
@@ -560,9 +565,6 @@ body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .w
 body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeTextBox {
   height: 20px;
 }
-body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeTextBox .waterIntakeText {
-  width: 69px;
-}
 body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeTextTime {
   font-weight: 400;
   font-size: 12px;
@@ -591,14 +593,40 @@ body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .w
 body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .plus {
   background: url(./image/plus.svg) rgb(204, 204, 204) center no-repeat;
 }
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .plus:hover {
+  background-color: #B9B9B9;
+}
 body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .minus {
   background: url(./image/minus.svg) rgb(204, 204, 204) center no-repeat;
 }
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .minus:hover {
+  background-color: #B9B9B9;
+}
 body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .waterIntackeIndicator {
+  position: relative;
   height: 100px;
   width: 40px;
-  background-color: rgb(53, 204, 140);
+  background-color: rgb(204, 204, 204);
   border-radius: 30px;
+  overflow: hidden;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .waterIndicate {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(rgb(129, 221, 255), rgb(120, 171, 255));
+  transition: height 0.2s ease-in-out;
+}
+body .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .percentOfDrunkWater {
+  position: absolute;
+  top: 43%;
+  left: 12.5%;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+  text-align: center;
 }
 body .main__homePage .main__homePageBox .homePageHeadlineBlock {
   display: flex;
@@ -616,6 +644,7 @@ body .main__homePage .main__homePageBox .mealsBlock {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding-bottom: 116px;
 }
 body .main__homePage .main__homePageBox .mealsBlock .mealbox {
   height: 89px;
@@ -663,25 +692,33 @@ body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealTime {
   text-align: center;
   color: rgb(128, 128, 128);
 }
-body .main__homePage .main__homePageBox .controlPanel {
+body .main__homePage .main__homePageBox .controlPanel--wrapper {
+  height: 104px;
+  width: 328px;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  border-radius: 10px 10px 0 0;
+}
+body .main__homePage .main__homePageBox .controlPanel--wrapper .controlPanel {
   position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  bottom: 50px;
+  bottom: 30px;
   height: 74px;
-  width: 330px;
+  width: 328px;
   background-color: rgb(219, 251, 237);
   border-radius: 10px;
 }
-body .main__homePage .main__homePageBox .controlPanel .controlPanelElem {
+body .main__homePage .main__homePageBox .controlPanel--wrapper .controlPanel .controlPanelElem {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
 }
-body .main__homePage .main__homePageBox .controlPanel .controlPanelElem .controlPanelParagraph {
+body .main__homePage .main__homePageBox .controlPanel--wrapper .controlPanel .controlPanelElem .controlPanelParagraph {
   color: rgb(53, 204, 140);
 }
 body .main__mealPage {
@@ -715,8 +752,10 @@ body .main__mealPage .mealHead .createBtn {
   background: url(./image/plus.svg) center no-repeat;
 }
 body .main__mealPage .mealHead .mealNameP {
+  position: absolute;
+  left: 50px;
   height: 24px;
-  width: 180px;
+  width: 264px;
   border: none;
   font-size: 20px;
   font-weight: 500;
@@ -807,6 +846,9 @@ body .main__mealPage .saveMealButton {
   position: fixed;
   bottom: 40px;
   height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 328px;
   background-color: rgb(53, 204, 140);
   color: rgb(255, 255, 255);
@@ -816,7 +858,7 @@ body .main__mealPage .saveMealButton {
 body .main__searchFood {
   position: absolute;
   width: 360px;
-  height: 800px;
+  height: 100%;
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
@@ -852,10 +894,11 @@ body .main__searchFood .searchBarBox .clearSearchButton {
   border: none;
 }
 body .main__searchFood .foodContainer {
-  height: 500px;
+  height: 100%;
   display: flex;
   gap: 10px;
   flex-direction: column;
+  overflow: auto;
 }
 body .main__searchFood .foodContainer .foodBox {
   height: 52px;

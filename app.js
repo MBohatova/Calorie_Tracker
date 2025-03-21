@@ -54,6 +54,7 @@ let eatenMealsList = document.getElementById('eatenMealsList');
 let mealCaloriesBlock = document.getElementById('mealcaloriesBlock');
 let mealsBlock = document.getElementById('mealsBlock');
 
+
 // Inputs
 let inputWeight = document.getElementById('weight');
 let inputAge = document.getElementById('age');
@@ -117,6 +118,7 @@ const foodData = [
   { name: "Celery", calories: 16, protein: 0.7, fat: 0.2, carbs: 3.6 },
   { name: "Broccoli", calories: 55, protein: 3.7, fat: 0.6, carbs: 11 }
 ];
+let drunkWater = 0;
 
 // Index
 let onboardingCurrentIndex = 0;
@@ -144,11 +146,16 @@ let monthYearSelectContainer = document.getElementById('monthYearSelectContainer
 let userName = document.getElementById('userName');
 let waterNormIndicator = document.getElementById('waterNormIndicator');
 let mealName = document.getElementById('mealName');
-
 let proteinsColor = document.getElementById('proteinsColor');
 let fatsColor = document.getElementById('fatsColor');
 let carbsColor = document.getElementById('carbsColor');
 let caloriesColor = document.getElementById('caloriesColor');
+let waterColorIndicator = document.getElementById('waterColorIndicator');
+let waterPercentNum = document.getElementById('waterPercentNum');
+let waterIntakeTime = document.getElementById('waterIntakeTime');
+let currentFood = "";
+let currentGrams = 0;
+let controlBar = document.getElementById('controlBar');
 
 appleButton.addEventListener('click', openApp);
 
@@ -157,9 +164,13 @@ function openApp() {
   if(dataFromStorage) {
     let data = JSON.parse(dataFromStorage);
     appleButton.style.display = 'none';
+    writeDefaultValuesDataInDom();
     toWriteDataInDomElems(data[0]);
     homePage.style.display = 'flex';
-    jenerateMealsFromLocalStorage(data[0])
+    scrollTo(0, 0);
+    jenerateMealsFromLocalStorage(data[0]);
+    calcWaterNorm(data[0]);
+    writeWaterDataInDom(data[0]);
   } else {
     appleButton.style.display = 'none';
     onboardingBox.style.display = 'flex';
@@ -188,6 +199,7 @@ function changeOnboardingContent() {
   onboardingContent[onboardingCurrentIndex].style.display = 'none';
   onboardingSkipButton.style.display = 'none';
   onboardingBackButton.style.display = 'flex';
+  scrollTo(0, 0);
   onboardingCurrentIndex = (onboardingCurrentIndex + 1);
   onboardingContent[onboardingCurrentIndex].style.display = 'flex';
 
@@ -240,6 +252,7 @@ startButton.addEventListener('click', openRequestingDataForm);
 function openRequestingDataForm() {
   onboardingContentContainer.style.display = 'none';
   requestingContentContainer.style.display = 'flex';
+  scrollTo(0, 0);
 }
 
 requestingButton.addEventListener('click', changeContentInRequestForm)
@@ -249,6 +262,7 @@ function changeContentInRequestForm() {
   requestingContent[requestingCurrentIndex].style.display = 'none';
   requestingCurrentIndex = (requestingCurrentIndex + 1);
   requestingContent[requestingCurrentIndex].style.display = 'flex';
+  scrollTo(0, 0);
 
   if(requestingCurrentIndex === (requestingContent.length - 2)) {
     calcPFC(userData);
@@ -260,7 +274,7 @@ function changeContentInRequestForm() {
     saveUserDataToLocalStorage(userData, userDataArray);
     toWriteDataInDomElems(userData);
     writeDefaultValuesDataInDom();
-    // calcWaterNorm(userData);
+    calcWaterNorm(userData);
   }
 }
 
@@ -270,6 +284,7 @@ function onRequestingButtonBack() {
   requestingContent[requestingCurrentIndex].style.display = 'none';
   requestingCurrentIndex = (requestingCurrentIndex - 1);
   requestingContent[requestingCurrentIndex].style.display = 'flex';
+  scrollTo(0, 0);
 
   if(requestingContent[requestingCurrentIndex].classList.contains('requestingGoal')) {
     requestingButtonBack.style.display = 'none';
@@ -317,7 +332,9 @@ function saveUserDataToLocalStorage(userData, userDataArray) {
   let dataFromStorage = localStorage.getItem('userDataArray');
   if(dataFromStorage) {
     let data = JSON.parse(dataFromStorage);
-    data.push(userData);
+    Object.keys(userData).forEach((key) => {
+      data[0][key] = userData[key];
+    });
     localStorage.setItem('userDataArray', JSON.stringify(data));
   } else {
     userDataArray.push(userData);
@@ -392,9 +409,9 @@ function toWriteResults(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs) 
 }
 
 function toSaveCalcResultsInLocalStorage(normDependOnGoal, proteinsCalcs, fatsCalcs, carbsCalcs) {
-  userData.proteins = proteinsCalcs + 'g';
-  userData.fats = fatsCalcs + 'g';
-  userData.carbs = carbsCalcs + 'g';
+  userData.proteins = proteinsCalcs;
+  userData.fats = fatsCalcs;
+  userData.carbs = carbsCalcs;
   userData.calories = normDependOnGoal;
 }
 
@@ -413,9 +430,9 @@ function toWriteEatenAndNormValuesInDom() {
   Object.keys(dataFromStorage).forEach((key) => {
     if(key.includes('Meal')) {
       caloriesTextElem.textContent = calcSumOfValues(dataFromStorage, calcCaloriesArr, key, 'calories') + ' / ' + dataFromStorage.calories;
-      proteinsTextElem.textContent = calcSumOfValues(dataFromStorage, calcProteinsArr, key, 'proteins') + ' / ' + sliceString(dataFromStorage.proteins);
-      fatsTextElem.textContent = calcSumOfValues(dataFromStorage, calcCarbsArr, key, 'fats') + ' / ' + sliceString(dataFromStorage.fats);
-      carbsTextElem.textContent = calcSumOfValues(dataFromStorage, calcFatsArr, key, 'carbs') + ' / ' + sliceString(dataFromStorage.carbs);
+      proteinsTextElem.textContent = calcSumOfValues(dataFromStorage, calcProteinsArr, key, 'proteins') + ' / ' + dataFromStorage.proteins;
+      fatsTextElem.textContent = calcSumOfValues(dataFromStorage, calcCarbsArr, key, 'fats') + ' / ' + dataFromStorage.fats;
+      carbsTextElem.textContent = calcSumOfValues(dataFromStorage, calcFatsArr, key, 'carbs') + ' / ' + dataFromStorage.carbs;
     }
   })
   calcColorIndicatorWidth(caloriesTextElem.textContent, caloriesColor);
@@ -442,16 +459,12 @@ function calcSumOfValues(dataObj, arr, keyMeal, keyValue) {
   return arr.reduce((prevElem, currentElem) => prevElem + currentElem);
 }
 
-function sliceString(string) {
-  return string.slice(0, -1);
-}
-
 function writeDefaultValuesDataInDom() {
   let dataFromStorage = JSON.parse(localStorage.getItem('userDataArray'))[0];
   caloriesTextElem.textContent = dataFromStorage.calories;
-  proteinsTextElem.textContent = sliceString(dataFromStorage.proteins);
-  fatsTextElem.textContent = sliceString(dataFromStorage.fats);
-  carbsTextElem.textContent = sliceString(dataFromStorage.carbs);
+  proteinsTextElem.textContent = dataFromStorage.proteins;
+  fatsTextElem.textContent = dataFromStorage.fats;
+  carbsTextElem.textContent = dataFromStorage.carbs;
 }
 
 calendarButton.addEventListener('click', onCalendarButtonHandler);
@@ -594,6 +607,8 @@ createMealButton.addEventListener('click', onCreateMealButtonHandler);
 
 function onCreateMealButtonHandler() {
   mealPage.style.display = 'flex';
+  scrollTo(0, 0);
+  controlBar.style.display = 'none';
   writeMealName();
   jenerateDefaultCPFCValues();
 }
@@ -640,6 +655,8 @@ createEatenMealsListBtn.addEventListener('click', onCreateEatenMealsListBtnHandl
 
 function onCreateEatenMealsListBtnHandler() {
   searchFoodContainer.style.display = 'flex';
+  scrollTo(0, 0);
+  saveMealsButton.style.display = 'none';
   jenerateAllFoodVariants();
 }
 
@@ -647,6 +664,8 @@ closeMealPageBtn.addEventListener('click', onCloseMealPageBtn);
 
 function onCloseMealPageBtn() {
   mealPage.style.display = 'none';
+  controlBar.style.display = 'flex';
+  eatenMealsList.innerHTML = '';
 }
 
 searchInput.addEventListener('input', searchByInput);
@@ -664,7 +683,7 @@ function searchByInput() {
 
 function jenerateAllFoodVariants() {
   foodData.forEach((food) => {
-    jenerateFoodAlgorithm(foodContainer, food)
+    jenerateFoodAlgorithm(foodContainer, food);
   })
 }
 
@@ -730,6 +749,7 @@ function onFoodBoxHandler(elem) {
 clearSearchButton.addEventListener('click', function() {
   if(searchInput.value === '') {
     searchFoodContainer.style.display = 'none';
+    saveMealsButton.style.display = 'flex';
   }
   
   searchInput.value = '';
@@ -738,23 +758,26 @@ clearSearchButton.addEventListener('click', function() {
 
 backSearchButton.addEventListener('click', function() {
   searchFoodContainer.style.display = 'none';
+  saveMealsButton.style.display = 'flex';
 })
 
 eatenAmountInput.removeEventListener('input', eatenAmountInputHandler);
 eatenAmountInput.addEventListener('input', eatenAmountInputHandler);
 
 function eatenAmountInputHandler(e) {
-  let foodName = document.getElementById('foodName').textContent;
-  let eatenGrams = e.target.value + 'g';
-  collectEatenFoodData(eatenGrams, foodName);
+  currentFood = document.getElementById('foodName').textContent;
+  currentGrams = Number(e.target.value);
 }
 
 okEatenAmountBtn.removeEventListener('click', onOkEatenAmountBtnHandler);
 okEatenAmountBtn.addEventListener('click', onOkEatenAmountBtnHandler);
 
 function onOkEatenAmountBtnHandler() {
+  if(currentFood && currentGrams > 0) {
+    chooseIfCreateNewMealOrRecreateSavedMeal(currentGrams);
+    calcEatenCPFC();
+  }
   eatenInfoForm.style.display = 'none';
-  jenerateChoosenEatenFood();
 }
 
 cancelEatenAmountBtn.removeEventListener('click', onCancelEatenAmountBtnHandler);
@@ -764,31 +787,37 @@ function onCancelEatenAmountBtnHandler() {
   eatenInfoForm.style.display = 'none';
 }
 
-function jenerateChoosenEatenFood() {
-  let choosenFoodElem;
-  let eatenCaloriesNum;
-  let eatenGramsNum;
-  let eatenProteinsNum;
-  let eatenFatsNum;
-  let eatenCarbsNum;
+function calcEatenCPFC() {
+  eatenMealsList.innerHTML = '';
 
-  foodData.forEach((elem) => {
-    if(elem.name === foodName.textContent) {
-      choosenFoodElem = elem;
-      eatenGramsNum = Number(mealData[foodName.textContent].slice(0, -1));
+  let totalCalories = 0;
+  let totalProteins = 0;
+  let totalFats = 0;
+  let totalCarbs = 0;
 
-      eatenCaloriesNum = Math.round((eatenGramsNum * choosenFoodElem.calories) / 100);
-      eatenProteinsNum = Math.round((eatenGramsNum * choosenFoodElem.protein) / 100);
-      eatenFatsNum = Math.round((eatenGramsNum * choosenFoodElem.fat) / 100);
-      eatenCarbsNum = Math.round((eatenGramsNum * choosenFoodElem.carbs) / 100);
-      
-      caloriesArr.push(eatenCaloriesNum);
-      proteinsArr.push(eatenProteinsNum);
-      fatsArr.push(eatenFatsNum);
-      carbsArr.push(eatenCarbsNum);
+  for (let foodName in mealData) {
+    let choosenFoodElem = foodData.find(elem => elem.name === foodName);
+    
+    if (choosenFoodElem) {
+      let eatenGramsNum = mealData[foodName];
+
+      let eatenCaloriesNum = Math.round((eatenGramsNum * choosenFoodElem.calories) / 100);
+      let eatenProteinsNum = Math.round((eatenGramsNum * choosenFoodElem.protein) / 100);
+      let eatenFatsNum = Math.round((eatenGramsNum * choosenFoodElem.fat) / 100);
+      let eatenCarbsNum = Math.round((eatenGramsNum * choosenFoodElem.carbs) / 100);
+
+      totalCalories += eatenCaloriesNum;
+      totalProteins += eatenProteinsNum;
+      totalFats += eatenFatsNum;
+      totalCarbs += eatenCarbsNum;
+
+      jenerateMealsList(choosenFoodElem, eatenCaloriesNum, eatenGramsNum);
     }
-  })
+  }
+  jenerateTotalCPFC(totalCalories, totalProteins, totalFats, totalCarbs);
+}
 
+function jenerateMealsList(choosenFoodElem, eatenCaloriesNum, eatenGramsNum) {
   eatenMealsList.insertAdjacentHTML('beforeend', `
     <div class="mealFoodBox">
       <div class="mealFoodWrapper">
@@ -801,49 +830,73 @@ function jenerateChoosenEatenFood() {
         <div class="deleteItem"></div>
       </div>
     </div>
-  `)
+  `);
+}
 
+function jenerateTotalCPFC(totalCalories, totalProteins, totalFats, totalCarbs) {
   mealCaloriesBlock.innerHTML = '';
-
-  mealCaloriesBlock.insertAdjacentHTML('beforeend', `
+  mealCaloriesBlock.innerHTML = `
     <div class="mealCaloriesElem">
-      <div class="mealCaloriesNum">${calcSumOfEatenCPFC(caloriesArr)}</div>
+      <div class="mealCaloriesNum">${totalCalories}</div>
       <p class="mealCaloriesP">Calories</p>
     </div>
 
     <div class="mealCaloriesElem">
-      <div class="mealCaloriesNum">${calcSumOfEatenCPFC(proteinsArr)}</div>
+      <div class="mealCaloriesNum">${totalProteins}</div>
       <p class="mealCaloriesP">Proteins</p>
     </div>
 
     <div class="mealCaloriesElem">
-      <div class="mealCaloriesNum">${calcSumOfEatenCPFC(fatsArr)}</div>
+      <div class="mealCaloriesNum">${totalFats}</div>
       <p class="mealCaloriesP">Fats</p>
     </div>
 
     <div class="mealCaloriesElem">
-      <div class="mealCaloriesNum">${calcSumOfEatenCPFC(carbsArr)}</div>
+      <div class="mealCaloriesNum">${totalCarbs}</div>
       <p class="mealCaloriesP">Carbs</p>
     </div>
-  `)
-  collectEatenValuesData();
+  `;
+
+  collectEatenValuesData(totalCalories, totalProteins, totalFats, totalCarbs);
 }
 
-function collectEatenValuesData() {
+function collectEatenValuesData(totalCalories, totalProteins, totalFats, totalCarbs) {
   mealData.eaten_Values = {
-    calories: calcSumOfEatenCPFC(caloriesArr),
-    proteins: calcSumOfEatenCPFC(proteinsArr),
-    fats: calcSumOfEatenCPFC(fatsArr),
-    carbs: calcSumOfEatenCPFC(carbsArr)
+    calories: totalCalories,
+    proteins: totalProteins,
+    fats: totalFats,
+    carbs: totalCarbs
   }
 }
 
-function collectEatenFoodData(e, foodName) {
-  mealData[foodName] = e;
+function chooseIfCreateNewMealOrRecreateSavedMeal(currentGrams) {
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  let activeMeal = mealName.textContent;
+  let mealExists = Object.keys(data).includes(activeMeal);
+
+  if(mealExists) {
+    changeEatenFoodData(data, activeMeal, currentGrams);
+  } else {
+    collectEatenFoodData(currentGrams, currentFood);
+  }
 }
 
-function calcSumOfEatenCPFC(arr) {
-  return arr.reduce((prevElem, elem) => prevElem + elem);
+function collectEatenFoodData(grams, foodName) {
+  if (mealData.hasOwnProperty(foodName)) {
+    mealData[foodName] += grams;
+  } else {
+    mealData[foodName] = grams;
+  }
+}
+
+function changeEatenFoodData(storageObj, mealKey, currentGrams) {
+  let food = foodName.textContent;
+  if (storageObj[mealKey].hasOwnProperty(food)) {
+    storageObj[mealKey][food] += currentGrams;
+  } else {
+    storageObj[mealKey][food] = currentGrams;
+  }
+  mealData = storageObj[mealKey];
 }
 
 saveMealsButton.addEventListener('click', onSaveButtonHandler);
@@ -853,10 +906,13 @@ function onSaveButtonHandler() {
   eatenMealsList.innerHTML = '';
   mealPage.style.display = 'none';
   mealData.time = getCurrentTime();
-  reSaveDataInLocalStorage(mealName.textContent, mealData);
+  let mealKey = mealName.textContent;
+  userData[mealKey] = mealData;
+  saveUserDataToLocalStorage(userData, userDataArray);
   cleanValuesElemsTextContent();
   toWriteEatenAndNormValuesInDom();
   jenerateMeal(mealName.textContent, mealData.eaten_Values.calories, mealData.time);
+  controlBar.style.display = 'flex';
 }
 
 function cleanValuesElemsTextContent() {
@@ -887,58 +943,197 @@ function jenerateMeal(mealName, caloriesNum, time) {
       </div>
     </div>
   `)
+  addEventListenersToMealBoxes();
 }
 
-function reSaveDataInLocalStorage(mealType, mealData) {
-  let dataFromStorage = localStorage.getItem('userDataArray');
-  let parsedData = JSON.parse(dataFromStorage);
-  if(!parsedData[0][mealType]) {
-    parsedData[0][mealType] = {};
-  }
+function writeWaterDataInDom(storageObj) {
+  Object.keys(storageObj).forEach((key) => {
+    if(key.includes('waterIntake')) {
+      waterNormIndicator.textContent = storageObj[key] + 'L';
+      let waterDataArr = storageObj[key].split(' / ');
+      calcPercentOfDrunkWater(waterDataArr[0], waterDataArr[1]);
+    }
 
-  for(let foodName in mealData) {
-    if(parsedData[0][mealType][foodName]) {
-      let prevAmount = parseInt(parsedData[0][mealType][foodName]);
-      let newAmount = parseInt(mealData[foodName]);
-      parsedData[0][mealType][foodName] = (prevAmount + newAmount) + 'g';
-    } else {
-      parsedData[0][mealType][foodName] = mealData[foodName];
+    if(key.includes('timeWaterIntake')) {
+      waterIntakeTime.textContent = `Last time ${storageObj[key]}`
+    }
+  })
+}
+
+function calcWaterNorm(userData) {
+  let baseNorm = +(((userData.weight * 35) / 1000).toFixed(1));
+  toWriteWaterIntakeInDom(baseNorm, drunkWater);
+
+  let onClickPlusButton = () => onPlusButtonHandler(baseNorm, userData);
+  plusButton.addEventListener('click', onClickPlusButton);
+
+  let onClickMinusButton = () => onMinusButtonHandler(baseNorm, userData);
+  minusButton.addEventListener('click', onClickMinusButton);
+}
+
+function onPlusButtonHandler(baseNorm, userData) {
+  if(checkWaterIntakeInLocalStorage() !== 0) {
+    drunkWater = checkWaterIntakeInLocalStorage();
+    drunkWater = Math.round((drunkWater + 0.1) * 10) / 10;
+    toWriteWaterIntakeInDom(baseNorm, drunkWater);
+    writeWaterIntakeTimeInDom();
+    calcPercentOfDrunkWater(drunkWater, baseNorm);
+    userData.waterIntake = drunkWater + ' / ' + baseNorm;
+    userData.timeWaterIntake = getCurrentTime();
+    saveUserDataToLocalStorage(userData, userDataArray);
+  } else {
+    drunkWater = Math.round((drunkWater + 0.1) * 10) / 10;
+    toWriteWaterIntakeInDom(baseNorm, drunkWater);
+    writeWaterIntakeTimeInDom();
+    calcPercentOfDrunkWater(drunkWater, baseNorm);
+    userData.waterIntake = drunkWater + ' / ' + baseNorm;
+    userData.timeWaterIntake = getCurrentTime();
+    saveUserDataToLocalStorage(userData, userDataArray);
+  }
+}
+
+function onMinusButtonHandler(baseNorm, userData) {
+  if(checkWaterIntakeInLocalStorage() !== 0) {
+    drunkWater = checkWaterIntakeInLocalStorage();
+    drunkWater = Math.round((drunkWater - 0.1) * 10) / 10;
+    calcPercentOfDrunkWater(drunkWater, baseNorm);
+    writeWaterIntakeTimeInDom();
+    toWriteWaterIntakeInDom(baseNorm, drunkWater);
+    userData.waterIntake = drunkWater + ' / ' + baseNorm;
+    userData.timeWaterIntake = getCurrentTime();
+    saveUserDataToLocalStorage(userData, userDataArray);
+  } else {
+    drunkWater = 0;
+    calcPercentOfDrunkWater(drunkWater, baseNorm);
+    writeWaterIntakeTimeInDom();
+    toWriteWaterIntakeInDom(baseNorm, drunkWater);
+    userData.waterIntake = drunkWater + ' / ' + baseNorm;
+    userData.timeWaterIntake = getCurrentTime();
+    saveUserDataToLocalStorage(userData, userDataArray);
+  }
+}
+
+function writeWaterIntakeTimeInDom() {
+  waterIntakeTime.textContent = `Last time ${getCurrentTime()}`;
+}
+
+function toWriteWaterIntakeInDom(baseNorm, drunkWater) {
+  waterNormIndicator.textContent = drunkWater + ' / ' + baseNorm + 'L';
+}
+
+function calcPercentOfDrunkWater(drunkNum, normNum) {
+  let persentOfDrunkWater = Math.round((drunkNum / normNum) * 100);
+  colorWaterIndicator(persentOfDrunkWater);
+  jeneratePercentNumOfDrunkWater(persentOfDrunkWater);
+}
+
+function colorWaterIndicator(percent) {
+  if(percent > 100) {
+    waterColorIndicator.style.height = 100 + '%';
+  } else {
+    waterColorIndicator.style.height = percent + '%';
+  }
+}
+
+function jeneratePercentNumOfDrunkWater(percent) {
+  waterPercentNum.textContent = percent + '%'
+}
+
+function checkWaterIntakeInLocalStorage() {
+  let dataFromLocalStorage = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  for(let key of Object.keys(dataFromLocalStorage)) {
+    if(key.includes('waterIntake')) {
+      let waterDataArr = dataFromLocalStorage[key].split(' / ');
+      return Number(waterDataArr[0]);
     }
   }
-  localStorage.setItem('userDataArray', JSON.stringify(parsedData));
+  return null;
 }
 
-// доробити nutrientsIndicatorBlock, щоб було вибно кількість з'їденого 
-// порівняно з нормою + можливість видаляти, редагувати створені meals
+// доробити можливість видаляти, редагувати створені meals 
+// + елементи по кліку на іконку користувача і зміна даних користувача 
+// з головного меню =>
 
+function addEventListenersToMealBoxes() {
+  let mealBoxes = document.querySelectorAll('.mealbox');
+  mealBoxes.forEach((box) => {
+    box.removeEventListener('click', onMealBoxHandler);
+    box.addEventListener('click', onMealBoxHandler);
+  })
+}
 
+function onMealBoxHandler() {
+  let mealNameElem = this.querySelector('.mealName').textContent;
+  mealName.textContent = '';
+  mealName.textContent = mealNameElem;
+  mealPage.style.display = 'flex';
+  scrollTo(0, 0);
+  controlBar.style.display = 'none';
+  checkMealDataInStorage(mealNameElem);
+}
 
-// функції для розрахунку норми води та збільшення випитого в dom
-// let drunkWater = 0;
+function checkMealDataInStorage(clickedMealName) {
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  Object.keys(data).forEach((key) => {
+    if(key === clickedMealName) {
+      jenerateSavedDataAboutMeal(data[key]);
+    }
+  })
+}
 
-// function calcWaterNorm(userData) {
-//   let baseNorm = +(((userData.weight * 35) / 1000).toFixed(1));
-//   toWriteWaterIntakeInDom(baseNorm, drunkWater);
-// }
+function jenerateSavedDataAboutMeal(mealDataObj) {
+  mealCaloriesBlock.innerHTML = '';
+  mealCaloriesBlock.insertAdjacentHTML('beforeend', `
+    <div class="mealCaloriesElem">
+      <div class="mealCaloriesNum">${mealDataObj['eaten_Values']['calories']}</div>
+      <p class="mealCaloriesP">Calories</p>
+    </div>
 
-// plusButton.addEventListener('click', function() {
-//   drunkWater++;
-//   toWriteWaterIntakeInDom(baseNorm, drunkWater);
-//   console.log(drunkWater);
-// })
+    <div class="mealCaloriesElem">
+      <div class="mealCaloriesNum">${mealDataObj['eaten_Values']['proteins']}</div>
+      <p class="mealCaloriesP">Proteins</p>
+    </div>
 
-// minusButton.addEventListener('click', function() {
-//   if (drunkWater > 0) drunkWater--;
-//   drunkWater--;
-//   toWriteWaterIntakeInDom(baseNorm, drunkWater);
-//   console.log(drunkWater);
-// })
+    <div class="mealCaloriesElem">
+      <div class="mealCaloriesNum">${mealDataObj['eaten_Values']['fats']}</div>
+      <p class="mealCaloriesP">Fats</p>
+    </div>
 
-// function toWriteWaterIntakeInDom(baseNorm, drunkWater) {
-//   waterNormIndicator.textContent = drunkWater + ' / ' + baseNorm + 'L';
-// }
+    <div class="mealCaloriesElem">
+      <div class="mealCaloriesNum">${mealDataObj['eaten_Values']['carbs']}</div>
+      <p class="mealCaloriesP">Carbs</p>
+    </div>
+  `);
 
+  eatenMealsList.innerHTML = '';
+  Object.keys(mealDataObj).forEach((key) => {
+    if(!(key === 'eaten_Values') && !(key === 'time')) {
+      eatenMealsList.insertAdjacentHTML('beforeend', `
+        <div class="mealFoodBox">
+          <div class="mealFoodWrapper">
+            <h4 class="mealFoodH">${key}</h4>
+            <p class="mealFoodP">${calcEatenCalories(key, mealDataObj[key])} cal • ${mealDataObj[key]} g</p>
+          </div>
+          <div class="deleteArea">
+            <div class="deleteItem"></div>
+            <div class="deleteItem"></div>
+            <div class="deleteItem"></div>
+          </div>
+        </div>
+      `);
+    }
+  })
 
+}
 
+function calcEatenCalories(elemsName, elemsGrams) {
+  let result = 0;
 
+  foodData.forEach((foodElem) => {
+    if(foodElem.name === elemsName) {
+      result = Math.round((elemsGrams * foodElem.calories) / 100);
+    }
+  })
+  return result;
+}
 

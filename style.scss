@@ -97,6 +97,7 @@ body {
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      padding: 20px 0 20px 0;
       display: none;
 
       .main__onboardingContent {
@@ -171,6 +172,7 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        padding-bottom: 20px;
 
         .main__onboardingSkipButton {
           display: flex;
@@ -204,6 +206,7 @@ body {
         left: 0;
         bottom: 0;
         width: 100%;
+        padding-bottom: 20px;
         display: none;
 
         .main__startButton {
@@ -242,6 +245,7 @@ body {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding: 20px 0 20px 0;
       display: none;
 
       .main__requestingDataContainer {
@@ -536,6 +540,7 @@ body {
         .main__homePageHeader {
           display: flex;
           justify-content: space-between;
+          align-items: center;
           margin-bottom: 10px;
           padding-top: 20px;
 
@@ -682,10 +687,6 @@ body {
 
               .waterIntakeTextBox {
                 height: 20px;
-
-                .waterIntakeText {
-                  width: 69px;
-                }
               }
 
               .waterIntakeTextTime {
@@ -718,18 +719,48 @@ body {
 
                 .plus {
                   background: url(./image/plus.svg) $greyForPlusMinusButtons center no-repeat;
+
+                  &:hover {
+                    background-color: #B9B9B9;
+                  }
                 }
 
                 .minus {
                   background: url(./image/minus.svg) $greyForPlusMinusButtons center no-repeat;
+
+                  &:hover {
+                    background-color: #B9B9B9;
+                  }
                 }
               }
 
               .waterIntackeIndicator {
+                position: relative;
                 height: 100px;
                 width: 40px;
-                background-color: $buttonGreen;
+                background-color: $greyForPlusMinusButtons;
                 border-radius: 30px;
+                overflow: hidden;
+              }
+
+              .waterIndicate {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 40px;
+                background: linear-gradient(rgba(129, 221, 255, 1), rgba(120, 171, 255, 1));
+                transition: height 0.2s ease-in-out;
+              }
+
+              .percentOfDrunkWater {
+                position: absolute;
+                top: 43%;
+                left: 12.5%;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 14.5px;
+                letter-spacing: 0%;
+                text-align: center;
               }
             }
           }
@@ -753,6 +784,7 @@ body {
           display: flex;
           flex-direction: column;
           gap: 12px;
+          padding-bottom: 116px;
 
           .mealbox {
             height: 89px;
@@ -802,26 +834,35 @@ body {
           }
         }
 
-        .controlPanel {
+        .controlPanel--wrapper {
+          height: 104px;
+          width: 328px;
           position: fixed;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          bottom: 50px;
-          height: 74px;
-          width: 330px;
-          background-color: $lightGreenBg;
-          border-radius: 10px;
+          bottom: 0;
+          background-color: white;
+          border-radius: 10px 10px 0 0;
 
-          .controlPanelElem {
+          .controlPanel {
+            position: fixed;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin: auto;
-
-            .controlPanelParagraph {
-              color: $buttonGreen;
+            bottom: 30px;
+            height: 74px;
+            width: 328px;
+            background-color: $lightGreenBg;
+            border-radius: 10px;
+  
+            .controlPanelElem {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              margin: auto;
+  
+              .controlPanelParagraph {
+                color: $buttonGreen;
+              }
             }
           }
         }
@@ -862,8 +903,10 @@ body {
         }
 
         .mealNameP {
+          position: absolute;
+          left: 50px;
           height: 24px;
-          width: 180px;
+          width: 264px;
           border: none;
           @include headlines;
           font-size: 18px;
@@ -956,6 +999,9 @@ body {
         position: fixed;
         bottom: 40px;
         height: 52px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 328px;
         background-color: $buttonGreen;
         color: $lightThemeBg;
@@ -967,7 +1013,7 @@ body {
     &__searchFood {
       position: absolute;
       width: 360px;
-      height: 800px;
+      height: 100%;
       background-color: $lightThemeBg;
       display: flex;
       flex-direction: column;
@@ -1007,10 +1053,11 @@ body {
       }
 
       .foodContainer {
-        height: 500px;
+        height: 100%;
         display: flex;
         gap: 10px;
         flex-direction: column;
+        overflow: auto;
 
         .foodBox {
           height: 52px;

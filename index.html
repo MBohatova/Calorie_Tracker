@@ -8,7 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script defer src="app.js"></script>
-  <title>Document</title>
+  <link rel="icon" type="image/png" href="/image/appleFirstPic.png">
+  <title>Calorie Tracker</title>
 </head>
 <body>
   <main class="main">
@@ -394,7 +395,7 @@
                 <p class="waterIntakeText">Water</p>
                 <p id="waterNormIndicator" class="waterIntakeText"></p>
               </div>
-              <p class="waterIntakeTextTime">Last Time 00:00 AM</p>
+              <p id="waterIntakeTime" class="waterIntakeTextTime">Last Time 00:00 AM</p>
             </div>
   
             <div class="waterIntackeButtonAndIndicatorBlock">
@@ -403,7 +404,10 @@
                 <button id="minusButton" class="plusMinusButton minus" type="button"></button>
               </div>
   
-              <div class="waterIntackeIndicator"></div>
+              <div class="waterIntackeIndicator">
+                <div id="waterColorIndicator" class="waterIndicate"></div>
+                <p id="waterPercentNum" class="percentOfDrunkWater">0%</p>
+              </div>
             </div>
           </div>
         </div>
@@ -429,10 +433,12 @@
           </div> -->
         </div>
 
-        <div class="controlPanel">
-          <div class="controlPanelElem">
-            <img src="./image/diary.svg" alt="diaryIcon" height="24px" width="24px">
-            <p class="controlPanelParagraph">Diary</p>
+        <div id="controlBar" class="controlPanel--wrapper">
+          <div class="controlPanel">
+            <div class="controlPanelElem">
+              <img src="./image/diary.svg" alt="diaryIcon" height="24px" width="24px">
+              <p class="controlPanelParagraph">Diary</p>
+            </div>
           </div>
         </div>
       </div>
