@@ -336,13 +336,13 @@
       <div class="main__homePageBox">
         <div class="main__homePageHeader">
 
-          <div class="personBlock">
+          <div id="personInfoMenu" class="personBlock">
             <img 
               src="./image/person.svg" 
               alt="personImg" 
               class="personImg" 
             >
-            <p id="userName" class="name"></p>
+            <p class="personName" id="userName" class="name"></p>
           </div>
   
           <button type="button" class="calendarButton"></button>
@@ -523,5 +523,245 @@
       </div>
     </div>
   </div>
+
+  <div class="profileBlock">
+    <div class="profileHeader">
+      <button id="backProfileButton" class="profileButtonBack" type="button"></button>
+      <h3 class="profileH">Profile</h3>
+    </div>
+
+    <div class="profileNamePhotoBlock">
+      <img 
+        src="./image/person.svg" 
+        alt="profileImg" 
+        class="profileImg" 
+      >
+      <p class="profileName" id="personProfileName" class="profileName"></p>
+    </div>
+
+    <div class="menuButtonsBlock">
+      <button id="openUserInfoButton" class="menuButtons meButton" type="button">
+        <span class="inButtonTextElem">Me</span>
+      </button>
+      <button id="openCalorieIntakeButton" class="menuButtons" type="button">
+        <span class="inButtonTextElem">Calorie Intake</span>
+        <span class="inButtonTextElem calorieElem" id="caloriesNormElem">1648 Cal</span>
+      </button>
+    </div>
+
+    <div class="lineElem"></div>
+
+    <div class="otherOprionsBlock">
+
+      <div class="themeBlock">
+        <div class="themeLogoAndName">
+          <img src="./image/themeLogo.svg" alt="themeLogo">
+          <p class="activeThemeName">Dark theme</p>
+        </div>
+
+        <label class="switch">
+          <input class="inputForSwitch" type="checkbox">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="logOutBlock">
+        <img 
+          src="./image/logOut.svg" 
+          alt="logOutImg" 
+          height="17px" 
+          width="17px"
+        >
+
+        <p class="logOutP">Logout</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="changeUserInfoBlock" class="meBlock">
+    <div class="meBlockContent">
+      <div class="meHeader">
+        <button id="backMeButton" class="meButtonBack" type="button"></button>
+        <h3 class="meHeadline">Me</h3>
+      </div>
+  
+      <div id="changeInfoElemsBlock" class="meElemsBlock">
+        <div data-goal="goals" class="meElem">
+          <p class="meParagraph">Goal</p>
+          <p id="goalEdited" class="meParagraph meGreenParagraph"></p>
+        </div>
+  
+        <div data-age="age" class="meElem">
+          <p class="meParagraph">Age</p>
+          <p id="ageEdited" class="meParagraph meGreenParagraph"></p>
+        </div>
+  
+        <div data-height="tall" class="meElem">
+          <p class="meParagraph">Height</p>
+          <p id="tallEdited" class="meParagraph meGreenParagraph"></p>
+        </div>
+  
+        <div data-weight="weight" class="meElem">
+          <p class="meParagraph">Weight</p>
+          <p id="weightEdited" class="meParagraph meGreenParagraph"></p>
+        </div>
+  
+        <div data-gender="gender" class="meElem disabledMeElem">
+          <p class="meParagraph meDisabledNameParagraph">Gender</p>
+          <p id="genderEdited" class="meParagraph meDisabledParagraph"></p>
+        </div>
+  
+        <div data-lifestyle="activity" class="meElem disabledMeElem">
+          <p class="meParagraph meDisabledNameParagraph">Lifestyle</p>
+          <p id="activityEdited" class="meParagraph meDisabledParagraph"></p>
+        </div>
+  
+      </div>
+    </div>
+
+    <button id="saveEditedUserButton" class="meSaveButton" type="button">Save</button>
+  </div>
+
+  <div id="changeWindow" class="changeInfoWindow">
+    <div class="changeInfoWindowWrapper">
+      <div class="miniLine"></div>
+
+      <div id="toolsForChangeUserInfo" class="contentBlock">
+
+        <div class="inputsToolsWrapper">
+          <p id="nameOfChangingInfo" class="nameOfChaingingParameter"></p>
+          <div id="changingInputContainer" class="inputAndValueWrapper"></div>
+        </div>
+
+        <div class="changeInfoChooseToolBox">
+
+          <div class="changeInfoPickerToolWrapper">
+        
+            <div class="changeInfoChoosePicker changeInfoMeter">
+              <div class="changeInfoPicker" id="changeInfoMeterPicker">
+                <p class="pickerNums"></p>
+              </div>
+              <div class="changeInfoHighlight"></div>
+            </div>
+        
+            <span class="changeInfoUnit">m</span>
+        
+          </div>
+        
+          <div class="changeInfoPickerToolWrapper">
+        
+            <div class="changeInfoChoosePicker changeInfoCentimeter">
+              <div class="changeInfoPicker" id="changeInfoCmPicker">
+                <p class="pickerNums"></p>
+              </div>
+              <div class="changeInfoHighlight"></div>
+            </div>
+        
+            <span class="changeInfoUnit">cm</span>
+        
+          </div>
+        
+        </div>
+
+        <div id="changeInfoGoalsBlock" class="changeInfoButtonsBox">
+          <button data-goals="lose_weight" class="changeInfoDataButton">Lose weight</button>
+          <button data-goals="keep_weight" class="changeInfoDataButton">Keep weight</button>
+          <button data-goals="gain_weight" class="changeInfoDataButton">Gain weight</button>
+        </div>
+
+      </div>
+  
+      <button id="doneButton" class="doneButtonChangeInfo" type="button">Done</button>
+    </div>
+  </div>
+
+  <div id="updInfoWindow" class="updateInfoWindow">
+    <div class="updateInfoWindowBlock">
+      <h3 class="updateHeadline">Save</h3>
+      <div class="updateInputBlock">
+        <input 
+          type="checkbox"
+          name="updateInfo"
+          id="inputUpdate"
+          class="updateInfoWindowInput"
+        >
+        <label class="updateInputText" for="inputUpdate">
+          Update daily nutrients
+        </label>
+      </div>
+      <div class="updateButtonsBlock">
+        <button id="updateCancelButton" class="updateButton" type="button">Cancel</button>
+        <button id="updateOkButton" class="updateButton" type="button">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="changeCalorieIntakeBlock" class="calorieIntakeBlock">
+    <div class="calorieIntakeWrapper">
+      <div class="calorieIntakeHeader">
+        <button id="changeCalorieIntakeBackButton" class="calorieIntakeBackButton" type="button"></button>
+        <h3 class="calorieIntakeHeadline">Calorie Intake</h3>
+      </div>
+  
+      <div class="calorieIntakeContentBlock">
+        <div class="calorieIntakeElement">
+          <span class="nutrientsName">Calories</span>
+          <span class="nutrientsName nutrientsValue"></span>
+        </div>
+  
+        <div class="calorieIntakeElement">
+          <span class="nutrientsName">Proteins</span>
+          <span class="nutrientsName nutrientsValue"></span>
+        </div>
+  
+        <div class="calorieIntakeElement">
+          <span class="nutrientsName">Fats</span>
+          <span class="nutrientsName nutrientsValue"></span>
+        </div>
+  
+        <div class="calorieIntakeElement">
+          <span class="nutrientsName">Carbs</span>
+          <span class="nutrientsName nutrientsValue"></span>
+        </div>
+  
+        <div class="calorieIntakeElement">
+          <span class="nutrientsName">Water</span>
+          <span class="nutrientsName nutrientsValue"></span>
+        </div>
+      </div>
+    </div>
+
+    <button id="saveEditedNutrientsButton" class="saveNutrientsButton" type="button">Save</button>
+  </div>
+
+  <div id="changeNutrientsIntakeBlock" class="changeNutrientsIntakeWindow">
+    <div class="changeNutrientsIntakeWindowBlock">
+      <div class="greyLine"></div>
+
+      <h3 class="changeNutrientsIntakeHeadline">
+        Daily <span class="nutrientName"></span> intake
+      </h3>
+
+      <div class="inputForNutrientsValueBlock">
+        <input 
+          type="number" 
+          name="nutrientsValue" 
+          id="nutrientsValue"
+          class="nutrientsValueInput"
+        >
+        <span class="nutrientQuantity">cal</span>
+      </div>
+
+      <p class="recommendedQuantity">
+        Recommended: <span class="recommendQuantity">2300 cal</span>
+      </p>
+
+      <button id="changeNutrientsIntakeDoneBtn" class="changeNutrientsIntakeDoneButton" type="button">
+        Done
+      </button>
+    </div>
+  </div>
+
 </body>
 </html>

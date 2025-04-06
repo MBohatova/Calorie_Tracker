@@ -27,7 +27,7 @@ body .main {
   display: flex;
   justify-content: center;
   width: 360px;
-  height: 800px;
+  height: 100%;
   margin: 0 auto;
 }
 body .main__appleButton {
@@ -39,11 +39,12 @@ body .main__appleButton {
   border: none;
 }
 body .main__onboarding {
+  height: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px 0 20px 0;
+  padding: 40px 0 40px 0;
   display: none;
 }
 body .main__onboarding .main__onboardingContent .onboardingWrapper {
@@ -181,7 +182,7 @@ body .main__requestingData {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px 0 20px 0;
+  padding: 40px 0 40px 0;
   display: none;
 }
 body .main__requestingData .main__requestingDataContainer {
@@ -436,13 +437,28 @@ body .main__homePage .main__homePageBox .main__homePageHeader {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  padding-top: 20px;
+  padding-top: 40px;
 }
 body .main__homePage .main__homePageBox .main__homePageHeader .personBlock {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 9px;
+}
+body .main__homePage .main__homePageBox .main__homePageHeader .personBlock .personImg {
+  height: 16px;
+  width: 17px;
+  padding: 5px;
+  border: 1px solid rgb(53, 204, 140);
+  border-radius: 50%;
+}
+body .main__homePage .main__homePageBox .main__homePageHeader .personBlock .personName {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
 }
 body .main__homePage .main__homePageBox .main__homePageHeader .calendarButton {
   height: 20px;
@@ -705,7 +721,7 @@ body .main__homePage .main__homePageBox .controlPanel--wrapper .controlPanel {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  bottom: 30px;
+  bottom: 40px;
   height: 74px;
   width: 328px;
   background-color: rgb(219, 251, 237);
@@ -827,20 +843,59 @@ body .main__mealPage .eatenMealsBlock .mealFoodBox .mealFoodWrapper .mealFoodP {
   text-align: center;
   color: rgb(110, 113, 121);
 }
-body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteArea {
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock {
+  position: relative;
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .deleteButton {
   height: 24px;
   width: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  gap: 3px;
+  background: none;
+  border: none;
+  border-radius: 5px;
 }
-body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteArea .deleteItem {
-  height: 3px;
-  width: 3px;
-  background-color: black;
-  border-radius: 50%;
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .deleteButton:hover {
+  border: 1px solid rgb(53, 204, 140);
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .editOrDeleteButtonsBox {
+  position: absolute;
+  top: 2px;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  gap: 3px;
+  border: none;
+  border-radius: 10px;
+  display: none;
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .editOrDeleteButtonsBox .editOrDeleteButtons {
+  height: 20px;
+  width: 100%;
+  background: none;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  border: 1px solid rgb(53, 204, 140);
+  border-radius: 4px;
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .editOrDeleteButtonsBox .editOrDeleteButtons:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(53, 204, 140);
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .editOrDeleteButtonsBox .editOrDeleteButtons .edit_Button {
+  padding-top: 3px;
+}
+body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .editOrDeleteButtonsBox .editOrDeleteButtons .cancel_Button {
+  padding-bottom: 3px;
 }
 body .main__mealPage .saveMealButton {
   position: fixed;
@@ -962,6 +1017,8 @@ body .calendar .calendarItem .calendarHead .calendarP {
   font-size: 14px;
   line-height: 17px;
   color: rgb(13, 18, 32);
+  outline: none;
+  border: none;
 }
 body .calendar .calendarItem .calendarHead .calendarH {
   height: 40px;
@@ -1015,13 +1072,14 @@ body .calendar .calendarItem .daysName {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 12px;
 }
 body .calendar .calendarItem .daysName .days {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
-  width: 43.43px;
+  height: 43.43px;
+  width: 45px;
 }
 body .calendar .calendarItem .nums {
   display: flex;
@@ -1035,7 +1093,7 @@ body .calendar .calendarItem .nums .num {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
+  height: 43.43px;
   width: 43.43px;
 }
 body .calendar .calendarItem .nums .empty {
@@ -1176,4 +1234,678 @@ body .eatenAmountForm .eatenAmountFormBox .caloriesButtonsBlock .caloriesCancelO
   color: rgb(13, 18, 32);
   font-size: 14px;
   color: rgb(53, 204, 140);
+}
+body .profileBlock {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  height: 800px;
+  width: 360px;
+  padding-top: 40px;
+  background-color: inherit;
+  display: none;
+}
+body .profileBlock .profileHeader {
+  display: flex;
+  gap: 100px;
+  justify-content: start;
+  align-items: center;
+  margin-right: 150px;
+}
+body .profileBlock .profileHeader .profileButtonBack {
+  height: 24px;
+  width: 24px;
+  background: url(./image/bigArrow.svg) no-repeat center;
+  border: none;
+  margin-left: 24px;
+}
+body .profileBlock .profileHeader .profileH {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
+}
+body .profileBlock .profileNamePhotoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+body .profileBlock .profileNamePhotoBlock .profileImg {
+  height: 60px;
+  width: 60px;
+  padding: 20px;
+  border: 1px solid rgb(53, 204, 140);
+  border-radius: 50%;
+}
+body .profileBlock .profileNamePhotoBlock .profileName {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+}
+body .profileBlock .menuButtonsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body .profileBlock .menuButtonsBlock .menuButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 328px;
+  border: none;
+  border-radius: 10px;
+  text-align: left;
+  padding: 16px;
+  background-color: rgb(219, 251, 237);
+}
+body .profileBlock .menuButtonsBlock .menuButtons .inButtonTextElem {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+}
+body .profileBlock .menuButtonsBlock .menuButtons .calorieElem {
+  color: rgb(53, 204, 140);
+}
+body .profileBlock .menuButtonsBlock .menuButtons:hover {
+  background-color: rgb(53, 204, 140);
+  color: rgb(255, 255, 255);
+}
+body .profileBlock .menuButtonsBlock .menuButtons:hover.meButton {
+  background-image: url(./image/nextArrow.svg);
+}
+body .profileBlock .menuButtonsBlock .menuButtons:hover .calorieElem {
+  color: rgb(255, 255, 255);
+}
+body .profileBlock .menuButtonsBlock .meButton {
+  background-image: url(./image/greenNextArrow.svg);
+  background-repeat: no-repeat;
+  background-position: 296px;
+}
+body .profileBlock .lineElem {
+  width: 100%;
+  height: 1px;
+  background-color: rgb(191, 191, 191);
+}
+body .profileBlock .otherOprionsBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .profileBlock .otherOprionsBlock .themeBlock {
+  display: flex;
+  width: 328px;
+  height: 48px;
+  justify-content: space-between;
+  align-items: center;
+}
+body .profileBlock .otherOprionsBlock .themeBlock .themeLogoAndName {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+body .profileBlock .otherOprionsBlock .themeBlock .themeLogoAndName .activeThemeName {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+}
+body .profileBlock .otherOprionsBlock .themeBlock .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+body .profileBlock .otherOprionsBlock .themeBlock .switch .inputForSwitch {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+body .profileBlock .otherOprionsBlock .themeBlock .switch .inputForSwitch:checked + .slider {
+  background-color: rgb(53, 204, 140);
+}
+body .profileBlock .otherOprionsBlock .themeBlock .switch .inputForSwitch:checked + .slider::before {
+  transform: translateX(16px);
+  background-color: rgb(255, 255, 255);
+}
+body .profileBlock .otherOprionsBlock .themeBlock .switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: inherit;
+  border: 2px solid rgb(53, 204, 140);
+  border-radius: 34px;
+  transition: 0.4s;
+}
+body .profileBlock .otherOprionsBlock .themeBlock .switch .slider::before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 4px;
+  bottom: 3px;
+  background-color: rgb(53, 204, 140);
+  border-radius: 50%;
+  transition: 0.4s;
+}
+body .profileBlock .otherOprionsBlock .logOutBlock {
+  width: 328px;
+  height: 48px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+body .profileBlock .otherOprionsBlock .logOutBlock .logOutP {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  color: rgb(203, 32, 48);
+}
+body .meBlock {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 40px;
+  height: 800px;
+  width: 360px;
+  display: none;
+}
+body .meBlock .meBlockContent {
+  display: flex;
+  flex-direction: column;
+}
+body .meBlock .meBlockContent .meHeader {
+  width: 312px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 130px;
+  padding-left: 16px;
+}
+body .meBlock .meBlockContent .meHeader .meButtonBack {
+  height: 24px;
+  width: 24px;
+  background: url(./image/bigArrow.svg) no-repeat center;
+  border: none;
+}
+body .meBlock .meBlockContent .meHeader .meHeadline {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
+}
+body .meBlock .meBlockContent .meElemsBlock {
+  display: flex;
+  flex-direction: column;
+}
+body .meBlock .meBlockContent .meElemsBlock .meElem {
+  height: 50px;
+  width: 360px;
+  border-bottom: 1px solid rgb(217, 217, 217);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body .meBlock .meBlockContent .meElemsBlock .meElem .meParagraph {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  padding: 0 16px;
+}
+body .meBlock .meBlockContent .meElemsBlock .meElem .meGreenParagraph {
+  color: rgb(53, 204, 140);
+}
+body .meBlock .meBlockContent .meElemsBlock .disabledMeElem {
+  pointer-events: none;
+}
+body .meBlock .meBlockContent .meElemsBlock .disabledMeElem .meDisabledNameParagraph {
+  color: rgb(110, 113, 121);
+}
+body .meBlock .meBlockContent .meElemsBlock .disabledMeElem .meDisabledParagraph {
+  color: rgb(166, 233, 204);
+}
+body .meBlock .meSaveButton {
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 328px;
+  background-color: rgb(53, 204, 140);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 40px;
+}
+body .changeInfoWindow {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+body .changeInfoWindow .changeInfoWindowWrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 360px;
+  border-radius: 24px 24px 0 0;
+  background-color: rgb(247, 247, 247);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .miniLine {
+  height: 4px;
+  width: 34px;
+  background-color: rgb(191, 191, 191);
+  border-radius: 100px;
+  margin-top: 20px;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .inputsToolsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .inputsToolsWrapper .nameOfChaingingParameter {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .inputsToolsWrapper .inputAndValueWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .inputsToolsWrapper .inputAndValueWrapper .inputForChangeInfo {
+  height: 48px;
+  width: 168px;
+  border: none;
+  border-radius: 4px 4px 0 0;
+  border-bottom: 2px solid rgb(53, 204, 140);
+  padding-left: 16px;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .inputsToolsWrapper .inputAndValueWrapper .valuesOfChangingInfo {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  font-size: 16px;
+  color: rgb(53, 204, 140);
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox .changeInfoPickerToolWrapper {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox .changeInfoPickerToolWrapper .changeInfoChoosePicker {
+  width: 70px;
+  height: 150px;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox .changeInfoPickerToolWrapper .changeInfoChoosePicker .changeInfoPicker {
+  overflow-y: scroll;
+  padding: 0px 10px;
+  scroll-snap-type: y mandatory;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox .changeInfoPickerToolWrapper .changeInfoChoosePicker .changeInfoPicker .pickerNums {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  scroll-snap-align: center;
+  color: rgb(110, 113, 121);
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox .changeInfoPickerToolWrapper .changeInfoChoosePicker .changeInfoPicker .pickerNumsActive {
+  font-weight: bold;
+  color: rgb(13, 18, 32);
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox .changeInfoPickerToolWrapper .changeInfoChoosePicker .changeInfoHighlight {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border-top: 2px solid rgb(53, 204, 140);
+  border-bottom: 2px solid rgb(53, 204, 140);
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox .changeInfoUnit {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  color: rgb(53, 204, 140);
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoButtonsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoButtonsBox .changeInfoDataButton {
+  height: 49px;
+  width: 278px;
+  background-color: inherit;
+  border: 1px solid rgb(217, 217, 217);
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 14px;
+}
+body .changeInfoWindow .changeInfoWindowWrapper .doneButtonChangeInfo {
+  height: 52px;
+  width: 328px;
+  background-color: rgb(53, 204, 140);
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  margin-bottom: 40px;
+}
+body .updateInfoWindow {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+body .updateInfoWindow .updateInfoWindowBlock {
+  height: 186px;
+  width: 328px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 43px;
+  border-radius: 10px;
+  background-color: rgb(247, 247, 247);
+}
+body .updateInfoWindow .updateInfoWindowBlock .updateHeadline {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
+}
+body .updateInfoWindow .updateInfoWindowBlock .updateInputBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+body .updateInfoWindow .updateInfoWindowBlock .updateInputBlock .updateInfoWindowInput {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid rgb(53, 204, 140);
+  border-radius: 2px;
+  padding: 4px 2px;
+}
+body .updateInfoWindow .updateInfoWindowBlock .updateInputBlock .updateInfoWindowInput:checked {
+  content: url(./image/checkMark.svg);
+  border: none;
+  background-color: rgb(53, 204, 140);
+}
+body .updateInfoWindow .updateInfoWindowBlock .updateInputBlock .updateInputText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  color: rgb(13, 18, 32);
+}
+body .updateInfoWindow .updateInfoWindowBlock .updateButtonsBlock {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 32px;
+  width: 286px;
+}
+body .updateInfoWindow .updateInfoWindowBlock .updateButtonsBlock .updateButton {
+  background: none;
+  border: none;
+  color: rgb(53, 204, 140);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  font-weight: 500;
+}
+body .calorieIntakeBlock {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding-top: 40px;
+  background-color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 800px;
+  width: 360px;
+  display: none;
+}
+body .calorieIntakeBlock .calorieIntakeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeHeader {
+  width: 312px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  gap: 80px;
+}
+body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeHeader .calorieIntakeBackButton {
+  height: 24px;
+  width: 24px;
+  background: url(./image/bigArrow.svg) no-repeat center;
+  border: none;
+}
+body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeHeader .calorieIntakeHeadline {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
+}
+body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeContentBlock {
+  height: 250px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeContentBlock .calorieIntakeElement {
+  height: 50px;
+  width: 360px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(217, 217, 217);
+}
+body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeContentBlock .calorieIntakeElement .nutrientsName {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  margin: 0 16px;
+}
+body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeContentBlock .calorieIntakeElement .nutrientsValue {
+  color: rgb(53, 204, 140);
+}
+body .calorieIntakeBlock .saveNutrientsButton {
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 328px;
+  background-color: rgb(53, 204, 140);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 40px;
+}
+body .changeNutrientsIntakeWindow {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock {
+  height: 337px;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background-color: rgb(247, 247, 247);
+  border-radius: 24px 24px 0 0;
+}
+body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .greyLine {
+  height: 4px;
+  width: 32px;
+  border-radius: 100px;
+  background-color: rgb(191, 191, 191);
+}
+body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .changeNutrientsIntakeHeadline {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
+}
+body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .inputForNutrientsValueBlock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .inputForNutrientsValueBlock .nutrientsValueInput {
+  height: 52px;
+  width: 168px;
+  border: none;
+  border-bottom: 1px solid rgb(53, 204, 140);
+  padding-left: 16px;
+}
+body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .inputForNutrientsValueBlock .nutrientQuantity {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  color: rgb(53, 204, 140);
+}
+body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .recommendedQuantity {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  font-weight: 500;
+  color: rgb(53, 204, 140);
+}
+body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .changeNutrientsIntakeDoneButton {
+  height: 52px;
+  width: 328px;
+  background-color: rgb(53, 204, 140);
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  margin-top: 10px;
 }/*# sourceMappingURL=style.css.map */

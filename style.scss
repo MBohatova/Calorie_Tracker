@@ -8,6 +8,7 @@ $lightGreyForTime: rgba(128, 128, 128, 1);
 $greyForPlusMinusButtons: rgba(204, 204, 204, 1);
 $lightGreenBg: rgba(219, 251, 237, 1);
 $greyForSmallParagraph: rgba(101, 101, 101, 1);
+$disabledGreenText: rgba(166, 233, 204, 1);
 
 * {
   margin: 0;
@@ -80,7 +81,7 @@ body {
     display: flex;
     justify-content: center;
     width: 360px;
-    height: 800px;
+    height: 100%;
     margin: 0 auto;
 
     &__appleButton {
@@ -93,11 +94,12 @@ body {
     }
 
     &__onboarding {
+      height: 800px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      padding: 20px 0 20px 0;
+      padding: 40px 0 40px 0;
       display: none;
 
       .main__onboardingContent {
@@ -245,7 +247,7 @@ body {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 20px 0 20px 0;
+      padding: 40px 0 40px 0;
       display: none;
 
       .main__requestingDataContainer {
@@ -542,13 +544,26 @@ body {
           justify-content: space-between;
           align-items: center;
           margin-bottom: 10px;
-          padding-top: 20px;
+          padding-top: 40px;
 
           .personBlock {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 9px;
+
+            .personImg {
+              height: 16px;
+              width: 17px;
+              padding: 5px;
+              border: 1px solid $buttonGreen;
+              border-radius: 50%;
+            }
+
+            .personName {
+              @include headlines;
+              font-size: 18px;
+            }
           }
 
           .calendarButton {
@@ -847,7 +862,7 @@ body {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            bottom: 30px;
+            bottom: 40px;
             height: 74px;
             width: 328px;
             background-color: $lightGreenBg;
@@ -976,20 +991,67 @@ body {
             }
           }
 
-          .deleteArea {
-            height: 24px;
-            width: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 3px;
+          .deleteButtonsBlock {
+            position: relative;
 
-            .deleteItem {
-              height: 3px;
-              width: 3px;
-              background-color: black;
-              border-radius: 50%;
+            .deleteButton {
+              height: 24px;
+              width: 24px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background: none;
+              border: none;
+              border-radius: 5px;
+
+              &:hover {
+                border: 1px solid $buttonGreen;
+              }
+            }
+  
+            .editOrDeleteButtonsBox {
+              position: absolute;
+              top: 2px;
+              right: 25px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              width: 100px;
+              gap: 3px;
+              border: none;
+              border-radius: 10px;
+              display: none;
+              // overflow: hidden;
+          
+              .editOrDeleteButtons {
+                height: 20px;
+                width: 100%;
+                background: none;
+                font-family: inherit;
+                font-weight: 600;
+                font-size: 11px;
+                line-height: 14.5px;
+                letter-spacing: 0%;
+                text-align: center;
+                color: rgb(13, 18, 32);
+                // border: none;
+                border: 1px solid $buttonGreen;
+                border-radius: 4px;
+
+                &:hover {
+                  color: $lightThemeBg;
+                  background-color: $buttonGreen;
+                }
+
+                .edit_Button {
+                  padding-top: 3px;
+                }
+
+                .cancel_Button {
+                  padding-bottom: 3px;
+                }
+              }
             }
           }
         }
@@ -1120,7 +1182,9 @@ body {
           font-weight: 500;
           font-size: 14px;
           line-height: 17px;
-          color: $LightHeadline;
+          color: $LightHeadline; 
+          outline: none;
+          border: none;
         }
 
         .calendarH {
@@ -1184,13 +1248,14 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: 12px;
 
         .days {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 48px;
-          width: 43.43px;
+          height: 43.43px;
+          width: 45px;
         }
       }
 
@@ -1206,7 +1271,7 @@ body {
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 48px;
+          height: 43.43px;
           width: 43.43px;
         }
 
@@ -1344,6 +1409,692 @@ body {
           font-size: 14px;
           color: $buttonGreen;
         }
+      }
+    }
+  }
+
+  .profileBlock {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    height: 800px;
+    width: 360px;
+    padding-top: 40px;
+    background-color: inherit;
+    display: none;
+
+    .profileHeader {
+      display: flex;
+      gap: 100px;
+      justify-content: start;
+      align-items: center;
+      margin-right: 150px;
+
+      .profileButtonBack {
+        height: 24px;
+        width: 24px;
+        background: url(./image/bigArrow.svg) no-repeat center;
+        border: none;
+        margin-left: 24px;
+      }
+
+      .profileH {
+        @include headlines;
+        font-size: 18px;
+      }
+    }
+
+    .profileNamePhotoBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .profileImg {
+        height: 60px;
+        width: 60px;
+        padding: 20px;
+        border: 1px solid $buttonGreen;
+        border-radius: 50%;
+      }
+
+      .profileName {
+        @include headlines;
+      }
+    }
+
+    .menuButtonsBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .menuButtons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 50px;
+        width: 328px;
+        border: none;
+        border-radius: 10px;
+        text-align: left;
+        padding: 16px;
+        background-color: $lightGreenBg;
+
+        .inButtonTextElem {
+          @include smallHeadline;
+        }
+
+        .calorieElem {
+          color: $buttonGreen;
+        }
+
+        &:hover {
+          background-color: $buttonGreen;
+          color: $lightThemeBg;
+
+          &.meButton {
+            background-image: url(./image/nextArrow.svg);
+          }
+
+          .calorieElem {
+            color: $lightThemeBg;
+          }
+        }
+      }
+
+      .meButton {
+        background-image: url(./image/greenNextArrow.svg);
+        background-repeat: no-repeat;
+        background-position: 296px;
+      }
+    }
+
+    .lineElem {
+      width: 100%;
+      height: 1px;
+      background-color: rgba(191, 191, 191, 1);
+    }
+
+    .otherOprionsBlock {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .themeBlock {
+        display: flex;
+        width: 328px;
+        height: 48px;
+        justify-content: space-between;
+        align-items: center;
+
+        .themeLogoAndName {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          .activeThemeName {
+            @include smallHeadline;
+          }
+        }
+
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 40px;
+          height: 24px;
+
+          .inputForSwitch {
+            opacity: 0;
+            width: 0;
+            height: 0;
+
+            &:checked + .slider {
+              background-color: $buttonGreen;
+            }
+
+            &:checked + .slider::before {
+              transform: translateX(16px);
+              background-color: $lightThemeBg;
+            }
+          }
+
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: inherit;
+            border: 2px solid $buttonGreen;
+            border-radius: 34px;
+            transition: 0.4s;
+
+            &::before {
+              position: absolute;
+              content: "";
+              height: 14px;
+              width: 14px;
+              left: 4px;
+              bottom: 3px;
+              background-color: $buttonGreen;
+              border-radius: 50%;
+              transition: 0.4s;
+            }
+          }
+        }
+      }
+
+      .logOutBlock {
+        width: 328px;
+        height: 48px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+
+        .logOutP {
+          @include smallHeadline;
+          color: rgba(203, 32, 48, 1);
+        }
+      }
+    }
+  }
+
+  .meBlock {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 40px;
+    height: 800px;
+    width: 360px;
+    display: none;
+
+    .meBlockContent {
+      display: flex;
+      flex-direction: column;
+
+      .meHeader {
+        width: 312px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        gap: 130px;
+        padding-left: 16px;
+
+        .meButtonBack {
+          height: 24px;
+          width: 24px;
+          background: url(./image/bigArrow.svg) no-repeat center;
+          border: none;
+        }
+
+        .meHeadline {
+          @include headlines;
+          font-size: 18px;
+        }
+      }
+      
+      .meElemsBlock {
+        display: flex;
+        flex-direction: column;
+
+        .meElem {
+          height: 50px;
+          width: 360px;
+          border-bottom: 1px solid $navItems;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .meParagraph {
+            @include smallHeadline;
+            padding: 0 16px;
+          }
+
+          .meGreenParagraph {
+            color: $buttonGreen;
+          }
+        }
+
+        .disabledMeElem {
+          pointer-events: none;
+
+          .meDisabledNameParagraph {
+            color: $lightParagraph;
+          }
+
+          .meDisabledParagraph {
+            color: $disabledGreenText;
+          }
+        }
+      }
+    }
+
+    .meSaveButton {
+      height: 52px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 328px;
+      background-color: $buttonGreen;
+      color: $lightThemeBg;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 40px;
+    }
+  }
+
+  .changeInfoWindow {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+
+    .changeInfoWindowWrapper {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      // height: 300px;
+      width: 360px;
+      border-radius: 24px 24px 0 0;
+      background-color: $backgroundBlocksLight;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      justify-content: space-between;
+      align-items: center;
+
+      .miniLine {
+        height: 4px;
+        width: 34px;
+        background-color: rgba(191, 191, 191, 1);
+        border-radius: 100px;
+        margin-top: 20px;
+      }
+
+      .contentBlock {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .inputsToolsWrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 30px;
+          margin-bottom: 30px;
+
+          .nameOfChaingingParameter {
+            @include headlines;
+            font-size: 18px;
+          }
+
+          .inputAndValueWrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .inputForChangeInfo {
+              height: 48px;
+              width: 168px;
+              border: none;
+              border-radius: 4px 4px 0 0;
+              border-bottom: 2px solid $buttonGreen;
+              padding-left: 16px;
+            }
+
+            .valuesOfChangingInfo {
+              @include smallHeadline;
+              font-size: 16px;
+              color: $buttonGreen;
+            }
+          }
+        }
+
+        .changeInfoChooseToolBox {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          justify-content: center;
+          display: none;
+
+          .changeInfoPickerToolWrapper {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+
+            .changeInfoChoosePicker {
+              width: 70px;
+              height: 150px;
+              overflow-y: hidden;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+
+              .changeInfoPicker {
+                overflow-y: scroll;
+                padding: 0px 10px;
+                scroll-snap-type: y mandatory;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+
+                .pickerNums {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  flex-shrink: 0;
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 5px;
+                  scroll-snap-align: center;
+                  color: $lightParagraph;
+                }
+
+                .pickerNumsActive {
+                  font-weight: bold;
+                  color: $LightHeadline;
+                }
+              }
+
+              .changeInfoHighlight {
+                position: absolute;
+                z-index: -1;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 50px;
+                height: 50px;
+                border-top: 2px solid $buttonGreen;
+                border-bottom: 2px solid $buttonGreen;
+              }
+            }
+          }
+
+          .changeInfoUnit {
+            @include paragraphs;
+            color: $buttonGreen;
+          }
+        }
+
+        .changeInfoButtonsBox {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .changeInfoDataButton {
+            height: 49px;
+            width: 278px;
+            background-color: inherit;
+            border: 1px solid $navItems;
+            border-radius: 10px;
+            @include headlines;
+            font-size: 14px;
+          }
+        }
+
+      }
+
+      .doneButtonChangeInfo {
+        height: 52px;
+        width: 328px;
+        background-color: $buttonGreen;
+        border-radius: 10px;
+        border: none;
+
+        @include headlines;
+        font-size: 16px;
+        color: $lightThemeBg;
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .updateInfoWindow {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+
+    .updateInfoWindowBlock {
+      height: 186px;
+      width: 328px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 43px;
+      border-radius: 10px;
+      background-color: $backgroundBlocksLight;
+
+      .updateHeadline {
+        @include headlines;
+        font-size: 18px;
+      }
+
+      .updateInputBlock {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+
+        .updateInfoWindowInput {
+          cursor: pointer;
+          height: 20px;
+          width: 20px;
+          appearance: none;
+          border: 1px solid $buttonGreen;
+          border-radius: 2px;
+          padding: 4px 2px;
+
+          &:checked {
+            content: url(./image/checkMark.svg);
+            border: none;
+            background-color: $buttonGreen;
+          }
+        }
+
+        .updateInputText {
+          @include paragraphs;
+          color: $LightHeadline;
+        }
+      }
+
+      .updateButtonsBlock {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: 32px;
+        width: 286px;
+
+        .updateButton {
+          background: none;
+          border: none;
+          color: $buttonGreen;
+
+          @include smallHeadline;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .calorieIntakeBlock {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding-top: 40px;
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 800px;
+    width: 360px;
+    display: none;
+
+    .calorieIntakeWrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .calorieIntakeHeader {
+        width: 312px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        padding-left: 16px;
+        gap: 80px;
+  
+        .calorieIntakeBackButton {
+          height: 24px;
+          width: 24px;
+          background: url(./image/bigArrow.svg) no-repeat center;
+          border: none;
+        }
+  
+        .calorieIntakeHeadline {
+          @include headlines;
+          font-size: 18px;
+        }
+      }
+  
+      .calorieIntakeContentBlock {
+        height: 250px;
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+  
+        .calorieIntakeElement {
+          height: 50px;
+          width: 360px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid $navItems;
+  
+          .nutrientsName {
+            @include smallHeadline;
+            margin: 0 16px;
+          }
+  
+          .nutrientsValue {
+            color: $buttonGreen;
+          }
+        }
+      }
+    }
+
+    .saveNutrientsButton {
+      height: 52px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 328px;
+      background-color: $buttonGreen;
+      color: $lightThemeBg;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 40px;
+    }
+  }
+
+  .changeNutrientsIntakeWindow {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+
+    .changeNutrientsIntakeWindowBlock {
+      height: 337px;
+      width: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      background-color: $backgroundBlocksLight;
+      border-radius: 24px 24px 0 0;
+
+      .greyLine {
+        height: 4px;
+        width: 32px;
+        border-radius: 100px;
+        background-color: rgba(191, 191, 191, 1);
+      }
+
+      .changeNutrientsIntakeHeadline {
+        @include headlines;
+        font-size: 18px;
+      }
+
+      .inputForNutrientsValueBlock {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .nutrientsValueInput {
+          height: 52px;
+          width: 168px;
+          border: none;
+          border-bottom: 1px solid $buttonGreen;
+          padding-left: 16px;
+        }
+
+        .nutrientQuantity {
+          @include paragraphs;
+          color: $buttonGreen;
+        }
+      }
+
+      .recommendedQuantity {
+        @include smallHeadline;
+        font-weight: 500;
+        color: $buttonGreen;
+      }
+
+      .changeNutrientsIntakeDoneButton {
+        height: 52px;
+        width: 328px;
+        background-color: $buttonGreen;
+        border-radius: 10px;
+        border: none;
+        @include headlines;
+        font-size: 16px;
+        color: $lightThemeBg;
+        margin-top: 10px;
       }
     }
   }
