@@ -85,8 +85,10 @@ body {
     margin: 0 auto;
 
     &__appleButton {
-      position: absolute;
-      top: 35%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       height: 200px;
       width: 200px;
       background: url(./image/appleFirstPic.png);
@@ -540,11 +542,15 @@ body {
         gap: 25px;
 
         .main__homePageHeader {
+          position: fixed;
+          width: 330px;
+          height: 68px;
           display: flex;
           justify-content: space-between;
           align-items: center;
           margin-bottom: 10px;
-          padding-top: 40px;
+          background-color: $lightThemeBg;
+          z-index: 1;
 
           .personBlock {
             display: flex;
@@ -580,6 +586,10 @@ body {
           line-height: 14.5px;
           letter-spacing: 0%;
           text-align: left;
+        }
+
+        .nutrientsIndicatorHeadline {
+          padding-top: 78px;
         }
 
         .nutrientsIndicatorBlock {
@@ -799,7 +809,6 @@ body {
           display: flex;
           flex-direction: column;
           gap: 12px;
-          padding-bottom: 116px;
 
           .mealbox {
             height: 89px;
@@ -810,12 +819,16 @@ body {
             background-color: $backgroundBlocksLight;
             border-radius: 10px;
 
+            &:last-child {
+              margin-bottom: 126px;
+            }
+
             .meal {
               height: 57px;
               width: 296px;
               display: flex;
               flex-direction: column;
-              gap: 21px;
+              gap: 11px;
 
               .mealHead {
                 display: flex;
@@ -836,14 +849,30 @@ body {
                 }
               }
 
-              .mealTime {
+              .mealTimeAndDateContainer {
                 display: flex;
-                font-weight: 400;
-                font-size: 12px;
-                line-height: 14.5px;
-                letter-spacing: 0%;
-                text-align: center;
-                color: $lightGreyForTime;
+                flex-direction: column;
+                gap: 3px;
+
+                .mealDate {
+                  display: flex;
+                  font-weight: 400;
+                  font-size: 12px;
+                  line-height: 14.5px;
+                  letter-spacing: 0%;
+                  text-align: center;
+                  color: $lightGreyForTime;
+                }
+  
+                .mealTime {
+                  display: flex;
+                  font-weight: 400;
+                  font-size: 12px;
+                  line-height: 14.5px;
+                  letter-spacing: 0%;
+                  text-align: center;
+                  color: $lightGreyForTime;
+                }
               }
             }
           }
@@ -894,6 +923,7 @@ body {
       gap: 10px;
       align-items: center;
       display: none;
+      z-index: 2;
 
       .mealHead {
         display: flex;
@@ -1082,6 +1112,7 @@ body {
       gap: 10px;
       align-items: center;
       display: none;
+      z-index: 2;
 
       .searchBarBox {
         width: 312px;
@@ -1155,9 +1186,14 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
     display: none;
 
     .calendarItem {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -1324,9 +1360,14 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
     display: none;
 
     .eatenAmountFormBox {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       height: 238px;
       width: 328px;
       display: flex;
@@ -1422,11 +1463,11 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    height: 800px;
+    height: 100%;
     width: 360px;
-    padding-top: 40px;
     background-color: inherit;
     display: none;
+    z-index: 2;
 
     .profileHeader {
       display: flex;
@@ -1434,6 +1475,7 @@ body {
       justify-content: start;
       align-items: center;
       margin-right: 150px;
+      padding-top: 40px;
 
       .profileButtonBack {
         height: 24px;
@@ -1615,9 +1657,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding-top: 40px;
-    height: 800px;
+    height: 100%;
     width: 360px;
+    z-index: 2;
     display: none;
 
     .meBlockContent {
@@ -1631,6 +1673,7 @@ body {
         align-items: center;
         gap: 130px;
         padding-left: 16px;
+        padding-top: 40px;
 
         .meButtonBack {
           height: 24px;
@@ -1701,6 +1744,7 @@ body {
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
     display: none;
 
     .changeInfoWindowWrapper {
@@ -1708,7 +1752,6 @@ body {
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      // height: 300px;
       width: 360px;
       border-radius: 24px 24px 0 0;
       background-color: $backgroundBlocksLight;
@@ -1878,6 +1921,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
     display: none;
 
     .updateInfoWindowBlock {
@@ -1948,7 +1992,6 @@ body {
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
-    padding-top: 40px;
     background-color: inherit;
     display: flex;
     flex-direction: column;
@@ -1956,6 +1999,7 @@ body {
     justify-content: space-between;
     min-height: 800px;
     width: 360px;
+    z-index: 2;
     display: none;
 
     .calorieIntakeWrapper {
@@ -1968,7 +2012,7 @@ body {
         height: 24px;
         display: flex;
         align-items: center;
-        padding-left: 16px;
+        padding: 40px 0 0 16px;
         gap: 80px;
   
         .calorieIntakeBackButton {
@@ -2035,6 +2079,7 @@ body {
     justify-content: center;
     align-items: end;
     background-color: rgba(0, 0, 0, 0.4);
+    z-index: 2;
     display: none;
 
     .changeNutrientsIntakeWindowBlock {

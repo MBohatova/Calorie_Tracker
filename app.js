@@ -79,6 +79,7 @@ let changeInfoGoalsBlock = document.getElementById('changeInfoGoalsBlock');
 let updInfoWindow = document.getElementById('updInfoWindow');
 let changeCalorieIntakeBlock = document.getElementById('changeCalorieIntakeBlock');
 let changeNutrientsIntakeBlock = document.getElementById('changeNutrientsIntakeBlock');
+let calendarItem = document.querySelector('.calendarItem');
 
 // Inputs
 let inputWeight = document.getElementById('weight');
@@ -200,9 +201,7 @@ let changeInfoFromInput = 0;
 let currentMonthIndex;
 let currentYear;
 
-
 appleButton.addEventListener('click', openApp);
-centerPopUpMessages(appleButton);
 
 function openApp() {
   let dataFromStorage = localStorage.getItem('userDataArray');
@@ -226,7 +225,7 @@ function openApp() {
 function generateMealsFromLocalStorage(userInfoObject) {
   Object.keys(userInfoObject).forEach((key) => {
     if(key.includes('Meal')) {
-      generateMeal(key, userInfoObject[key]['eaten_Values']['calories'], userInfoObject[key]['time'])
+      generateMeal(key, userInfoObject[key]['eaten_Values']['calories'], userInfoObject[key]['time'], userInfoObject[key]['date'])
     }
   })
 }
@@ -300,6 +299,7 @@ startButton.addEventListener('click', openRequestingDataForm);
 
 function openRequestingDataForm() {
   onboardingContentContainer.style.display = 'none';
+  scrollTo(0, 0);
   requestingContentContainer.style.display = 'flex';
   createPicker(0, 3, meterPicker, 'm');
   createPicker(0, 100, cmPicker, 'cm');
@@ -368,7 +368,6 @@ function deactivateButton(button) {
   button.setAttribute('disabled', true);
 }
 
-
 requestingButtonBack.addEventListener('click', onRequestingButtonBack);
 
 function onRequestingButtonBack() {
@@ -435,14 +434,23 @@ function saveUserDataToLocalStorage(userData, userDataArray) {
   let dataFromStorage = localStorage.getItem('userDataArray');
   if(dataFromStorage) {
     let data = JSON.parse(dataFromStorage);
+
     Object.keys(userData).forEach((key) => {
       data[0][key] = userData[key];
     });
+
+    Object.keys(data[0]).forEach(key => {
+      if (key.includes('Meal') && !userData.hasOwnProperty(key)) {
+        delete data[0][key];
+      }
+    });
+
     localStorage.setItem('userDataArray', JSON.stringify(data));
   } else {
     userDataArray.push(userData);
     localStorage.setItem('userDataArray', JSON.stringify(userDataArray));
   }
+  userData = {};
 }
 
 function calcPFC(userData) {
@@ -463,7 +471,7 @@ function calcBasalMetabolicRate(userData) {
 function calcTotalDailyEnergyExpenditure(basalMetabolicRate, userData) {
   let totalDailyEnergyExpenditure = 0;
   switch(userData.activity.toLowerCase()) {
-    case 'sedentary': 
+    case 'sedentary':
       totalDailyEnergyExpenditure = Math.round(basalMetabolicRate * 1.2);
       break;
     case 'low active':
@@ -531,11 +539,13 @@ function toWriteEatenAndNormValuesInDom() {
 
   let dataFromStorage = JSON.parse(localStorage.getItem('userDataArray'))[0];
   Object.keys(dataFromStorage).forEach((key) => {
-    if(key.includes('Meal')) {
+    if (key.includes('Meal')) {
       caloriesTextElem.textContent = calcSumOfValues(dataFromStorage, calcCaloriesArr, key, 'calories') + ' / ' + dataFromStorage.calories;
       proteinsTextElem.textContent = calcSumOfValues(dataFromStorage, calcProteinsArr, key, 'proteins') + ' / ' + dataFromStorage.proteins;
       fatsTextElem.textContent = calcSumOfValues(dataFromStorage, calcCarbsArr, key, 'fats') + ' / ' + dataFromStorage.fats;
       carbsTextElem.textContent = calcSumOfValues(dataFromStorage, calcFatsArr, key, 'carbs') + ' / ' + dataFromStorage.carbs;
+    } else {
+      writeDefaultValuesDataInDom();
     }
   })
   calcColorIndicatorWidth(caloriesTextElem.textContent, caloriesColor);
@@ -574,7 +584,6 @@ calendarButton.addEventListener('click', onCalendarButtonHandler);
 
 function onCalendarButtonHandler() {
   calendar.style.display = 'flex';
-  centerPopUpMessages(calendar);
   toWriteTodaysDate();
   generateDefaultCalendar();
   generateMonthAndYearElems();
@@ -760,6 +769,31 @@ function chooseDay(e) {
   if(prevClickedDay) prevClickedDay.classList.remove('activeDate');
   e.target.classList.add('activeDate');
   prevClickedDay = e.target;
+  chooseDateOfEating(e.target);
+}
+
+function chooseDateOfEating(choosenDay) {
+  let monthAndYear = [];
+  let date = '';
+  if(choosenDay) {
+    monthAndYear = monthYearSelectContainer.value.split(' ');
+    date = choosenDay.textContent + '.' + findMonthNumber(monthAndYear[0]) + '.' + monthAndYear[1];
+    writeChoosenDateToMealData(date);
+  }
+}
+
+function writeChoosenDateToMealData(date) {
+  mealData.date = date;
+}
+
+function findMonthNumber(monthFromCalendar) {
+  let result = 0;
+  months.find((month, index) => {
+    if(month.includes(monthFromCalendar)) {
+      result = index + 1;
+    }
+  })
+  return result;
 }
 
 createMealButton.addEventListener('click', onCreateMealButtonHandler);
@@ -774,7 +808,6 @@ function onCreateMealButtonHandler() {
 
 function writeMealName() {
   let dataFromLocalStorage = JSON.parse(localStorage.getItem('userDataArray'))[0];
-
   Object.keys(dataFromLocalStorage).forEach((key) => {
     if(key.includes('Meal')) {
       mealName.innerHTML = '';
@@ -825,6 +858,7 @@ function onCloseMealPageBtn() {
   mealPage.style.display = 'none';
   controlBar.style.display = 'flex';
   eatenMealsList.innerHTML = '';
+  dailyMealsData = {};
   mealData = {};
 }
 
@@ -905,7 +939,6 @@ function onFoodBoxHandler(elem) {
      `)
     }
   })
-  centerPopUpMessages(eatenAmountFormBox);
 }
 
 clearSearchButton.addEventListener('click', function() {
@@ -994,7 +1027,6 @@ function generateMealsList(choosenFoodElem, eatenCaloriesNum, eatenGramsNum) {
         </button>
 
         <div class="editOrDeleteButtonsBox">
-          <button id="editButton" class="editOrDeleteButtons edit_Button" type="button">Edit</button>
           <button id="deleteButton" class="editOrDeleteButtons delete_Button" type="button">Delete</button>
           <button id="cancelButton" class="editOrDeleteButtons cancel_Button" type="button">Cancel</button>
         </div>
@@ -1009,21 +1041,29 @@ function addEventListenerToDeleteButtonWhenMealCreating(mealData) {
 
   deleteButtons.forEach((button) => {
     let onDeleteButtonClickwhileCreatingMeal = () => onDeleteButtonHandlerWhileCreatingMeal(button, mealData);
-    button.removeEventListener('click', onDeleteButtonClickwhileCreatingMeal);
+    // button.removeEventListener('click', onDeleteButtonClickwhileCreatingMeal);
     button.addEventListener('click', onDeleteButtonClickwhileCreatingMeal);
   })
 }
 
 function onDeleteButtonHandlerWhileCreatingMeal(button, mealData) {
+  event.stopPropagation();
+  findOpenButtonsBoxToClose();
   let deleteButtonsBlock = button.closest('.deleteButtonsBlock');
   let editOrDeleteButtonsBox = deleteButtonsBlock.querySelector('.editOrDeleteButtonsBox');
-  editOrDeleteButtonsBox.style.display = 'flex';
-  addEventListenersToButtonseditCancelDetete(mealData, editOrDeleteButtonsBox)
+  editOrDeleteButtonsBox.style.display = editOrDeleteButtonsBox.style.display === 'flex' ? 'none' : 'flex';
+
+  addEventListenerToDocumentForHidingBlock(editOrDeleteButtonsBox);
+
+  editOrDeleteButtonsBox.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  addEventListenersToButtonsCancelDelete(mealData, editOrDeleteButtonsBox)
 }
 
-function addEventListenersToButtonseditCancelDetete(mealData, editOrDeleteButtonsBox) {
+function addEventListenersToButtonsCancelDelete(mealData, editOrDeleteButtonsBox) {
   let cancel_Button = editOrDeleteButtonsBox.querySelector('.cancel_Button');
-  let edit_Button = editOrDeleteButtonsBox.querySelector('.edit_Button');
   let delete_Button = editOrDeleteButtonsBox.querySelector('.delete_Button');
 
   let onClickOnCancelButton = () => onCancelButtonFromDeleteBlockHandler(editOrDeleteButtonsBox);
@@ -1039,6 +1079,7 @@ function onDeleteButtonFromDeleteBlockHandler(delete_Button, mealData) {
   let foodToDelete = delete_Button.closest('.mealFoodBox');
   let mealName = foodToDelete.querySelector('.mealFoodH').textContent;
   foodToDelete.remove();
+  calcEatenCPFC();
   deleteFoodFromMealDataObject(mealData, mealName);
 }
 
@@ -1112,6 +1153,9 @@ function collectEatenFoodData(grams, foodName) {
   } else {
     mealData[foodName] = grams;
   }
+  mealData.time = getCurrentTime();
+  dayKey = findOutTodaysDate();
+  checkIfDateChoosen();
 }
 
 function changeEatenFoodData(storageObj, mealKey, currentGrams) {
@@ -1131,24 +1175,74 @@ function changeEatenFoodData(storageObj, mealKey, currentGrams) {
 saveMealsButton.addEventListener('click', onSaveButtonHandler);
 
 function onSaveButtonHandler() {
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  userData = data;
   mealCaloriesBlock.innerHTML = '';
   eatenMealsList.innerHTML = '';
   mealPage.style.display = 'none';
 
-  mealData.time = getCurrentTime();
+  const mealKey = mealName.textContent;
+  const metaFields = ['eaten_Values', 'time', 'date'];
+  const realFields = Object.keys(mealData).filter(key => !metaFields.includes(key));
 
-  let mealKey = mealName.textContent;
-  userData[mealKey] = mealData;
+  if (realFields.length > 0) {
+    userData[mealKey] = mealData;
+    generateNewVersionOfMeal(mealName);
+    generateMeal(mealName.textContent, mealData.eaten_Values.calories, mealData.time, mealData.date);
+  } else {
+    delete userData[mealKey];
+    deleteMealFromDOM(mealName);
+  }
 
   saveUserDataToLocalStorage(userData, userDataArray);
   cleanValuesElemsTextContent();
   toWriteEatenAndNormValuesInDom();
-  generateNewVersionOfMeal(mealName);
-  generateMeal(mealName.textContent, mealData.eaten_Values.calories, mealData.time);
-  
-  controlBar.style.display = 'flex';
 
+  controlBar.style.display = 'flex';
   mealData = {};
+}
+
+function deleteMealFromDOM(mealNameToDelete) {
+  let meals = mealsBlock.querySelectorAll('.mealbox');
+  meals.forEach((elem) => {
+    let mealName = elem.querySelector('.mealName');
+    if(mealNameToDelete.textContent === mealName.textContent) {
+      elem.remove();
+    }
+  })
+}
+
+// function checkIfMealDataHaveFoodElem(data, mealName) {
+//   let mealKey = mealName.textContent;
+
+//   const metaFields = ['eaten_Values', 'time', 'date'];
+//   const realFields = Object.keys(mealData).filter(key => !metaFields.includes(key));
+
+//   if (realFields.length > 0) {
+//     data[mealKey] = mealData;
+//     userData = data;
+//   }
+
+//   if(realFields.length === 0) {
+//     delete data[mealName];
+//     userData = data;
+//   }
+// }
+
+function checkIfDateChoosen() {
+  let ifNotContainsDate = !mealData.hasOwnProperty('date');
+  if(ifNotContainsDate) {
+    mealData.date = dayKey;
+  }
+}
+
+function findOutTodaysDate() {
+  let date = new Date;
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let actualDate = day + '.' + month + '.' + year;
+  return actualDate;
 }
 
 function checkIfChangesExist(mealData, mealKey) {
@@ -1189,7 +1283,7 @@ function getCurrentTime() {
   });
 }
 
-function generateMeal(mealName, caloriesNum, time) {
+function generateMeal(mealName, caloriesNum, time, date) {
   mealsBlock.insertAdjacentHTML('beforeend', `
     <div class="mealbox">
       <div class="meal">
@@ -1197,7 +1291,10 @@ function generateMeal(mealName, caloriesNum, time) {
           <h3 class="mealName">${mealName}</h3>
           <p class="calories">${caloriesNum} Cal</p>
         </div>
-        <p class="mealTime">${time}</p>
+        <div class="mealTimeAndDateContainer">
+          <p class="mealDate">${date}</p>
+          <p class="mealTime">${time}</p>
+        </div>
       </div>
     </div>
   `)
@@ -1205,6 +1302,7 @@ function generateMeal(mealName, caloriesNum, time) {
 }
 
 function generateNewVersionOfMeal(mealName) {
+
   let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
   let mealsFromDom = mealsBlock.querySelectorAll('.mealbox');
 
@@ -1249,7 +1347,10 @@ function calcWaterNorm(userData) {
 }
 
 function onPlusButtonHandler(baseNorm, userData) {
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  userData = data;
   if(checkWaterIntakeInLocalStorage() !== 0) {
+    let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
     drunkWater = checkWaterIntakeInLocalStorage();
     drunkWater = Math.round((drunkWater + 0.1) * 10) / 10;
     toWriteWaterIntakeInDom(baseNorm, drunkWater);
@@ -1272,6 +1373,8 @@ function onPlusButtonHandler(baseNorm, userData) {
 }
 
 function onMinusButtonHandler(baseNorm, userData) {
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  userData = data;
   if(checkWaterIntakeInLocalStorage() !== 0) {
     drunkWater = checkWaterIntakeInLocalStorage();
     drunkWater = Math.round((drunkWater - 0.1) * 10) / 10;
@@ -1317,7 +1420,11 @@ function colorWaterIndicator(percent) {
 }
 
 function generatePercentNumOfDrunkWater(percent) {
-  waterPercentNum.textContent = percent + '%'
+  if(!percent) {
+    waterPercentNum.textContent = 0 + '%'
+  } else {
+    waterPercentNum.textContent = percent + '%'
+  }
 }
 
 function checkWaterIntakeInLocalStorage() {
@@ -1387,7 +1494,7 @@ function generateSavedCalcsMealsData(mealDataObj, data) {
 function generateSavedMealsData(mealDataObj, data) {
   eatenMealsList.innerHTML = '';
   Object.keys(mealDataObj).forEach((key) => {
-    if(!(key === 'eaten_Values') && !(key === 'time')) {
+    if(!(key === 'eaten_Values') && !(key === 'time') && !(key === 'date')) {
       eatenMealsList.insertAdjacentHTML('beforeend', `
         <div class="mealFoodBox">
           <div class="mealFoodWrapper">
@@ -1400,7 +1507,6 @@ function generateSavedMealsData(mealDataObj, data) {
             </button>
 
             <div class="editOrDeleteButtonsBox">
-              <button id="editButton" class="editOrDeleteButtons edit_Button" type="button">Edit</button>
               <button id="deleteButton" class="editOrDeleteButtons delete_Button" type="button">Delete</button>
               <button id="cancelButton" class="editOrDeleteButtons cancel_Button" type="button">Cancel</button>
             </div>
@@ -1428,13 +1534,42 @@ function addEventListenersToDeleteAreaOnFoodElems(mealDataObj, data) {
 
   deleteButtons.forEach((button) => {
     let onDeleteButtonClick = () => onDeleteButtonHandler(button, mealDataObj, data);
-    button.removeEventListener('click', onDeleteButtonClick);
     button.addEventListener('click', onDeleteButtonClick);
+    // button.removeEventListener('click', onDeleteButtonClick);
+    // button.addEventListener('click', onDeleteButtonClick);
   })
 }
 
 function onDeleteButtonHandler(button, mealDataObj, data) {
-  generateButtonsForEditorDelete(button, mealDataObj, data);
+  event.stopPropagation();
+  findOpenButtonsBoxToClose();
+
+  let deleteButtonsBlock = button.closest('.deleteButtonsBlock');
+  let editOrDeleteButtonsBox = deleteButtonsBlock.querySelector('.editOrDeleteButtonsBox');
+  editOrDeleteButtonsBox.style.display = editOrDeleteButtonsBox.style.display === 'flex' ? 'none' : 'flex';
+
+  addEventListenerToDocumentForHidingBlock(editOrDeleteButtonsBox);
+
+  editOrDeleteButtonsBox.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  addEventListenersForEditDeleteButtons(button, editOrDeleteButtonsBox, mealDataObj, data);
+}
+
+function addEventListenerToDocumentForHidingBlock(elemBlock) {
+  document.addEventListener('click', () => {
+    elemBlock.style.display = 'none';
+  });
+}
+
+function findOpenButtonsBoxToClose() {
+  let openedButtonsBoxes = document.querySelectorAll('.editOrDeleteButtonsBox');
+  openedButtonsBoxes.forEach((box) => {
+    if(box.style.display === 'flex') {
+      box.style.display = 'none';
+    }
+  })
 }
 
 function generateButtonsForEditorDelete(button, mealDataObj, data) {
@@ -1446,7 +1581,6 @@ function generateButtonsForEditorDelete(button, mealDataObj, data) {
 
 function addEventListenersForEditDeleteButtons(button, editOrDeleteButtonsBox, mealDataObj, data) {
   let cancelEditFoodListButton = editOrDeleteButtonsBox.querySelector('.cancel_Button');
-  let editEditFoodListButton = editOrDeleteButtonsBox.querySelector('.edit_Button');
   let deleteEditFoodListButton = editOrDeleteButtonsBox.querySelector('.delete_Button');
 
   let onClickOnCancelEditFoodListButton = () => onCancelEditFoodListButtonHandler(button, editOrDeleteButtonsBox);
@@ -1463,19 +1597,36 @@ function onCancelEditFoodListButtonHandler(button, editOrDeleteButtonsBox) {
 
 function onDeleteEditFoodListButtonHandler(button, deleteEditFoodListButton, mealDataObj, data) {
   let foodToDelete = deleteEditFoodListButton.closest('.mealFoodBox');
-  let mealName = foodToDelete.querySelector('.mealFoodH').textContent;
+  let mealFoodName = foodToDelete.querySelector('.mealFoodH').textContent;
   button.style.backgroundColor = 'inherit';
-  deleteFoodFromLocalStorage(mealName, mealDataObj, data);
   foodToDelete.remove();
-  checkIfChangesExist(mealData, mealName);
+  deleteFoodFromLocalStorage(mealFoodName, mealDataObj, data);
+  // checkIfMealDataHaveFoodElem(data, mealName);
+  // checkIfFoodElemIsLast(data, mealName.textContent);
+  checkIfChangesExist(mealData, mealFoodName);
+  generateSavedCalcsMealsData(mealDataObj, data)
 }
 
-function deleteFoodFromLocalStorage(mealName, mealDataObj, data) {
-  let mealExist = Object.keys(mealDataObj).includes(mealName);
+// function checkIfFoodElemIsLast(data, mealName) {
+//   let foodElemsExist = eatenMealsList.querySelector('.mealFoodBox');
+//   if(!foodElemsExist) {
+//     const metaFields = ['eaten_Values', 'time', 'date'];
+//     const realFields = Object.keys(data[mealName]).filter(key => !metaFields.includes(key));  
+
+//     if (realFields.length === 0) {
+//       delete data[mealName];
+//       userData = data;
+//     }
+//   }
+// }
+
+function deleteFoodFromLocalStorage(mealFoodName, mealDataObj, data) {
+  let mealExist = Object.keys(mealDataObj).includes(mealFoodName);
+
   if(mealExist) {
-    calcCPFCAfterDeletingFood(mealName, mealDataObj);
-    delete mealDataObj[mealName];
-    mealData = mealDataObj;
+    calcCPFCAfterDeletingFood(mealFoodName, mealDataObj);
+    delete mealDataObj[mealFoodName];
+    mealData = mealDataObj
   }
 }
 
@@ -1537,6 +1688,7 @@ function onBackPersonInfoButtonHandler() {
 }
 
 function onOpenUserInfoButtonHandler() {
+  deactivateButton(saveEditedUserButton);
   changeUserInfoBlock.style.display = 'flex';
   writeUserInfoToMeBlock();
   addEventListenersTochangeInfoElems();
@@ -1575,12 +1727,15 @@ function onMeElemHandler() {
   let changingParameter = this.textContent.trim().replace(/\s+/g, ' ').split(' ')[0];
   writeNameOfChangingParameter(changingParameter);
   checkWhichParameterWantToChange(changingParameter);
-  doneButton.removeEventListener('click', onDoneButtonHandler);
-  doneButton.addEventListener('click', onDoneButtonHandler);
+  let onDoneButtonClick = () => onDoneButtonHandler(changingParameter);
+  doneButton.removeEventListener('click', onDoneButtonClick);
+  doneButton.addEventListener('click', onDoneButtonClick);
 }
 
-function onDoneButtonHandler() {
+function onDoneButtonHandler(changingParameter) {
   changeWindow.style.display = 'none';
+  checkIfParametersChanged(changingParameter, saveEditedUserButton);
+  writeNewParameterValueInDOM(changingParameter.toLowerCase());
 }
 
 function writeNameOfChangingParameter(changingParameter) {
@@ -1674,6 +1829,61 @@ function collectDataFromInputs(keyName, changeInfoFromInput) {
   userData[keyName] = changeInfoFromInput;
 }
 
+function checkIfParametersChanged(changingParameter, button) {
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  let key = changingParameter.toLowerCase();
+
+  if(key === 'goal' || key === 'height') {
+    key = createCorrectKey(key);
+  }
+
+  let currentParameter = String(userData[key]).trim();
+  let storageParameter = String(data[key]).trim();
+
+  if(currentParameter !== storageParameter) {
+    activateButton(button);
+  } else {
+    deactivateButton(button);
+  }
+}
+
+function createCorrectKey(key) {
+  if(key === 'goal') {
+    key = 'goals';
+    return key;
+  }
+
+  if(key === 'height') {
+    key = 'tall';
+    return key;
+  }
+  return;
+}
+
+// function writeNewParameterValueInDOM(elemToChangeContent) {
+//   //запис змінених даних
+//   console.log(userData)
+//   let meElems = document.querySelectorAll('.meElem');
+//   meElems.forEach((elem) => {
+//     let headline = elem.querySelector('.meParagraph').textContent.toLowerCase().trim();
+//     let value = elem.querySelector('.meGreenParagraph');
+//     let comparableKey;
+//     let changeElem = elemToChangeContent;
+
+//     if(headline === 'goal' || headline === 'height') {
+//       changeElem = createCorrectKey(headline);
+//       comparableKey = createCorrectKey(headline);
+//     } else {
+//       comparableKey = headline;
+//     }
+
+//     if(comparableKey === elemToChangeContent) {
+//       console.log(comparableKey)
+//       value.textContent = capitalizeFirstLetter(userData[elemToChangeContent]);
+//     }
+//   })
+// }
+
 saveEditedUserButton.addEventListener('click', onSaveEditedUserButton);
 
 function onSaveEditedUserButton() {
@@ -1709,6 +1919,7 @@ function checkUpdateInput() {
 }
 
 function onOpenCalorieIntakeButtonHandler() {
+  deactivateButton(saveEditedNutrientsButton);
   changeCalorieIntakeBlock.style.display = 'flex';
   changeCalorieIntakeBackButton.removeEventListener('click', onChangeCalorieIntakeBackButton);
   changeCalorieIntakeBackButton.addEventListener('click', onChangeCalorieIntakeBackButton);
@@ -1757,7 +1968,7 @@ function onCalorieIntakeElementHandler() {
   let collectInfoFromNutrientsInput = () => collectInfoFromNutrientsValueInput(intakeElem, nutrientsValue);
   nutrientsValue.addEventListener('input', collectInfoFromNutrientsInput);
 
-  let onDoneButtonClick = () => onChangeNutrientsIntakeDoneBtn(collectInfoFromNutrientsInput);
+  let onDoneButtonClick = () => onChangeNutrientsIntakeDoneBtn(collectInfoFromNutrientsInput, intakeElem);
   changeNutrientsIntakeDoneBtn.removeEventListener('click', onDoneButtonClick);
   changeNutrientsIntakeDoneBtn.addEventListener('click', onDoneButtonClick);
 }
@@ -1792,10 +2003,11 @@ function changeIntakeBlockDependsOnIntakeElement(intakeElem) {
   }
 }
 
-function onChangeNutrientsIntakeDoneBtn(collectInfoFromNutrientsInput) {
+function onChangeNutrientsIntakeDoneBtn(collectInfoFromNutrientsInput, intakeElem) {
   changeNutrientsIntakeBlock.style.display = 'none';
   nutrientsValue.removeEventListener('input', collectInfoFromNutrientsInput);
   nutrientsValue.value = '';
+  checkIfParametersChanged(intakeElem, saveEditedNutrientsButton);
 }
 
 function collectInfoFromNutrientsValueInput(intakeElem, nutrientsValue) {
@@ -1805,18 +2017,6 @@ function collectInfoFromNutrientsValueInput(intakeElem, nutrientsValue) {
 
 function onSaveEditedNutrientsButtonHandler() {
   saveUserDataToLocalStorage(userData, userDataArray);
-}
-
-function centerPopUpMessages(message) {
-  let windowWidth = window.innerWidth;
-  let messageWidth = message.offsetWidth;
-  let windowHeight = window.innerHeight;
-  let messageHeight = message.offsetHeight;
-
-  message.style.left = `${(windowWidth - messageWidth) / 2}px`;
-  message.style.top = `${(windowHeight - messageHeight) / 2}px`
-
-    message.scrollIntoView({block: "center", behavior: "smooth"});
 }
 
 

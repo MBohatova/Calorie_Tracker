@@ -31,8 +31,10 @@ body .main {
   margin: 0 auto;
 }
 body .main__appleButton {
-  position: absolute;
-  top: 35%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 200px;
   width: 200px;
   background: url(./image/appleFirstPic.png);
@@ -433,11 +435,15 @@ body .main__homePage .main__homePageBox {
   gap: 25px;
 }
 body .main__homePage .main__homePageBox .main__homePageHeader {
+  position: fixed;
+  width: 330px;
+  height: 68px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  padding-top: 40px;
+  background-color: rgb(255, 255, 255);
+  z-index: 1;
 }
 body .main__homePage .main__homePageBox .main__homePageHeader .personBlock {
   display: flex;
@@ -472,6 +478,9 @@ body .main__homePage .main__homePageBox .homePageHeadline {
   line-height: 14.5px;
   letter-spacing: 0%;
   text-align: left;
+}
+body .main__homePage .main__homePageBox .nutrientsIndicatorHeadline {
+  padding-top: 78px;
 }
 body .main__homePage .main__homePageBox .nutrientsIndicatorBlock {
   width: 328px;
@@ -660,7 +669,6 @@ body .main__homePage .main__homePageBox .mealsBlock {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding-bottom: 116px;
 }
 body .main__homePage .main__homePageBox .mealsBlock .mealbox {
   height: 89px;
@@ -671,12 +679,15 @@ body .main__homePage .main__homePageBox .mealsBlock .mealbox {
   background-color: rgb(247, 247, 247);
   border-radius: 10px;
 }
+body .main__homePage .main__homePageBox .mealsBlock .mealbox:last-child {
+  margin-bottom: 126px;
+}
 body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal {
   height: 57px;
   width: 296px;
   display: flex;
   flex-direction: column;
-  gap: 21px;
+  gap: 11px;
 }
 body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealHead {
   display: flex;
@@ -699,7 +710,21 @@ body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealHead .ca
   font-weight: 500;
   color: rgb(13, 18, 32);
 }
-body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealTime {
+body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealTimeAndDateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealTimeAndDateContainer .mealDate {
+  display: flex;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(128, 128, 128);
+}
+body .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealTimeAndDateContainer .mealTime {
   display: flex;
   font-weight: 400;
   font-size: 12px;
@@ -747,6 +772,7 @@ body .main__mealPage {
   gap: 10px;
   align-items: center;
   display: none;
+  z-index: 2;
 }
 body .main__mealPage .mealHead {
   display: flex;
@@ -920,6 +946,7 @@ body .main__searchFood {
   gap: 10px;
   align-items: center;
   display: none;
+  z-index: 2;
 }
 body .main__searchFood .searchBarBox {
   width: 312px;
@@ -989,9 +1016,14 @@ body .calendar {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
   display: none;
 }
 body .calendar .calendarItem {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1137,9 +1169,14 @@ body .eatenAmountForm {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
   display: none;
 }
 body .eatenAmountForm .eatenAmountFormBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 238px;
   width: 328px;
   display: flex;
@@ -1244,11 +1281,11 @@ body .profileBlock {
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  height: 800px;
+  height: 100%;
   width: 360px;
-  padding-top: 40px;
   background-color: inherit;
   display: none;
+  z-index: 2;
 }
 body .profileBlock .profileHeader {
   display: flex;
@@ -1256,6 +1293,7 @@ body .profileBlock .profileHeader {
   justify-content: start;
   align-items: center;
   margin-right: 150px;
+  padding-top: 40px;
 }
 body .profileBlock .profileHeader .profileButtonBack {
   height: 24px;
@@ -1426,9 +1464,9 @@ body .meBlock {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding-top: 40px;
-  height: 800px;
+  height: 100%;
   width: 360px;
+  z-index: 2;
   display: none;
 }
 body .meBlock .meBlockContent {
@@ -1442,6 +1480,7 @@ body .meBlock .meBlockContent .meHeader {
   align-items: center;
   gap: 130px;
   padding-left: 16px;
+  padding-top: 40px;
 }
 body .meBlock .meBlockContent .meHeader .meButtonBack {
   height: 24px;
@@ -1506,6 +1545,7 @@ body .changeInfoWindow {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
   display: none;
 }
 body .changeInfoWindow .changeInfoWindowWrapper {
@@ -1680,6 +1720,7 @@ body .updateInfoWindow {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
   display: none;
 }
 body .updateInfoWindow .updateInfoWindowBlock {
@@ -1754,7 +1795,6 @@ body .calorieIntakeBlock {
   top: 0;
   left: 50%;
   transform: translate(-50%, 0);
-  padding-top: 40px;
   background-color: inherit;
   display: flex;
   flex-direction: column;
@@ -1762,6 +1802,7 @@ body .calorieIntakeBlock {
   justify-content: space-between;
   min-height: 800px;
   width: 360px;
+  z-index: 2;
   display: none;
 }
 body .calorieIntakeBlock .calorieIntakeWrapper {
@@ -1774,7 +1815,7 @@ body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeHeader {
   height: 24px;
   display: flex;
   align-items: center;
-  padding-left: 16px;
+  padding: 40px 0 0 16px;
   gap: 80px;
 }
 body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeHeader .calorieIntakeBackButton {
@@ -1838,6 +1879,7 @@ body .changeNutrientsIntakeWindow {
   justify-content: center;
   align-items: end;
   background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
   display: none;
 }
 body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock {
