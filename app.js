@@ -44,6 +44,7 @@ let onboardingBox4 = document.querySelector('.onboardingBox4');
 let onboardingButtonsContainer = document.querySelector('.main__onboardingButtons');
 let onboardingStartButtonsContainer = document.querySelector('.main__startButtons');
 let homePage = document.querySelector('.main__homePage');
+let homePageBlock = document.querySelector('.main__homePageBox');
 let requestingContentContainer = document.querySelector('.main__requestingData');;
 let requestingButtons = document.querySelector('.main__requestingDataButtons');
 let requestingGoal = document.querySelector('.requestingGoal');
@@ -80,6 +81,7 @@ let updInfoWindow = document.getElementById('updInfoWindow');
 let changeCalorieIntakeBlock = document.getElementById('changeCalorieIntakeBlock');
 let changeNutrientsIntakeBlock = document.getElementById('changeNutrientsIntakeBlock');
 let calendarItem = document.querySelector('.calendarItem');
+let logOut = document.querySelector('.logOutBlock');
 
 // Inputs
 let inputWeight = document.getElementById('weight');
@@ -88,6 +90,7 @@ let inputName = document.getElementById('name');
 let searchInput = document.getElementById('searchInput');
 let eatenAmountInput = document.getElementById('eatenAmountInput');
 let inputUpdate = document.getElementById('inputUpdate');
+let sliderTheme = document.querySelector('.inputForSwitch');
 
 // Arrays & objects
 let userDataArray = [];
@@ -223,6 +226,8 @@ function openApp() {
 }
 
 function generateMealsFromLocalStorage(userInfoObject) {
+  mealsBlock.innerHTML = '';
+
   Object.keys(userInfoObject).forEach((key) => {
     if(key.includes('Meal')) {
       generateMeal(key, userInfoObject[key]['eaten_Values']['calories'], userInfoObject[key]['time'], userInfoObject[key]['date'])
@@ -406,7 +411,7 @@ function collectUserDataFromScroll(elem, key) {
 }
 
 function calcTall(tallObj) {
-  if(tallObj.cm) {
+  if(tallObj.m && tallObj.cm) {
     let tallInCm = (Number(tallObj.m) * 100) + Number(tallObj.cm);
     userData.tall = tallInCm.toString();
   }
@@ -583,6 +588,7 @@ function writeDefaultValuesDataInDom() {
 calendarButton.addEventListener('click', onCalendarButtonHandler);
 
 function onCalendarButtonHandler() {
+  homePageBlock.style.display = 'none';
   calendar.style.display = 'flex';
   toWriteTodaysDate();
   generateDefaultCalendar();
@@ -747,10 +753,12 @@ calendarOkBtn.addEventListener('click', onOkCalendarButtonHandler);
 
 function onCancelCalendarButtonHandler() {
   calendar.style.display = 'none';
+  homePageBlock.style.display = 'flex';
 }
 
 function onOkCalendarButtonHandler() {
   calendar.style.display = 'none';
+  homePageBlock.style.display = 'flex';
 }
 
 let prevClickedDay = null;
@@ -800,6 +808,7 @@ createMealButton.addEventListener('click', onCreateMealButtonHandler);
 
 function onCreateMealButtonHandler() {
   mealPage.style.display = 'flex';
+  homePageBlock.style.display = 'none';
   scrollTo(0, 0);
   controlBar.style.display = 'none';
   writeMealName();
@@ -856,6 +865,7 @@ closeMealPageBtn.addEventListener('click', onCloseMealPageBtn);
 
 function onCloseMealPageBtn() {
   mealPage.style.display = 'none';
+  homePageBlock.style.display = 'flex';
   controlBar.style.display = 'flex';
   eatenMealsList.innerHTML = '';
   dailyMealsData = {};
@@ -1022,9 +1032,7 @@ function generateMealsList(choosenFoodElem, eatenCaloriesNum, eatenGramsNum) {
         <p class="mealFoodP">${eatenCaloriesNum} cal • ${eatenGramsNum} g</p>
       </div>
       <div class="deleteButtonsBlock">
-        <button class="deleteButton">
-          <img src="./image/deleteBtn.svg" alt="deleteBtn">
-        </button>
+        <button class="deleteButton" alt="deleteBtn"></button>
 
         <div class="editOrDeleteButtonsBox">
           <button id="deleteButton" class="editOrDeleteButtons delete_Button" type="button">Delete</button>
@@ -1041,7 +1049,6 @@ function addEventListenerToDeleteButtonWhenMealCreating(mealData) {
 
   deleteButtons.forEach((button) => {
     let onDeleteButtonClickwhileCreatingMeal = () => onDeleteButtonHandlerWhileCreatingMeal(button, mealData);
-    // button.removeEventListener('click', onDeleteButtonClickwhileCreatingMeal);
     button.addEventListener('click', onDeleteButtonClickwhileCreatingMeal);
   })
 }
@@ -1177,6 +1184,7 @@ saveMealsButton.addEventListener('click', onSaveButtonHandler);
 function onSaveButtonHandler() {
   let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
   userData = data;
+  homePageBlock.style.display = 'flex';
   mealCaloriesBlock.innerHTML = '';
   eatenMealsList.innerHTML = '';
   mealPage.style.display = 'none';
@@ -1211,23 +1219,6 @@ function deleteMealFromDOM(mealNameToDelete) {
     }
   })
 }
-
-// function checkIfMealDataHaveFoodElem(data, mealName) {
-//   let mealKey = mealName.textContent;
-
-//   const metaFields = ['eaten_Values', 'time', 'date'];
-//   const realFields = Object.keys(mealData).filter(key => !metaFields.includes(key));
-
-//   if (realFields.length > 0) {
-//     data[mealKey] = mealData;
-//     userData = data;
-//   }
-
-//   if(realFields.length === 0) {
-//     delete data[mealName];
-//     userData = data;
-//   }
-// }
 
 function checkIfDateChoosen() {
   let ifNotContainsDate = !mealData.hasOwnProperty('date');
@@ -1350,7 +1341,6 @@ function onPlusButtonHandler(baseNorm, userData) {
   let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
   userData = data;
   if(checkWaterIntakeInLocalStorage() !== 0) {
-    let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
     drunkWater = checkWaterIntakeInLocalStorage();
     drunkWater = Math.round((drunkWater + 0.1) * 10) / 10;
     toWriteWaterIntakeInDom(baseNorm, drunkWater);
@@ -1446,6 +1436,7 @@ function addEventListenersToMealBoxes() {
 }
 
 function onMealBoxHandler() {
+  homePageBlock.style.display = 'none';
   let mealNameElem = this.querySelector('.mealName').textContent;
   mealName.textContent = '';
   mealName.textContent = mealNameElem;
@@ -1502,9 +1493,7 @@ function generateSavedMealsData(mealDataObj, data) {
             <p class="mealFoodP">${calcEatenCalories(key, mealDataObj[key])} cal • ${mealDataObj[key]} g</p>
           </div>
           <div class="deleteButtonsBlock">
-            <button class="deleteButton">
-              <img src="./image/deleteBtn.svg" alt="deleteBtn">
-            </button>
+            <button class="deleteButton"></button>
 
             <div class="editOrDeleteButtonsBox">
               <button id="deleteButton" class="editOrDeleteButtons delete_Button" type="button">Delete</button>
@@ -1607,19 +1596,6 @@ function onDeleteEditFoodListButtonHandler(button, deleteEditFoodListButton, mea
   generateSavedCalcsMealsData(mealDataObj, data)
 }
 
-// function checkIfFoodElemIsLast(data, mealName) {
-//   let foodElemsExist = eatenMealsList.querySelector('.mealFoodBox');
-//   if(!foodElemsExist) {
-//     const metaFields = ['eaten_Values', 'time', 'date'];
-//     const realFields = Object.keys(data[mealName]).filter(key => !metaFields.includes(key));  
-
-//     if (realFields.length === 0) {
-//       delete data[mealName];
-//       userData = data;
-//     }
-//   }
-// }
-
 function deleteFoodFromLocalStorage(mealFoodName, mealDataObj, data) {
   let mealExist = Object.keys(mealDataObj).includes(mealFoodName);
 
@@ -1666,6 +1642,7 @@ personInfoMenu.addEventListener('click', openPersonInfoMenu);
 
 function openPersonInfoMenu() {
   let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  homePageBlock.style.display = 'none';
   profileBlock.style.display = 'flex';
   personProfileName.textContent = data.name;
   writeCaloriesNormInCalorieIntakeButton();
@@ -1681,10 +1658,20 @@ function openPersonInfoMenu() {
 
   openCalorieIntakeButton.removeEventListener('click', onOpenCalorieIntakeButtonHandler);
   openCalorieIntakeButton.addEventListener('click', onOpenCalorieIntakeButtonHandler);
+
+  logOut.addEventListener('click', onLogOutHandler);
+}
+
+function onLogOutHandler() {
+  profileBlock.style.display = 'none';
+  homePage.style.display = 'none';
+  appleButton.style.display = 'flex';
+  homePageBlock.style.display = 'flex';
 }
 
 function onBackPersonInfoButtonHandler() {
   profileBlock.style.display = 'none';
+  homePageBlock.style.display = 'flex';
 }
 
 function onOpenUserInfoButtonHandler() {
@@ -1692,6 +1679,8 @@ function onOpenUserInfoButtonHandler() {
   changeUserInfoBlock.style.display = 'flex';
   writeUserInfoToMeBlock();
   addEventListenersTochangeInfoElems();
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  userData = data;
 }
 
 function onBackMeButtonHandler() {
@@ -1700,7 +1689,6 @@ function onBackMeButtonHandler() {
 
 function writeUserInfoToMeBlock() {
   let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
-
   userInfoArrayForMeBlock.forEach((elem) => {
     let nameOfBlock = elem.closest('.meElem');
     if(nameOfBlock) {
@@ -1724,18 +1712,19 @@ function addEventListenersTochangeInfoElems() {
 
 function onMeElemHandler() {
   changeWindow.style.display = 'block';
+  let clickedElem = this;
   let changingParameter = this.textContent.trim().replace(/\s+/g, ' ').split(' ')[0];
   writeNameOfChangingParameter(changingParameter);
   checkWhichParameterWantToChange(changingParameter);
-  let onDoneButtonClick = () => onDoneButtonHandler(changingParameter);
+  let onDoneButtonClick = () => onDoneButtonHandler(changingParameter, clickedElem);
   doneButton.removeEventListener('click', onDoneButtonClick);
   doneButton.addEventListener('click', onDoneButtonClick);
 }
 
-function onDoneButtonHandler(changingParameter) {
+function onDoneButtonHandler(changingParameter, clickedElem) {
   changeWindow.style.display = 'none';
   checkIfParametersChanged(changingParameter, saveEditedUserButton);
-  writeNewParameterValueInDOM(changingParameter.toLowerCase());
+  writeNewParameterValueInDOM(clickedElem);
 }
 
 function writeNameOfChangingParameter(changingParameter) {
@@ -1773,6 +1762,8 @@ function generateInputToolForChangeUserInfo(forInputValue, placeholderValue) {
     <input 
       class="inputForChangeInfo" 
       type="number"
+      min="1"
+      step="1"
       placeholder="${placeholderValue}"
     >
     <p class="valuesOfChangingInfo">
@@ -1826,6 +1817,10 @@ function onInputInteraction(input) {
 }
 
 function collectDataFromInputs(keyName, changeInfoFromInput) {
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  if(changeInfoFromInput === '') {
+    changeInfoFromInput = data[keyName];
+  }
   userData[keyName] = changeInfoFromInput;
 }
 
@@ -1860,29 +1855,13 @@ function createCorrectKey(key) {
   return;
 }
 
-// function writeNewParameterValueInDOM(elemToChangeContent) {
-//   //запис змінених даних
-//   console.log(userData)
-//   let meElems = document.querySelectorAll('.meElem');
-//   meElems.forEach((elem) => {
-//     let headline = elem.querySelector('.meParagraph').textContent.toLowerCase().trim();
-//     let value = elem.querySelector('.meGreenParagraph');
-//     let comparableKey;
-//     let changeElem = elemToChangeContent;
-
-//     if(headline === 'goal' || headline === 'height') {
-//       changeElem = createCorrectKey(headline);
-//       comparableKey = createCorrectKey(headline);
-//     } else {
-//       comparableKey = headline;
-//     }
-
-//     if(comparableKey === elemToChangeContent) {
-//       console.log(comparableKey)
-//       value.textContent = capitalizeFirstLetter(userData[elemToChangeContent]);
-//     }
-//   })
-// }
+function writeNewParameterValueInDOM(clickedElem) {
+  const key = Object.keys(clickedElem.dataset)[0];
+  const value = clickedElem.dataset[key];
+  if(userData.hasOwnProperty(value)) {
+    clickedElem.querySelector('.meGreenParagraph').textContent = capitalizeFirstLetter(userData[value]);
+  }
+}
 
 saveEditedUserButton.addEventListener('click', onSaveEditedUserButton);
 
@@ -1908,6 +1887,7 @@ function onUpdateCancelButton() {
 
 function onUpdateOkButton() {
   updInfoWindow.style.display = 'none';
+  inputUpdate.checked = false;
 }
 
 function checkUpdateInput() {
@@ -1919,6 +1899,8 @@ function checkUpdateInput() {
 }
 
 function onOpenCalorieIntakeButtonHandler() {
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
+  userData = data;
   deactivateButton(saveEditedNutrientsButton);
   changeCalorieIntakeBlock.style.display = 'flex';
   changeCalorieIntakeBackButton.removeEventListener('click', onChangeCalorieIntakeBackButton);
@@ -1956,19 +1938,20 @@ function writeCalorieIntakeInfoFromStorage() {
 function addEventListenersToCalorieIntakeElems() {
   let calorieIntakeElements = document.querySelectorAll('.calorieIntakeElement');
   calorieIntakeElements.forEach((elem) => {
-    elem.removeEventListener('clikc', onCalorieIntakeElementHandler);
+    elem.removeEventListener('click', onCalorieIntakeElementHandler);
     elem.addEventListener('click', onCalorieIntakeElementHandler);
   })
 }
 
 function onCalorieIntakeElementHandler() {
+  let intakeClickedElem = this;
   let intakeElem = this.querySelector('.nutrientsName').textContent;
   changeIntakeBlockDependsOnIntakeElement(intakeElem);
 
   let collectInfoFromNutrientsInput = () => collectInfoFromNutrientsValueInput(intakeElem, nutrientsValue);
   nutrientsValue.addEventListener('input', collectInfoFromNutrientsInput);
 
-  let onDoneButtonClick = () => onChangeNutrientsIntakeDoneBtn(collectInfoFromNutrientsInput, intakeElem);
+  let onDoneButtonClick = () => onChangeNutrientsIntakeDoneBtn(collectInfoFromNutrientsInput, intakeElem, intakeClickedElem);
   changeNutrientsIntakeDoneBtn.removeEventListener('click', onDoneButtonClick);
   changeNutrientsIntakeDoneBtn.addEventListener('click', onDoneButtonClick);
 }
@@ -2003,20 +1986,48 @@ function changeIntakeBlockDependsOnIntakeElement(intakeElem) {
   }
 }
 
-function onChangeNutrientsIntakeDoneBtn(collectInfoFromNutrientsInput, intakeElem) {
+function onChangeNutrientsIntakeDoneBtn(collectInfoFromNutrientsInput, intakeElem, intakeClickedElem) {
   changeNutrientsIntakeBlock.style.display = 'none';
   nutrientsValue.removeEventListener('input', collectInfoFromNutrientsInput);
   nutrientsValue.value = '';
   checkIfParametersChanged(intakeElem, saveEditedNutrientsButton);
+  writeChangedDataInDOM(intakeClickedElem);
+}
+
+function writeChangedDataInDOM(intakeClickedElem) {
+  let clickedElemName = intakeClickedElem.querySelector('.nutrientsName').textContent.toLowerCase();
+  if(userData.hasOwnProperty(clickedElemName)) {
+    intakeClickedElem.querySelector('.nutrientsValue').textContent = userData[clickedElemName];
+  }
 }
 
 function collectInfoFromNutrientsValueInput(intakeElem, nutrientsValue) {
+  let data = JSON.parse(localStorage.getItem('userDataArray'))[0];
   let keyForUserData = intakeElem.toLowerCase();
-  userData[keyForUserData] = nutrientsValue.value;
+  if(nutrientsValue.value === '') {
+    userData[keyForUserData] = data[keyForUserData];
+  } else {
+    userData[keyForUserData] = nutrientsValue.value;
+  }
 }
 
 function onSaveEditedNutrientsButtonHandler() {
   saveUserDataToLocalStorage(userData, userDataArray);
 }
 
+function setTheme(theme) {
+  document.body.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  sliderTheme.checked = theme === 'dark';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  let savedTheme = localStorage.getItem('theme') || 'light';
+  setTheme(savedTheme);
+})
+
+sliderTheme.addEventListener('change', function() {
+  const newTheme = sliderTheme.checked ? 'dark' : 'light';
+  setTheme(newTheme);
+})
 

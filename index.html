@@ -514,7 +514,7 @@
       </div>
 
       <div class="caloriesValueBlock">
-        <input id="eatenAmountInput" type="text" class="eatenAmountGrams" placeholder="100">
+        <input id="eatenAmountInput" type="number" min="1" step="1" class="eatenAmountGrams" placeholder="100">
         <p class="eatenAmountGramsP">grams</p>
       </div>
 
@@ -750,6 +750,8 @@
           name="nutrientsValue" 
           id="nutrientsValue"
           class="nutrientsValueInput"
+          min="1"
+          step="1"
         >
         <span class="nutrientQuantity">cal</span>
       </div>

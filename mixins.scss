@@ -1,0 +1,38 @@
+@mixin headlines {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: $LightHeadline;
+}
+
+@mixin paragraphs {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: $lightParagraph;
+}
+
+@mixin smallHeadline {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+}
+
+@mixin smallParagraph {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5px;
+  letter-spacing: 0%;
+}
+
+@mixin roundButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: none;
+  background: $buttonGreen url(./image/nextArrow.svg) no-repeat center;
+}

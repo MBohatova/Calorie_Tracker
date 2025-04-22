@@ -16,6 +16,11 @@
   scrollbar-width: none;
   /* Firefox */
 }
+* select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
 body {
   position: relative;
@@ -118,7 +123,7 @@ body .main__onboarding .main__onboardingButtons {
   align-items: flex-end;
   padding-bottom: 20px;
 }
-body .main__onboarding .main__onboardingButtons .main__onboardingSkipButton, body .main__onboarding .main__onboardingButtons .main__onboardingBackButton {
+body .main__onboarding .main__onboardingButtons .main__onboardingSkipButton, body[data-theme=dark] .main__onboarding .main__onboardingButtons .main__onboardingBackButton, body .main__onboarding .main__onboardingButtons .main__onboardingBackButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -881,6 +886,7 @@ body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .deleteBu
   background: none;
   border: none;
   border-radius: 5px;
+  background: url(./image/deleteBtn.svg) no-repeat center;
 }
 body .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .deleteButton:hover {
   border: 1px solid rgb(53, 204, 140);
@@ -1463,8 +1469,7 @@ body .meBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 100%;
+  height: 700px;
   width: 360px;
   z-index: 2;
   display: none;
@@ -1528,6 +1533,8 @@ body .meBlock .meBlockContent .meElemsBlock .disabledMeElem .meDisabledParagraph
   color: rgb(166, 233, 204);
 }
 body .meBlock .meSaveButton {
+  position: fixed;
+  bottom: 0;
   height: 52px;
   display: flex;
   justify-content: center;
@@ -1800,7 +1807,7 @@ body .calorieIntakeBlock {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  min-height: 800px;
+  min-height: 700px;
   width: 360px;
   z-index: 2;
   display: none;
@@ -1859,6 +1866,8 @@ body .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeContentBlock .calor
   color: rgb(53, 204, 140);
 }
 body .calorieIntakeBlock .saveNutrientsButton {
+  position: fixed;
+  bottom: 0;
   height: 52px;
   display: flex;
   justify-content: center;
@@ -1949,5 +1958,533 @@ body .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .changeNutri
   color: rgb(13, 18, 32);
   font-size: 16px;
   color: rgb(255, 255, 255);
+  margin-top: 10px;
+}
+
+body[data-theme=dark] {
+  background-color: rgb(13, 13, 13);
+}
+body[data-theme=dark] .main__onboarding .main__onboardingContent .onboardingWrapper .main__onboardingTextBox .main__onboardingH {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .main__onboarding .main__onboardingButtons .main__onboardingBackButton {
+  display: none;
+}
+body[data-theme=dark] .main__onboarding .main__onboardingButtons .main__onboardingNextButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: none;
+  background: rgb(53, 204, 140) url(./image/nextArrow.svg) no-repeat center;
+  background: rgb(53, 204, 140) url(./image/darkThemeArrow.svg) no-repeat center;
+}
+body[data-theme=dark] .main__onboarding .main__startButtons .main__startButton {
+  color: rgb(13, 13, 13);
+}
+body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextBox .requestingHeadline {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingButtonsBox .requestingDataButton {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .main__requestingData .main__requestingDataButtons .requestingButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: none;
+  background: rgb(53, 204, 140) url(./image/nextArrow.svg) no-repeat center;
+  background: rgb(53, 204, 140) url(./image/darkThemeArrow.svg) no-repeat center;
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .main__homePageHeader {
+  background-color: rgb(13, 13, 13);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .main__homePageHeader .personBlock .personName {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .homePageHeadline {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorHeadline {
+  padding-top: 78px;
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorBlock {
+  background-color: rgb(36, 40, 51);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .pfcText {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  text-align: center;
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .pfcIndicator {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .colorIndicator {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  height: 4px;
+  border-radius: 5px;
+  background-color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .proteins {
+  background-color: rgb(229, 101, 113);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .fats {
+  background-color: rgb(255, 160, 114);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorBlock .pfcBox .pfcBlock .carbs {
+  background-color: rgb(89, 255, 196);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox .caloriesText {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .nutrientsIndicatorBlock .caloriesBox .caloriesIndicator {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .waterIntakeBlock {
+  background-color: rgb(36, 40, 51);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeTextBox {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntakeTextBlock .waterIntakeTextTime {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .plus {
+  background: url(./image/plusDarkTheme.svg) rgb(62, 65, 77) center no-repeat;
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .plus:hover {
+  background-color: #B9B9B9;
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .minus {
+  background: url(./image/minusDarkTheme.svg) rgb(62, 65, 77) center no-repeat;
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .plusMinusButtonsBlock .minus:hover {
+  background-color: #B9B9B9;
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .waterIntackeIndicator {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .waterIntakeBlock .waterIntakeWrapper .waterIntackeButtonAndIndicatorBlock .percentOfDrunkWater {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .homePageHeadlineBlock .plusButton {
+  background: url(./image/plusDarkTheme.svg) center no-repeat;
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .mealsBlock .mealbox {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealHead .mealName {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .mealsBlock .mealbox .meal .mealHead .calories {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .controlPanel--wrapper {
+  background-color: rgb(13, 13, 13);
+}
+body[data-theme=dark] .main__homePage .main__homePageBox .controlPanel--wrapper .controlPanel {
+  background-color: rgb(7, 54, 34);
+}
+body[data-theme=dark] .main__mealPage {
+  background-color: rgb(13, 13, 13);
+}
+body[data-theme=dark] .main__mealPage .mealHead .closeBtn {
+  background: url(./image/darkClear.svg) center no-repeat;
+}
+body[data-theme=dark] .main__mealPage .mealHead .createBtn {
+  background: url(./image/plusDarkTheme.svg) center no-repeat;
+}
+body[data-theme=dark] .main__mealPage .mealHead .mealNameP {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .main__mealPage .mealCaloriesBlock .mealCaloriesElem .mealCaloriesNum {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .main__mealPage .mealCaloriesBlock .mealCaloriesElem .mealCaloriesP {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .main__mealPage .eatenMealsBlock .mealFoodBox .mealFoodWrapper .mealFoodH {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .main__mealPage .eatenMealsBlock .mealFoodBox .mealFoodWrapper .mealFoodP {
+  color: rgb(110, 113, 121);
+}
+body[data-theme=dark] .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .deleteButton {
+  background: url(./image/deleteButtonDarkTheme.svg) no-repeat center;
+}
+body[data-theme=dark] .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .deleteButton:hover {
+  border: 1px solid rgb(53, 204, 140);
+}
+body[data-theme=dark] .main__mealPage .eatenMealsBlock .mealFoodBox .deleteButtonsBlock .editOrDeleteButtonsBox .editOrDeleteButtons {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .main__mealPage .saveMealButton {
+  color: rgb(13, 13, 13);
+}
+body[data-theme=dark] .main__searchFood {
+  background-color: rgb(13, 13, 13);
+}
+body[data-theme=dark] .main__searchFood .searchBarBox .backSearchButton {
+  background: url(./image/bigArrowDarkTheme.svg) center no-repeat;
+}
+body[data-theme=dark] .main__searchFood .searchBarBox .searchInput {
+  background: rgb(13, 13, 13);
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .main__searchFood .searchBarBox .clearSearchButton {
+  background: url(./image/darkClear.svg) center no-repeat;
+}
+body[data-theme=dark] .main__searchFood .foodContainer .foodBox .foodH {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .calendar .calendarItem {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .calendar .calendarItem .calendarHead .calendarP {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .calendar .calendarItem .calendarHead .calendarH {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .calendar .calendarItem .calendarNav .monthAndYear .calendarP {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .calendar .calendarItem .calendarNav .navigation .backButtonCalendar, body[data-theme=dark] .calendar .calendarItem .calendarNav .navigation .nextButtonCalendar {
+  background: url(./image/arrowCalendarDark.svg) center no-repeat;
+  transform: rotate(180deg);
+}
+body[data-theme=dark] .calendar .calendarItem .calendarNav .navigation .nextButtonCalendar {
+  background: url(./image/arrowCalendarDark.svg) center no-repeat;
+  transform: rotate(360deg);
+}
+body[data-theme=dark] .calendar .calendarItem .daysName .days {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .calendar .calendarItem .nums .num {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .eatenAmountForm .eatenAmountFormBox {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .eatenAmountForm .eatenAmountFormBox .eatenAmountFormWrapper .eatenAmountH {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .eatenAmountForm .eatenAmountFormBox .eatenAmountFormWrapper .caloriesBlock .caloriesElem .caloriesNum {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  font-weight: 500;
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .eatenAmountForm .eatenAmountFormBox .eatenAmountFormWrapper .caloriesBlock .caloriesElem .caloriesP {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  font-size: 14px;
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .eatenAmountForm .eatenAmountFormBox .caloriesValueBlock .eatenAmountGrams {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .profileBlock .profileHeader .profileButtonBack {
+  background: url(./image/bigArrowDarkTheme.svg) no-repeat center;
+}
+body[data-theme=dark] .profileBlock .profileHeader .profileH {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 18px;
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .profileBlock .profileNamePhotoBlock .profileName {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .profileBlock .menuButtonsBlock .menuButtons {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .profileBlock .menuButtonsBlock .menuButtons .inButtonTextElem {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .profileBlock .menuButtonsBlock .menuButtons .calorieElem {
+  color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .profileBlock .menuButtonsBlock .menuButtons:hover {
+  background-color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .profileBlock .menuButtonsBlock .menuButtons:hover.meButton {
+  background-image: url(./image/nextArrow.svg);
+}
+body[data-theme=dark] .profileBlock .menuButtonsBlock .menuButtons:hover .inButtonTextElem {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .profileBlock .menuButtonsBlock .menuButtons:hover .calorieElem {
+  color: rgb(255, 255, 255);
+}
+body[data-theme=dark] .profileBlock .lineElem {
+  background-color: rgb(36, 40, 51);
+}
+body[data-theme=dark] .profileBlock .otherOprionsBlock .themeBlock .themeLogoAndName .activeThemeName {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .profileBlock .otherOprionsBlock .themeBlock .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+body[data-theme=dark] .profileBlock .otherOprionsBlock .themeBlock .switch .inputForSwitch {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+body[data-theme=dark] .profileBlock .otherOprionsBlock .themeBlock .switch .inputForSwitch:checked + .slider {
+  background-color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .profileBlock .otherOprionsBlock .themeBlock .switch .inputForSwitch:checked + .slider::before {
+  transform: translateX(16px);
+  background-color: rgb(255, 255, 255);
+}
+body[data-theme=dark] .profileBlock .otherOprionsBlock .themeBlock .switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: inherit;
+  border: 2px solid rgb(53, 204, 140);
+  border-radius: 34px;
+  transition: 0.4s;
+}
+body[data-theme=dark] .profileBlock .otherOprionsBlock .themeBlock .switch .slider::before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 4px;
+  bottom: 3px;
+  background-color: rgb(53, 204, 140);
+  border-radius: 50%;
+  transition: 0.4s;
+}
+body[data-theme=dark] .meBlock .meBlockContent .meHeader .meButtonBack {
+  background: url(./image/bigArrowDarkTheme.svg) no-repeat center;
+}
+body[data-theme=dark] .meBlock .meBlockContent .meHeader .meHeadline {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .meBlock .meBlockContent .meElemsBlock .meElem .meParagraph {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .meBlock .meBlockContent .meElemsBlock .meElem .meGreenParagraph {
+  color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .meBlock .meBlockContent .meElemsBlock .disabledMeElem {
+  pointer-events: none;
+}
+body[data-theme=dark] .meBlock .meBlockContent .meElemsBlock .disabledMeElem .meDisabledNameParagraph {
+  color: rgb(110, 113, 121);
+}
+body[data-theme=dark] .meBlock .meBlockContent .meElemsBlock .disabledMeElem .meDisabledParagraph {
+  color: rgb(166, 233, 204);
+}
+body[data-theme=dark] .meBlock .meSaveButton {
+  color: rgb(13, 13, 13);
+}
+body[data-theme=dark] .changeInfoWindow .changeInfoWindowWrapper {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .changeInfoWindow .changeInfoWindowWrapper .miniLine {
+  background-color: rgb(110, 113, 121);
+}
+body[data-theme=dark] .changeInfoWindow .changeInfoWindowWrapper .contentBlock .inputsToolsWrapper .nameOfChaingingParameter {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .changeInfoWindow .changeInfoWindowWrapper .contentBlock .inputsToolsWrapper .inputAndValueWrapper .inputForChangeInfo {
+  background-color: inherit;
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox .changeInfoPickerToolWrapper .changeInfoChoosePicker .changeInfoPicker .pickerNumsActive {
+  font-weight: bold;
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoChooseToolBox .changeInfoUnit {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoButtonsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+body[data-theme=dark] .changeInfoWindow .changeInfoWindowWrapper .contentBlock .changeInfoButtonsBox .changeInfoDataButton {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .changeInfoWindow .changeInfoWindowWrapper .doneButtonChangeInfo {
+  height: 52px;
+  width: 328px;
+  background-color: rgb(53, 204, 140);
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  margin-bottom: 40px;
+}
+body[data-theme=dark] .updateInfoWindow .updateInfoWindowBlock {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .updateInfoWindow .updateInfoWindowBlock .updateHeadline {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .updateInfoWindow .updateInfoWindowBlock .updateInputBlock .updateInfoWindowInput {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid rgb(53, 204, 140);
+  border-radius: 2px;
+  padding: 4px 2px;
+}
+body[data-theme=dark] .updateInfoWindow .updateInfoWindowBlock .updateInputBlock .updateInfoWindowInput:checked {
+  content: url(./image/checkMark.svg);
+  border: none;
+  background-color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .updateInfoWindow .updateInfoWindowBlock .updateInputBlock .updateInputText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .updateInfoWindow .updateInfoWindowBlock .updateButtonsBlock {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 32px;
+  width: 286px;
+}
+body[data-theme=dark] .updateInfoWindow .updateInfoWindowBlock .updateButtonsBlock .updateButton {
+  background: none;
+  border: none;
+  color: rgb(53, 204, 140);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  font-weight: 500;
+}
+body[data-theme=dark] .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeHeader .calorieIntakeBackButton {
+  background: url(./image/bigArrowDarkTheme.svg) no-repeat center;
+}
+body[data-theme=dark] .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeHeader .calorieIntakeHeadline {
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeContentBlock .calorieIntakeElement .nutrientsName {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  margin: 0 16px;
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .calorieIntakeBlock .calorieIntakeWrapper .calorieIntakeContentBlock .calorieIntakeElement .nutrientsValue {
+  color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .calorieIntakeBlock .saveNutrientsButton {
+  color: rgb(13, 13, 13);
+}
+body[data-theme=dark] .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock {
+  background-color: rgb(62, 65, 77);
+}
+body[data-theme=dark] .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .greyLine {
+  height: 4px;
+  width: 32px;
+  border-radius: 100px;
+  background-color: rgb(110, 113, 121);
+}
+body[data-theme=dark] .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .changeNutrientsIntakeHeadline {
+  color: rgb(179, 179, 179);
+}
+body[data-theme=dark] .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .inputForNutrientsValueBlock .nutrientsValueInput {
+  background-color: inherit;
+  color: rgb(230, 230, 230);
+}
+body[data-theme=dark] .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .inputForNutrientsValueBlock .nutrientQuantity {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: rgb(110, 113, 121);
+  color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .recommendedQuantity {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0%;
+  font-weight: 500;
+  color: rgb(53, 204, 140);
+}
+body[data-theme=dark] .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowBlock .changeNutrientsIntakeDoneButton {
+  height: 52px;
+  width: 328px;
+  background-color: rgb(53, 204, 140);
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  color: rgb(13, 18, 32);
+  font-size: 16px;
+  color: rgb(13, 13, 13);
   margin-top: 10px;
 }/*# sourceMappingURL=style.css.map */
