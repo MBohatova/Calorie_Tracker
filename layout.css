@@ -1987,7 +1987,7 @@ body[data-theme=dark] .main__onboarding .main__startButtons .main__startButton {
   color: rgb(13, 13, 13);
 }
 body[data-theme=dark] .main__onboarding .main__startButtons .main__startParagraph {
-  color: rgb(179, 179, 179);
+  color: rgb(230, 230, 230);
 }
 body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextBox .requestingHeadline {
   font-size: 20px;
@@ -1997,32 +1997,6 @@ body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main
   color: rgb(13, 18, 32);
   color: rgb(179, 179, 179);
 }
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextWeight .inputWeight {
-  background-color: inherit;
-  color: rgb(230, 230, 230);
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextWeight .weightParagraph {
-  color: rgb(53, 204, 140);
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextAge .inputAge {
-  background-color: inherit;
-  color: rgb(230, 230, 230);
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextAge .ageParagraph {
-  color: rgb(53, 204, 140);
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextName {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingTextName .inputName {
-  background-color: inherit;
-  color: rgb(230, 230, 230);
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingInfoBox .normCalorieParagraph {
-  color: rgb(13, 13, 13);
-}
 body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingButtonsBox .requestingDataButton {
   font-size: 20px;
   font-weight: 500;
@@ -2030,49 +2004,6 @@ body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main
   text-align: center;
   color: rgb(13, 18, 32);
   color: rgb(179, 179, 179);
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper .requestingChoose .picker {
-  overflow-y: scroll;
-  padding: 0px 10px;
-  scroll-snap-type: y mandatory;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper .requestingChoose .picker .pickerNums {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
-  scroll-snap-align: center;
-  color: rgb(110, 113, 121);
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper .requestingChoose .picker .pickerNumsActive {
-  font-weight: bold;
-  color: rgb(230, 230, 230);
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .requestingChooseToolWrapper .requestingChoose .highlight {
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
-  border-top: 2px solid rgb(53, 204, 140);
-  border-bottom: 2px solid rgb(53, 204, 140);
-}
-body[data-theme=dark] .main__requestingData .main__requestingDataContainer .main__requestingBox .requestingChooseToolBox .unit {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0.005em;
-  text-align: center;
-  color: rgb(110, 113, 121);
-  color: rgb(53, 204, 140);
 }
 body[data-theme=dark] .main__requestingData .main__requestingDataButtons .requestingButton {
   height: 50px;
@@ -2559,4 +2490,4 @@ body[data-theme=dark] .changeNutrientsIntakeWindow .changeNutrientsIntakeWindowB
   font-size: 16px;
   color: rgb(13, 13, 13);
   margin-top: 10px;
-}/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=layout.css.map */

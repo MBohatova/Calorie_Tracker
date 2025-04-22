@@ -2015,19 +2015,20 @@ function onSaveEditedNutrientsButtonHandler() {
   saveUserDataToLocalStorage(userData, userDataArray);
 }
 
-function setTheme(theme) {
-  document.body.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  sliderTheme.checked = theme === 'dark';
-}
+document.body.setAttribute('data-theme', 'dark');
+// function setTheme(theme) {
+//   document.body.setAttribute('data-theme', theme);
+//   localStorage.setItem('theme', theme);
+//   sliderTheme.checked = theme === 'dark';
+// }
 
-document.addEventListener('DOMContentLoaded', function() {
-  let savedTheme = localStorage.getItem('theme') || 'light';
-  setTheme(savedTheme);
-})
+// document.addEventListener('DOMContentLoaded', function() {
+//   let savedTheme = localStorage.getItem('theme') || 'dark';
+//   setTheme(savedTheme);
+// })
 
-sliderTheme.addEventListener('change', function() {
-  const newTheme = sliderTheme.checked ? 'dark' : 'light';
-  setTheme(newTheme);
-})
+// sliderTheme.addEventListener('change', function() {
+//   const newTheme = sliderTheme.checked ? 'dark' : 'light';
+//   setTheme(newTheme);
+// })
 
